@@ -1,0 +1,42 @@
+{
+    
+    "editor.detectIndentation": false,
+	"editor.tabSize": 4,
+	"prettier.tabWidth": 4,
+    "files.eol": "\n",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "typescript.preferences.quoteStyle": "single",
+    "prettier.jsxSingleQuote": true,
+	"prettier.singleQuote": true,
+    "editor.rulers": [80, 120],
+
+    "javascript.preferences.quoteStyle": "single",
+    "editor.bracketPairColorization.enabled": false,
+
+    "eslint.packageManager": "yarn",
+    "eslint.validate": ["javascriptreact", "vue", "javascript"],
+
+    "editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[php]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[scss]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+}
