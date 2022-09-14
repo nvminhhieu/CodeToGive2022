@@ -19,7 +19,7 @@ export default Test;
 export const getStaticProps: GetStaticProps = () => {
 	return {
 		props: {
-			data: process.env.IS_CLOUD,
+			data: process.env.HOST,
 		},
 	};
 };
