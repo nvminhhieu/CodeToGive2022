@@ -9,7 +9,7 @@ const Test = ({ data }: Props): ReactElement | null => {
 	console.log(data);
 	return (
 		<>
-			<div className=''>Hello :)</div>
+			<div className=''>This is test page</div>
 			<h1>{data?.message}</h1>
 		</>
 	);
