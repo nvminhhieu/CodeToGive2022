@@ -6,20 +6,24 @@ type Props = {
 };
 
 const Test = ({ data }: Props): ReactElement | null => {
+	console.log(data);
 	return (
 		<>
 			<div className=''>Hello :)</div>
-			<h1>{data}</h1>
+			<h1>{data?.message}</h1>
 		</>
 	);
 };
 
 export default Test;
 
-export const getStaticProps: GetStaticProps = () => {
+export const getStaticProps: GetStaticProps = async () => {
+	const request = await fetch(`${process.env.HOST}/api/v1/hello`);
+	const response = await request.json();
+
 	return {
 		props: {
-			data: process.env.HOST,
+			data: response,
 		},
 	};
 };
