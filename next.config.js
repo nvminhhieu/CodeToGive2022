@@ -2,8 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  output: 'standalone',
-  basePath: '/client'
-}
+  output: "standalone",
+  basePath: "/client",
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
