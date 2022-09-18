@@ -15,9 +15,9 @@ const Test = () => {
       ></CustomTextField>
       <CustomTextField
         control={control}
-        name="password"
-        label="Password"
-        type="password"
+        name="phone"
+        label="Phone"
+        type="phone"
         variant="outlined"
       ></CustomTextField>
     </Form>
