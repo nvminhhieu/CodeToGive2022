@@ -1,17 +1,20 @@
 import CustomTextField from "../../components/common/CustomTextField";
 import { useForm } from "react-hook-form";
-import styled from "@emotion/styled";
+import CustomButton from "../../components/common/CustomButton";
 
 const Test = () => {
   const { control, handleSubmit } = useForm();
+  const onSubmit = (data: any) => console.log(data);
+
   return (
-    <Form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <CustomTextField
         control={control}
         name="email"
         label="E-mail address"
+        type="email"
         variant="outlined"
-        sx={{ marginTop: "15px" }}
+        sx={{ margin: "15px 0" }}
       ></CustomTextField>
       <CustomTextField
         control={control}
@@ -20,20 +23,12 @@ const Test = () => {
         type="phone"
         variant="outlined"
       ></CustomTextField>
-    </Form>
+
+      <CustomButton variant="outlined" type="submit" sx={{ marginTop: "15px" }}>
+        Submit
+      </CustomButton>
+    </form>
   );
 };
 
 export default Test;
-
-const Form = styled("form")`
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  @media (min-width: 1300px) {
-    width: 30%;
-  }
-`;
