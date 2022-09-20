@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next';
+import Image from 'next/image';
 import { ReactElement } from 'react';
 
 type Props = {
@@ -11,6 +12,7 @@ const Test = ({ data }: Props): ReactElement | null => {
 		<>
 			<div className=''>This is another test page test 2</div>
 			<h1>{data?.message}</h1>
+			<Image src='' alt='test' layout='fill' />
 		</>
 	);
 };
