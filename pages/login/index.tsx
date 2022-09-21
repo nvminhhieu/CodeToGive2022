@@ -1,6 +1,19 @@
+import CustomTextField from '../../components/common/CustomTextField'
+import { useForm } from 'react-hook-form'
+import CustomButton from '../../components/common/CustomButton'
+import { signIn } from 'next-auth/react'
+
 const Login = () => {
   const { control, handleSubmit } = useForm()
-  const onSubmit = (data: any) => console.log(data)
+  const onSubmit = (data: any) => {
+    const signingIn = signIn('credentials', {
+      username: 'admin',
+      password: 'ds',
+    })
+
+    console.log('signIn', signingIn)
+    console.log(data)
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

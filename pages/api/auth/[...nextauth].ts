@@ -15,7 +15,7 @@ const authOptions: NextAuthOptions = {
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {},
-      authorize(credentials: any, req) {
+      async authorize(credentials: any, req) {
         // You need to provide your own logic here that takes the credentials
         // submitted and returns either a object representing a user or value
         // that is false/null if the credentials are invalid.
@@ -43,6 +43,11 @@ const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  //   pages: {
+  //     signIn: process.env.NEXT_PUBLIC_BASE_URL + '/connexion',
+  //     signOut:  process.env.NEXT_PUBLIC_BASE_URL + '/deconnexion',
+  //     error:  process.env.NEXT_PUBLIC_BASE_URL + '/connexion/erreur', // Error code passed in query string as ?error=
+  //   },
 }
 
 export default NextAuth(authOptions)
