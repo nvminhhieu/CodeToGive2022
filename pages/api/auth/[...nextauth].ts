@@ -37,17 +37,14 @@ const authOptions: NextAuthOptions = {
         //
         // Mock credentials
         const { username, password } = credentials
-        if (username === 'admin' && password === 'admin')
-          return { data: 'success' }
+        if (username === 'admin' && password === 'admin') {
+          return { id: 123, name: 'test' }
+        }
         return null
       },
     }),
   ],
-  //   pages: {
-  //     signIn: process.env.NEXT_PUBLIC_BASE_URL + '/connexion',
-  //     signOut:  process.env.NEXT_PUBLIC_BASE_URL + '/deconnexion',
-  //     error:  process.env.NEXT_PUBLIC_BASE_URL + '/connexion/erreur', // Error code passed in query string as ?error=
-  //   },
+  secret: 'sdsd',
 }
 
 export default NextAuth(authOptions)

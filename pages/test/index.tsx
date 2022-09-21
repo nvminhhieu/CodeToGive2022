@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next'
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { ReactElement } from 'react'
 
@@ -8,6 +9,8 @@ type Props = {
 
 const Test = ({ data }: Props): ReactElement | null => {
   console.log(data)
+  const session = useSession()
+  console.log('session', session)
   return (
     <>
       <div className="">This is another test page test 2</div>
