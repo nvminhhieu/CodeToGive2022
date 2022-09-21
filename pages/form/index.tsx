@@ -1,10 +1,10 @@
-import CustomTextField from "../../components/common/CustomTextField";
-import { useForm } from "react-hook-form";
-import CustomButton from "../../components/common/CustomButton";
+import CustomTextField from "../../components/common/CustomTextField"
+import { useForm } from "react-hook-form"
+import CustomButton from "../../components/common/CustomButton"
 
 const Test = () => {
-  const { control, handleSubmit } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+  const { control, handleSubmit } = useForm()
+  const onSubmit = (data: any) => console.log(data)
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -15,20 +15,20 @@ const Test = () => {
         type="email"
         variant="outlined"
         sx={{ margin: "15px 0" }}
-      ></CustomTextField>
+      />
       <CustomTextField
         control={control}
         name="phone"
         label="Phone"
         type="phone"
         variant="outlined"
-      ></CustomTextField>
+      />
 
       <CustomButton variant="outlined" type="submit" sx={{ marginTop: "15px" }}>
         Submit
       </CustomButton>
     </form>
-  );
-};
+  )
+}
 
-export default Test;
+export default Test

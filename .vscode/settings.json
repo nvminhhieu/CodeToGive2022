@@ -1,11 +1,12 @@
 {
   "editor.detectIndentation": false,
+  "editor.tabSize": 2,
   "files.eol": "\n",
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "typescript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "double",
   "editor.rulers": [80, 120],
 
-  "javascript.preferences.quoteStyle": "single",
+  "javascript.preferences.quoteStyle": "double",
   "editor.bracketPairColorization.enabled": false,
 
   "eslint.packageManager": "yarn",
