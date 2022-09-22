@@ -21,6 +21,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin: 40px 0 60px 0;
 `
 
 const Title = styled.h2`

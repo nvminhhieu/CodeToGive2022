@@ -48,12 +48,12 @@ const Container = styled.div`
 `
 const LeftContainer = styled.div`
   display: flex;
-  gap: 15px;
+  gap: 28px;
 `
 const Nav = styled.nav`
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 28px;
 `
 
 const LinkWrapper = styled.span<{ active: boolean }>`
