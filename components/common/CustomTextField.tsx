@@ -1,6 +1,6 @@
-import { TextField } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { Controller } from "react-hook-form";
+import { TextField } from "@mui/material"
+import { styled } from "@mui/material/styles"
+import { Controller } from "react-hook-form"
 
 const CusTextField = styled(TextField)`
   width: 100%;
@@ -8,7 +8,7 @@ const CusTextField = styled(TextField)`
     border-radius: 100px;
     background-color: white;
   }
-`;
+`
 
 export default function CustomTextField(props: any) {
   return (
@@ -21,5 +21,5 @@ export default function CustomTextField(props: any) {
         formState,
       }) => <CusTextField onChange={onChange} value={value || ""} {...props} />}
     />
-  );
+  )
 }
