@@ -1,6 +1,6 @@
 import { GetStaticProps } from "next"
-import Image from "next/image"
 import { ReactElement } from "react"
+import Layout from "../../components/Layout"
 
 type Props = {
   data: any
@@ -9,11 +9,10 @@ type Props = {
 const Test = ({ data }: Props): ReactElement | null => {
   console.log(data)
   return (
-    <>
+    <Layout>
       <div className="">This is another test page test 2</div>
       <h1>{data?.message}</h1>
-      <Image src="" alt="test" layout="fill" />
-    </>
+    </Layout>
   )
 }
 
