@@ -2,15 +2,26 @@ import styled from "@emotion/styled"
 import Image from "next/image"
 import logoImage from "../../../assets/logo.png"
 
+import Link from "next/link"
+import { useRouter } from "next/router"
+
 const Header = () => {
+  const router = useRouter()
   return (
     <Wrapper>
       <Container>
         <LeftContainer>
           <Image src={logoImage} alt="test" width="48px" height="48px" />
           <Nav>
-            <h1>Link1</h1>
-            <h2>Link2</h2>
+            <LinkWrapper active={router.pathname === "/"}>
+              <Link href="/">Home</Link>
+            </LinkWrapper>
+            <LinkWrapper active={router.pathname === "/test"}>
+              <Link href="/test">Test</Link>
+            </LinkWrapper>
+            <LinkWrapper active={router.pathname === "/form"}>
+              <Link href="/form">login</Link>
+            </LinkWrapper>
           </Nav>
         </LeftContainer>
       </Container>
@@ -43,4 +54,8 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   gap: 15px;
+`
+
+const LinkWrapper = styled.span<{ active: boolean }>`
+  border-bottom: ${({ active }) => (active ? "2px solid black" : "none")};
 `
