@@ -17,7 +17,7 @@ const Test = ({ data }: Props): ReactElement | null => {
     <Layout>
       <div className="">This is another test page test 2</div>
       <h1>{data?.message}</h1>
-      {alertIsOpen && (
+      {alertIsOpen ? (
         <Alert
           variant="filled"
           severity="info"
@@ -29,7 +29,7 @@ const Test = ({ data }: Props): ReactElement | null => {
           Finish all the tests and one of our colleagues will reach out to you
           with the further steps.
         </Alert>
-      )}
+      ) : null}
     </Layout>
   )
 }
