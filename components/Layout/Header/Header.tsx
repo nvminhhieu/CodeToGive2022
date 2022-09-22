@@ -34,7 +34,6 @@ const Container = styled.div`
   max-width: 1080px;
   display: flex;
   justify-content: space-between;
-  background: red;
 `
 const LeftContainer = styled.div`
   display: flex;
