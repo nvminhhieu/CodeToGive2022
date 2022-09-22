@@ -57,5 +57,6 @@ const Nav = styled.nav`
 `
 
 const LinkWrapper = styled.span<{ active: boolean }>`
-  border-bottom: ${({ active }) => (active ? "2px solid black" : "none")};
+  color: ${({ active }) => (active ? "#FF5000" : "#0068FF")};
+  font-weight: 600;
 `
