@@ -1,6 +1,7 @@
 import { Alert } from "@mui/material"
 import { GetStaticProps } from "next"
 import { ReactElement, useState } from "react"
+import PageTitle from "../../components/common/PageTitle"
 import Layout from "../../components/Layout"
 import { useSession } from "next-auth/react"
 
@@ -15,6 +16,16 @@ const Test = ({ data }: Props): ReactElement | null => {
   console.log("session", session)
   return (
     <Layout>
+      <PageTitle
+        title="Assessment"
+        description={
+          <>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam
+            <br />
+            minima nihil unde nulla, modi corporis iure libero soluta saepe rem!
+          </>
+        }
+      />
       <div className="">This is another test page test 2</div>
       <h1>{data?.message}</h1>
       {alertIsOpen ? (
