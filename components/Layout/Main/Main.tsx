@@ -1,8 +1,8 @@
 import styled from "@emotion/styled"
-import { ReactElement } from "react"
+import { ReactNode } from "react"
 
 type Props = {
-  children: ReactElement | ReactElement[] | null
+  children: ReactNode
 }
 
 export default function Main({ children }: Props) {
