@@ -1,9 +1,9 @@
-import React, { ReactElement } from "react"
+import React, { ReactNode } from "react"
 import Header from "./Header/Header"
 import Main from "./Main/Main"
 
 type Props = {
-  children: ReactElement | ReactElement[] | null
+  children: ReactNode
 }
 
 /**
