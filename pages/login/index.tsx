@@ -8,8 +8,8 @@ const Login = () => {
   const { control, handleSubmit } = useForm()
   const onSubmit = async (data: any) => {
     const response = await signIn('credentials', {
-      username: 'admin',
-      password: 'admin',
+      username: data.username,
+      password: data.password,
       redirect: false,
     })
 
@@ -26,17 +26,17 @@ const Login = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <CustomTextField
           control={control}
-          name="email"
-          label="E-mail address"
-          type="email"
+          name="username"
+          label="Usernames"
+          type="text"
           variant="outlined"
           sx={{ margin: '15px 0' }}
         />
         <CustomTextField
           control={control}
-          name="phone"
-          label="Phone"
-          type="phone"
+          name="password"
+          label="Password"
+          type="password"
           variant="outlined"
         />
 
