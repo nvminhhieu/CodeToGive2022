@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 import { Button } from "@mui/material"
 import { ReactElement } from "react"
+import CustomButton from "../common/CustomButton"
 
 type Props = {
   image?: string
@@ -20,27 +21,27 @@ const QuestionCard = ({
 }: Props) => {
   return (
     <Container>
-      <ImageCover image={image} />
+      {image ? <ImageCover image={image} /> : null}
       <InnerContainer>
         <Content>
           <Title>Question {index}</Title>
           <Description>{description}</Description>
         </Content>
         <AnswerContainer>
-          <Button
+          <CustomButton
             onClick={onClickCallBack}
             variant="contained"
             sx={{ width: "100%" }}
           >
             Agree
-          </Button>
-          <Button
+          </CustomButton>
+          <CustomButton
             onClick={onClickCallBack}
             variant="contained"
             sx={{ width: "100%" }}
           >
             Disagree
-          </Button>
+          </CustomButton>
         </AnswerContainer>
       </InnerContainer>
     </Container>

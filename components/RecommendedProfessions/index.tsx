@@ -1,10 +1,30 @@
 import styled from "@emotion/styled"
 import JobCard from "./JobCard/JobCard"
+import MinimizeIcon from "@mui/icons-material/Minimize"
+import SvgIcon from "@mui/icons-material/Minimize"
 
-const RecommendedProfessions = () => {
+type Props = {
+  onClickCallBack: any
+}
+
+const RecommendedProfessions = ({ onClickCallBack }: Props) => {
   return (
     <Container>
-      <Title>Recommended professions</Title>
+      <ContentCont>
+        <Title>Recommended professions</Title>
+        <div onClick={() => onClickCallBack()}>
+          <SvgIcon
+            sx={{
+              fontSize: "40px",
+              color: "#0097F2",
+              transform: "translateY(-5px)",
+            }}
+          >
+            <MinimizeIcon />
+          </SvgIcon>
+        </div>
+      </ContentCont>
+
       <InnerContainer>
         <JobCard match_value={70} />
         <JobCard match_value={68} />
@@ -37,6 +57,11 @@ const Container = styled.div`
 const Title = styled.p`
   font-weight: 700;
   font-size: 32px;
+`
+const ContentCont = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 `
 
 const InnerContainer = styled.div`

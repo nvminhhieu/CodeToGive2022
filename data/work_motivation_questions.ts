@@ -1,7 +1,8 @@
 export const questions = [
   {
     index: 1,
-    description: "this is description",
+    description:
+      "Do you like the working environment represented on the image above?",
     answers: [
       {
         label: "yes",
@@ -29,7 +30,8 @@ export const questions = [
   },
   {
     index: 2,
-    description: "this is description222",
+    description:
+      "Do you like the working environment represented on the image above 2?",
     answers: [
       {
         label: "yes",
