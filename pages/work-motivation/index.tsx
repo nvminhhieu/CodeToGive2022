@@ -1,5 +1,6 @@
 import PageTitle from "../../components/common/PageTitle"
 import Layout from "../../components/Layout"
+import RecommendedProfessions from "../../components/RecommendedProfessions"
 
 const WorkMotivation = () => {
   return (
@@ -13,6 +14,7 @@ const WorkMotivation = () => {
           </>
         }
       />
+      <RecommendedProfessions />
     </Layout>
   )
 }
