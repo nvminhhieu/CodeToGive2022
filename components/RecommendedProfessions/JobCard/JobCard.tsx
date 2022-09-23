@@ -3,9 +3,21 @@ import AddCircleIcon from "@mui/icons-material/AddCircle"
 import InfoIcon from "@mui/icons-material/Info"
 import { SvgIcon } from "@mui/material"
 
-const JobCard = () => {
+type Props = {
+  match_value: number
+  image?: string
+}
+
+const FALL_BACK_IMAGE =
+  "https://images.unsplash.com/photo-1661956601030-fdfb9c7e9e2f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=742&q=80"
+
+const calculateFadeValue = (value: number): number => {
+  return value / 100
+}
+
+const JobCard = ({ match_value }: Props) => {
   return (
-    <Container>
+    <Container value={match_value}>
       <AbsoluteInnerContainer>
         <SvgIcon sx={{ color: "white" }}>
           <InfoIcon />
@@ -15,28 +27,48 @@ const JobCard = () => {
         </SvgIcon>
       </AbsoluteInnerContainer>
       <Title>Shop assistant</Title>
-      <Match>20% match</Match>
+      <Match>{match_value}% match</Match>
     </Container>
   )
 }
 
 export default JobCard
 
-const Container = styled.div`
+const Container = styled.div<{ value: number; image?: string }>`
   position: relative;
-  width: 20vw;
-  max-width: 300px;
+  width: 100%;
+  //max-width: 300px;
   height: 20vh;
   padding: 20px 17px;
-  background: radial-gradient(
-    216.18% 577.81% at 75.41% 171.32%,
-    rgba(6, 70, 159, 1) 0%,
-    rgb(151, 186, 236, 1) 100%
-  );
+  z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   border-radius: 8px;
+  &:before {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    border-radius: 8px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: ${({ value }) => calculateFadeValue(value) * 1.3};
+    background: linear-gradient(
+        25.8deg,
+        rgba(0, 0, 0, 0.162) 14.33%,
+        rgba(0, 0, 0, 0) 83.67%
+      ),
+      linear-gradient(
+        288.1deg,
+        rgba(6, 70, 159, ${({ value }) => calculateFadeValue(value)}) 17.87%,
+        rgb(151, 186, 236, ${({ value }) => calculateFadeValue(value)}) 142.8%
+      ),
+      url(${({ image }) => (image ? image : FALL_BACK_IMAGE)});
+    background-position: center;
+    background-size: cover;
+  }
 `
 
 const Title = styled.p`
@@ -56,7 +88,7 @@ const AbsoluteInnerContainer = styled.div`
   position: absolute;
   top: 17px;
   right: 20px;
-  gap: 12px;
+  gap: 10px;
   display: flex;
   justify-content: flex-end;
 `
