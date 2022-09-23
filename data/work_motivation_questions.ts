@@ -22,7 +22,7 @@ export const questions = [
       },
     ],
     image: {
-      src: "./.../",
+      src: "https://images.unsplash.com/photo-1659535901690-ab95a8539929?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
       alt: "Alt text",
     },
     completed: false,
@@ -50,7 +50,7 @@ export const questions = [
       },
     ],
     image: {
-      src: "./.../",
+      src: "https://images.unsplash.com/photo-1663940019982-c14294717dbd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
       alt: "Alt text",
     },
     completed: false,

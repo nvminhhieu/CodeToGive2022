@@ -1,31 +1,44 @@
 import styled from "@emotion/styled"
 import { Button } from "@mui/material"
+import { ReactElement } from "react"
 
 type Props = {
   image?: string
+  onClickCallBack: any
+  index: number
+  description: string | ReactElement
 }
 
 const FALL_BACK_IMAGE =
   "https://images.unsplash.com/photo-1661956601030-fdfb9c7e9e2f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=742&q=80"
 
-const QuestionCard = ({ image }: Props) => {
+const QuestionCard = ({
+  image,
+  index,
+  onClickCallBack,
+  description,
+}: Props) => {
   return (
     <Container>
       <ImageCover image={image} />
       <InnerContainer>
         <Content>
-          <Title>Question 1</Title>
-          <Description>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et officia
-            ipsa cum. Doloremque rerum fugit aperiam a excepturi nostrum
-            aliquid.
-          </Description>
+          <Title>Question {index}</Title>
+          <Description>{description}</Description>
         </Content>
         <AnswerContainer>
-          <Button variant="contained" sx={{ width: "100%" }}>
+          <Button
+            onClick={onClickCallBack}
+            variant="contained"
+            sx={{ width: "100%" }}
+          >
             Agree
           </Button>
-          <Button variant="contained" sx={{ width: "100%" }}>
+          <Button
+            onClick={onClickCallBack}
+            variant="contained"
+            sx={{ width: "100%" }}
+          >
             Disagree
           </Button>
         </AnswerContainer>
@@ -39,7 +52,6 @@ export default QuestionCard
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-self: center;
   justify-content: space-between;
   border-radius: 16px;
   width: 460px;
