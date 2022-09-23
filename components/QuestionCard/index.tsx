@@ -31,6 +31,7 @@ const QuestionCard = ({
           <CustomButton
             onClick={onClickCallBack}
             variant="contained"
+            color="success"
             sx={{ width: "100%" }}
           >
             Agree
@@ -38,6 +39,7 @@ const QuestionCard = ({
           <CustomButton
             onClick={onClickCallBack}
             variant="contained"
+            color="error"
             sx={{ width: "100%" }}
           >
             Disagree
