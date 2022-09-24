@@ -1,7 +1,8 @@
 export const questions = [
   {
     index: 1,
-    description: "this is description",
+    description:
+      "Do you like the working environment represented on the image above?",
     answers: [
       {
         label: "yes",
@@ -22,14 +23,15 @@ export const questions = [
       },
     ],
     image: {
-      src: "./.../",
+      src: "https://images.unsplash.com/photo-1659535901690-ab95a8539929?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
       alt: "Alt text",
     },
     completed: false,
   },
   {
     index: 2,
-    description: "this is description222",
+    description:
+      "Do you like the working environment represented on the image above 2?",
     answers: [
       {
         label: "yes",
@@ -50,7 +52,7 @@ export const questions = [
       },
     ],
     image: {
-      src: "./.../",
+      src: "https://images.unsplash.com/photo-1663940019982-c14294717dbd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
       alt: "Alt text",
     },
     completed: false,
