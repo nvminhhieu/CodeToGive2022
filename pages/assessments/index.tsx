@@ -1,6 +1,6 @@
 import { AssessmentCard } from "../../components/Assessments/AssessmentCard"
 import { AssessmentResultCard } from "../../components/Assessments/AssessmentResultCard"
-import PageTitle from "../../components/Common/PageTitle"
+import PageTitle from "../../components/common/PageTitle"
 import Layout from "../../components/Layout"
 import { assessments } from "../../data/assessment_display"
 
