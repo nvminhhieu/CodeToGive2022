@@ -27,7 +27,8 @@ const Test = () => {
         />
 
         <CustomButton
-          variant="outlined"
+          variant="contained"
+          color="success"
           type="submit"
           sx={{ marginTop: "15px" }}
         >
