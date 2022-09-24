@@ -53,6 +53,7 @@ const WorkMotivation = () => {
 
         <AnimatePresence exitBeforeEnter>
           <motion.div
+            style={{ width: "100%" }}
             key={currentQuestionIndex}
             variants={questionCardSlideAnimation}
             initial="hidden"
@@ -81,6 +82,7 @@ const WorkMotivation = () => {
         </IconContainer>
       </CardContainer>
       <Spacer />
+
       <IconWrapper onClick={() => setIsOpenRecommended(!isOpenRecommended)}>
         <IconContainer>
           <SvgIcon sx={{ fontSize: "30px", color: "#0097F2" }}>
@@ -114,6 +116,7 @@ const CardContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2vw;
 `
 
 const Spacer = styled.div`
@@ -121,8 +124,6 @@ const Spacer = styled.div`
   height: 500px;
 `
 const IconContainer = styled.div`
-  width: 80px;
-  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,6 +131,7 @@ const IconContainer = styled.div`
   box-shadow: 0px 0px 7px rgba(7, 31, 54, 0.04),
     0px 15px 17px -1px rgba(5, 125, 236, 0.1);
   border-radius: 50%;
+  padding: 10px;
 `
 
 const IconWrapper = styled.div`
