@@ -49,7 +49,7 @@ export const AssessmentCard = ({ assessment }: any) => {
       </Justify>
       {!assessment.completed && (
         <>
-          <Flex>
+          <Flex style={{ marginTop: "20px" }}>
             <LinearProgress
               variant="determinate"
               value={assessment.progress}
@@ -59,7 +59,6 @@ export const AssessmentCard = ({ assessment }: any) => {
                 borderRadius: "12px",
                 height: "8px",
                 width: "112px",
-                marginTop: "20px",
               }}
             />
 
@@ -89,7 +88,6 @@ export const AssessmentCard = ({ assessment }: any) => {
 const Flex = styled.div`
   display: flex;
   align-items: center;
-  position: relative;
 `
 
 const Justify = styled.div`
@@ -110,6 +108,7 @@ const Container = styled.div`
   border-radius: 16px;
   padding: 24px;
   margin-top: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 `
 
 const Title = styled.h2`
@@ -127,9 +126,7 @@ const Text = styled.p`
   font-size: 14px;
   font-weight: 400;
   color: #666666;
-  position: absolute;
-  top: 14px;
-  left: 124px;
+  margin-left: 10px;
 `
 
 const SuccessText = styled.p`
