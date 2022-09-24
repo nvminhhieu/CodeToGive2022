@@ -39,6 +39,7 @@ const Wrapper = styled.header`
   justify-content: center;
   background: white;
   padding: 20px;
+  box-shadow: 0px 1px 5px 0px rgb(0 0 0 / 10%);
 `
 const Container = styled.div`
   width: 80%;
