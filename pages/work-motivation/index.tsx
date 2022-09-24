@@ -51,7 +51,7 @@ const WorkMotivation = () => {
           </SvgIcon>
         </IconContainer>
 
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence mode="wait">
           <motion.div
             style={{ width: "100%" }}
             key={currentQuestionIndex}
@@ -65,6 +65,7 @@ const WorkMotivation = () => {
               description={questions[currentQuestionIndex].description}
               onClickCallBack={answerOnClickCallBack}
               image={questions[currentQuestionIndex].image.src}
+              totalLength={questions.length}
             />
           </motion.div>
         </AnimatePresence>
@@ -84,7 +85,7 @@ const WorkMotivation = () => {
       <Spacer />
 
       <IconWrapper onClick={() => setIsOpenRecommended(!isOpenRecommended)}>
-        <IconContainer>
+        <IconContainer style={{ padding: "20px" }}>
           <SvgIcon sx={{ fontSize: "30px", color: "#0097F2" }}>
             <WorkOutlineIcon />
           </SvgIcon>
@@ -132,6 +133,7 @@ const IconContainer = styled.div`
     0px 15px 17px -1px rgba(5, 125, 236, 0.1);
   border-radius: 50%;
   padding: 10px;
+  cursor: pointer;
 `
 
 const IconWrapper = styled.div`

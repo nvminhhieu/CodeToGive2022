@@ -30,8 +30,7 @@ export const questions = [
   },
   {
     index: 2,
-    description:
-      "Do you like the working environment represented on the image above 2?",
+    description: "Would you feel comfortable dealing with customers?",
     answers: [
       {
         label: "yes",

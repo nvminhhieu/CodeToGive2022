@@ -9,6 +9,7 @@ type Props = {
   onClickCallBack: any
   index: number
   description: string | ReactElement
+  totalLength: number
 }
 
 const FALL_BACK_IMAGE =
@@ -19,6 +20,7 @@ const QuestionCard = ({
   index,
   onClickCallBack,
   description,
+  totalLength,
 }: Props) => {
   const [selectedAnswer, setSelectedAnswer] = useState(0)
   return (
@@ -27,7 +29,9 @@ const QuestionCard = ({
         <ContentContainer>
           {image ? <ImageCover image={image} /> : null}
           <Content>
-            <Title>Question {index}</Title>
+            <Title>
+              Question {index} of {totalLength}
+            </Title>
             <Description>{description}</Description>
           </Content>
         </ContentContainer>
