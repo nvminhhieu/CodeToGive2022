@@ -8,6 +8,8 @@ import { ROUTES } from "../../../routing/routes"
 
 const Header = () => {
   const router = useRouter()
+  const isMatchRoute = (route: string): boolean =>
+    router.pathname.match(route) !== null
   return (
     <Wrapper>
       <Container>
@@ -17,10 +19,10 @@ const Header = () => {
             <LinkWrapper active={router.pathname === ROUTES.home}>
               <NextLink href={ROUTES.home}>Home</NextLink>
             </LinkWrapper>
-            <LinkWrapper active={router.pathname === ROUTES.assessments}>
+            <LinkWrapper active={isMatchRoute(ROUTES.assessments)}>
               <NextLink href={ROUTES.assessments}>Assessments</NextLink>
             </LinkWrapper>
-            <LinkWrapper active={router.pathname === ROUTES.login}>
+            <LinkWrapper active={isMatchRoute(ROUTES.login)}>
               <NextLink href={ROUTES.login}>Log in</NextLink>
             </LinkWrapper>
           </Nav>
