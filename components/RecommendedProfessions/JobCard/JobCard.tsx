@@ -2,6 +2,7 @@ import styled from "@emotion/styled"
 import AddCircleIcon from "@mui/icons-material/AddCircle"
 import InfoIcon from "@mui/icons-material/Info"
 import { SvgIcon } from "@mui/material"
+import { motion } from "framer-motion"
 
 type Props = {
   match_value: number
@@ -17,7 +18,13 @@ const calculateFadeValue = (value: number): number => {
 
 const JobCard = ({ match_value }: Props) => {
   return (
-    <Container value={match_value}>
+    <Container
+      value={match_value}
+      layout
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <AbsoluteInnerContainer>
         <SvgIcon sx={{ color: "white" }}>
           <InfoIcon />
@@ -34,7 +41,7 @@ const JobCard = ({ match_value }: Props) => {
 
 export default JobCard
 
-const Container = styled.div<{ value: number; image?: string }>`
+const Container = styled(motion.div)<{ value: number; image?: string }>`
   position: relative;
   width: 100%;
   //max-width: 300px;

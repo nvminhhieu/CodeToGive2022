@@ -9,6 +9,7 @@ import { questions } from "../../data/work_motivation_questions"
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
+import { AnimatePresence, motion } from "framer-motion"
 
 const WorkMotivation = () => {
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
@@ -50,12 +51,23 @@ const WorkMotivation = () => {
           </SvgIcon>
         </IconContainer>
 
-        <QuestionCard
-          index={questions[currentQuestionIndex].index}
-          description={questions[currentQuestionIndex].description}
-          onClickCallBack={answerOnClickCallBack}
-          image={questions[currentQuestionIndex].image.src}
-        />
+        <AnimatePresence exitBeforeEnter>
+          <motion.div
+            key={currentQuestionIndex}
+            variants={questionCardSlideAnimation}
+            initial="hidden"
+            animate="visible"
+            exit="fadeout"
+          >
+            <QuestionCard
+              index={questions[currentQuestionIndex].index}
+              description={questions[currentQuestionIndex].description}
+              onClickCallBack={answerOnClickCallBack}
+              image={questions[currentQuestionIndex].image.src}
+            />
+          </motion.div>
+        </AnimatePresence>
+
         <IconContainer
           onClick={() => {
             setCurrentQuestionIndex(
@@ -77,11 +89,20 @@ const WorkMotivation = () => {
         </IconContainer>
       </IconWrapper>
 
-      {isOpenRecommended ? (
-        <RecommendedProfessions
-          onClickCallBack={() => setIsOpenRecommended(!isOpenRecommended)}
-        />
-      ) : null}
+      <AnimatePresence>
+        {isOpenRecommended ? (
+          <RecommendedProfessionsCont
+            variants={toggleAnimation}
+            initial="hidden"
+            animate="visible"
+            exit="fadeout"
+          >
+            <RecommendedProfessions
+              onClickCallBack={() => setIsOpenRecommended(!isOpenRecommended)}
+            />
+          </RecommendedProfessionsCont>
+        ) : null}
+      </AnimatePresence>
     </Layout>
   )
 }
@@ -117,3 +138,38 @@ const IconWrapper = styled.div`
   align-self: center;
   cursor: pointer;
 `
+
+const RecommendedProfessionsCont = styled(motion.div)`
+  position: fixed;
+  bottom: 2vh;
+  align-self: center;
+  width: 80%;
+  max-width: 1080px;
+`
+
+const toggleAnimation = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+  fadeout: {
+    opacity: 0,
+    y: 100,
+  },
+}
+
+const questionCardSlideAnimation = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
+  fadeout: {
+    opacity: 0,
+  },
+}

@@ -1,7 +1,7 @@
 import { Alert } from "@mui/material"
 import { GetStaticProps } from "next"
 import { ReactElement, useState } from "react"
-import PageTitle from "../../components/Common/PageTitle"
+import PageTitle from "../../components/common/PageTitle"
 import Layout from "../../components/Layout"
 import { useSession } from "next-auth/react"
 

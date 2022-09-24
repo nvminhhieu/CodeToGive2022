@@ -2,12 +2,92 @@ import styled from "@emotion/styled"
 import JobCard from "./JobCard/JobCard"
 import MinimizeIcon from "@mui/icons-material/Minimize"
 import SvgIcon from "@mui/icons-material/Minimize"
+import { motion, AnimatePresence } from "framer-motion"
+import { useEffect, useState } from "react"
 
 type Props = {
   onClickCallBack: any
 }
 
+const arrayMock = [
+  [
+    {
+      id: 1,
+      label: "shop assistance",
+      match_value: 80,
+      details: {
+        company_name: "Inc",
+        about: "this company is doing blah blah",
+        description: "to success you should have:",
+      },
+    },
+    {
+      id: 2,
+      label: "shop assistance",
+      match_value: 70,
+      details: {
+        company_name: "Inc",
+        about: "this company is doing blah blah",
+        description: "to success you should have:",
+      },
+    },
+
+    {
+      id: 3,
+      label: "shop assistance",
+      match_value: 60,
+      details: {
+        company_name: "Inc",
+        about: "this company is doing blah blah",
+        description: "to success you should have:",
+      },
+    },
+  ],
+  [
+    {
+      id: 3,
+      label: "shop assistance",
+      match_value: 90,
+      details: {
+        company_name: "Inc",
+        about: "this company is doing blah blah",
+        description: "to success you should have:",
+      },
+    },
+    {
+      id: 2,
+      label: "shop assistance",
+      match_value: 80,
+      details: {
+        company_name: "Inc",
+        about: "this company is doing blah blah",
+        description: "to success you should have:",
+      },
+    },
+    {
+      id: 1,
+      label: "shop assistance",
+      match_value: 70,
+      details: {
+        company_name: "Inc",
+        about: "this company is doing blah blah",
+        description: "to success you should have:",
+      },
+    },
+  ],
+]
+
 const RecommendedProfessions = ({ onClickCallBack }: Props) => {
+  //Test Animate Layout
+  const [arrayIndex, setArrayIndex] = useState(0)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setArrayIndex(arrayIndex + 1)
+    }, 2000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
     <Container>
       <ContentCont>
@@ -25,10 +105,12 @@ const RecommendedProfessions = ({ onClickCallBack }: Props) => {
         </div>
       </ContentCont>
 
-      <InnerContainer>
-        <JobCard match_value={70} />
-        <JobCard match_value={68} />
-        <JobCard match_value={55} />
+      <InnerContainer layout>
+        <AnimatePresence exitBeforeEnter>
+          {arrayMock[arrayIndex].map((e) => (
+            <JobCard key={e.id} match_value={e.match_value} />
+          ))}
+        </AnimatePresence>
       </InnerContainer>
     </Container>
   )
@@ -37,11 +119,6 @@ const RecommendedProfessions = ({ onClickCallBack }: Props) => {
 export default RecommendedProfessions
 
 const Container = styled.div`
-  position: fixed;
-  bottom: 2vh;
-  align-self: center;
-  width: 80%;
-  max-width: 1080px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -64,7 +141,7 @@ const ContentCont = styled.div`
   justify-content: space-between;
 `
 
-const InnerContainer = styled.div`
+const InnerContainer = styled(motion.div)`
   width: 100%;
   display: flex;
   gap: 20px;
