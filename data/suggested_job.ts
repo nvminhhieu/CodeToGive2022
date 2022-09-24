@@ -1,7 +1,8 @@
 export const suggestedJobs = [
   {
+    id: 1,
     label: "shop assistance",
-    match_value: 69,
+    match_value: 80,
     details: {
       company_name: "Inc",
       about: "this company is doing blah blah",
