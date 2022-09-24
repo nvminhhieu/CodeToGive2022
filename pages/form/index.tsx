@@ -1,6 +1,6 @@
-import CustomTextField from "../../components/common/CustomTextField"
+import CustomTextField from "../../components/Common/CustomTextField/CustomTextField"
 import { useForm } from "react-hook-form"
-import CustomButton from "../../components/common/CustomButton"
+import CustomButton from "../../components/Common/CustomButton/CustomButton"
 import Layout from "../../components/Layout"
 
 const Test = () => {

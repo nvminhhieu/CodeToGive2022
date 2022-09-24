@@ -2,8 +2,9 @@ import styled from "@emotion/styled"
 import Image from "next/image"
 import logoImage from "../../../assets/logo.png"
 
-import Link from "next/link"
+import NextLink from "next/link"
 import { useRouter } from "next/router"
+import { ROUTES } from "../../../routing/routes"
 
 const Header = () => {
   const router = useRouter()
@@ -13,14 +14,14 @@ const Header = () => {
         <LeftContainer>
           <Image src={logoImage} alt="test" width="48px" height="48px" />
           <Nav>
-            <LinkWrapper active={router.pathname === "/"}>
-              <Link href="/">Home</Link>
+            <LinkWrapper active={router.pathname === ROUTES.home}>
+              <NextLink href={ROUTES.home}>Home</NextLink>
             </LinkWrapper>
-            <LinkWrapper active={router.pathname === "/test"}>
-              <Link href="/test">Test</Link>
+            <LinkWrapper active={router.pathname === ROUTES.assessments}>
+              <NextLink href={ROUTES.assessments}>Assessments</NextLink>
             </LinkWrapper>
-            <LinkWrapper active={router.pathname === "/form"}>
-              <Link href="/form">login</Link>
+            <LinkWrapper active={router.pathname === ROUTES.login}>
+              <NextLink href={ROUTES.login}>Log in</NextLink>
             </LinkWrapper>
           </Nav>
         </LeftContainer>
@@ -40,6 +41,7 @@ const Wrapper = styled.header`
   background: white;
   padding: 20px;
   box-shadow: 0px 1px 5px 0px rgb(0 0 0 / 10%);
+  z-index: 1;
 `
 const Container = styled.div`
   width: 80%;

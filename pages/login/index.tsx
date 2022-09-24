@@ -1,23 +1,23 @@
-import CustomTextField from '../../components/common/CustomTextField'
-import { useForm } from 'react-hook-form'
-import CustomButton from '../../components/common/CustomButton'
-import { signIn, signOut } from 'next-auth/react'
-import Router from 'next/router'
+import CustomTextField from "../../components/Common/CustomTextField/CustomTextField"
+import { useForm } from "react-hook-form"
+import CustomButton from "../../components/Common/CustomButton/CustomButton"
+import { signIn, signOut } from "next-auth/react"
+import Router from "next/router"
 
 const Login = () => {
   const { control, handleSubmit } = useForm()
   const onSubmit = async (data: any) => {
-    const response = await signIn('credentials', {
+    const response = await signIn("credentials", {
       username: data.username,
       password: data.password,
       redirect: false,
     })
 
     if (response?.ok) {
-      Router.push('/admin')
+      Router.push("/admin")
     }
 
-    console.log('signIn', response)
+    console.log("signIn", response)
     console.log(data)
   }
 
@@ -30,7 +30,7 @@ const Login = () => {
           label="Usernames"
           type="text"
           variant="outlined"
-          sx={{ margin: '15px 0' }}
+          sx={{ margin: "15px 0" }}
         />
         <CustomTextField
           control={control}
@@ -43,7 +43,7 @@ const Login = () => {
         <CustomButton
           variant="outlined"
           type="submit"
-          sx={{ marginTop: '15px' }}
+          sx={{ marginTop: "15px" }}
         >
           Submit
         </CustomButton>
