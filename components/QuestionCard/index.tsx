@@ -1,7 +1,6 @@
 import styled from "@emotion/styled"
-import { Button } from "@mui/material"
 import { ReactElement } from "react"
-import CustomButton from "../common/CustomButton"
+import CustomButton from "../common/CustomButton/CustomButton"
 
 type Props = {
   image?: string
