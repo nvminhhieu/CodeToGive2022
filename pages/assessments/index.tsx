@@ -10,9 +10,11 @@ const AssessmentsPage = () => {
         title="Assessments"
         description="Here you can find the assessments required to get a job. Please select the test you would like to do."
       />
-      {assessments.map((assessment, i) => (
-        <AssessmentCard key={i} assessment={assessment} />
-      ))}
+      <div style={{ paddingBottom: "100px" }}>
+        {assessments.map((assessment, i) => (
+          <AssessmentCard key={i} assessment={assessment} />
+        ))}
+      </div>
     </Layout>
   )
 }

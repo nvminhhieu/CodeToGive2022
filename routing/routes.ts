@@ -1,7 +1,9 @@
 // frontend routes
 const ROUTES = {
-  home: "/client/",
-  test: "/client/test",
+  home: "/",
+  test: "/test",
+  assessments: "/assessments",
+  login: "/form",
 }
 
 const API_ENDPOINTS = {
