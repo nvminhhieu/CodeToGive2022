@@ -17,7 +17,16 @@ export const AssessmentResultCard = ({
           to.
         </Description>
         <Flex>
-          <Button variant="outlined" disabled={!isCompleted}>
+          <Button
+            variant="contained"
+            style={{
+              boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.1);",
+              height: "41px",
+              borderRadius: "8px",
+            }}
+            color="secondary"
+            disabled={!isCompleted}
+          >
             Learn more
           </Button>
           <Text>
