@@ -8,8 +8,10 @@ import { ROUTES } from "../../../routing/routes"
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks"
 import Bookmark from "./Bookmark/Bookmark"
+import { useState } from "react"
 
 const Header = () => {
+  const [isOpenBookmarked, setIsOpenBookmarked] = useState(false)
   const router = useRouter()
   const isMatchRoute = (route: string): boolean =>
     router.pathname.match(route) !== null
@@ -31,10 +33,18 @@ const Header = () => {
           </Nav>
         </LeftContainer>
         <RightContainer>
-          <BookmarksIcon sx={{ color: "#0068FF", cursor: "pointer" }} />
-          <BookmarkContainer>
-            <Bookmark />
-          </BookmarkContainer>
+          <div
+            onClick={() => {
+              setIsOpenBookmarked(!isOpenBookmarked)
+            }}
+          >
+            <BookmarksIcon sx={{ color: "#0068FF", cursor: "pointer" }} />
+          </div>
+          {isOpenBookmarked ? (
+            <BookmarkContainer>
+              <Bookmark />
+            </BookmarkContainer>
+          ) : null}
         </RightContainer>
       </Container>
     </Wrapper>
@@ -86,5 +96,5 @@ const BookmarkContainer = styled.div`
   position: absolute;
   align-self: flex-end;
   right: 0;
-  bottom: -700px;
+  top: 88px;
 `
