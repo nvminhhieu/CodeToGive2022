@@ -25,7 +25,7 @@ const Bookmark = () => {
         ))}
         {bookmarkedJobs.length === 0 ? (
           <JobContainer>
-            <p>So empty, lets bookmarked some jobs</p>
+            <p>So empty, let&apos;s bookmark some jobs</p>
           </JobContainer>
         ) : null}
       </InnerContainer>

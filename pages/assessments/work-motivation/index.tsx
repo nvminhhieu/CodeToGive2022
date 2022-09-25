@@ -1,7 +1,6 @@
 import styled from "@emotion/styled"
 import { SvgIcon } from "@mui/material"
 import { useState } from "react"
-import PageTitle from "../../../components/common/PageTitle"
 import Layout from "../../../components/Layout"
 import QuestionCard from "../../../components/QuestionCard"
 import RecommendedProfessions from "../../../components/RecommendedProfessions"
@@ -10,6 +9,8 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
+import PageTitle from "../../../components/Common/PageTitle"
+import Dictaphone from "../../../components/Common/Dictaphone/Dictaphone"
 
 const WorkMotivation = () => {
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
@@ -38,6 +39,7 @@ const WorkMotivation = () => {
         }
       />
 
+      <Dictaphone />
       <CardContainer>
         <IconContainer
           onClick={() => {

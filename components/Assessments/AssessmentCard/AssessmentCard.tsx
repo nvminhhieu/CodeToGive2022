@@ -2,7 +2,7 @@ import styled from "@emotion/styled"
 import { Button, LinearProgress } from "@mui/material"
 import DoneIcon from "@mui/icons-material/Done"
 import { useRouter } from "next/router"
-import { assessments } from "../../data/assessment_display"
+import { assessments } from "../../../data/assessment_display"
 
 type Props = {
   assessment: typeof assessments[number]
