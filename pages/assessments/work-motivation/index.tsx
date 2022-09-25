@@ -11,7 +11,7 @@ import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
 import PageTitle from "../../../components/Common/PageTitle"
 import Dictaphone from "../../../components/Common/Dictaphone/Dictaphone"
-import { CustomIconButton } from "../../../components/Common/CustomIconButton/CusotmIconButton"
+import { CustomIconButton } from "../../../components/Common/CustomIconButton/CustomIconButton"
 
 const WorkMotivation = () => {
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
@@ -39,8 +39,6 @@ const WorkMotivation = () => {
           </>
         }
       />
-
-      <Dictaphone />
       <CardContainer>
         <IconContainer
           onClick={() => {
@@ -91,6 +89,19 @@ const WorkMotivation = () => {
         _onClick={() => setIsOpenRecommended(!isOpenRecommended)}
         icon={<WorkOutlineIcon />}
         style={{ alignSelf: "center" }}
+      />
+
+      <Dictaphone
+        onNext={() =>
+          setCurrentQuestionIndex(
+            handleIndexTransit(currentQuestionIndex + 1, questions)
+          )
+        }
+        onPrev={() =>
+          setCurrentQuestionIndex(
+            handleIndexTransit(currentQuestionIndex - 1, questions)
+          )
+        }
       />
 
       <AnimatePresence>
