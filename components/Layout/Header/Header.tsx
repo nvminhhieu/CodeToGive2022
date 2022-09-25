@@ -6,6 +6,9 @@ import NextLink from "next/link"
 import { useRouter } from "next/router"
 import { ROUTES } from "../../../routing/routes"
 
+import BookmarksIcon from "@mui/icons-material/Bookmarks"
+import Bookmark from "./Bookmark/Bookmark"
+
 const Header = () => {
   const router = useRouter()
   return (
@@ -25,6 +28,12 @@ const Header = () => {
             </LinkWrapper>
           </Nav>
         </LeftContainer>
+        <RightContainer>
+          <BookmarksIcon sx={{ color: "#0068FF", cursor: "pointer" }} />
+          <BookmarkContainer>
+            <Bookmark />
+          </BookmarkContainer>
+        </RightContainer>
       </Container>
     </Wrapper>
   )
@@ -53,6 +62,13 @@ const LeftContainer = styled.div`
   display: flex;
   gap: 28px;
 `
+const RightContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 28px;
+  position: relative;
+`
 const Nav = styled.nav`
   display: flex;
   align-items: center;
@@ -62,4 +78,11 @@ const Nav = styled.nav`
 const LinkWrapper = styled.span<{ active: boolean }>`
   color: ${({ active }) => (active ? "#FF5000" : "#0068FF")};
   font-weight: 600;
+`
+
+const BookmarkContainer = styled.div`
+  position: absolute;
+  align-self: flex-end;
+  right: 0;
+  bottom: -700px;
 `
