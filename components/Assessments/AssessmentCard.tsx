@@ -1,8 +1,16 @@
 import styled from "@emotion/styled"
 import { Button, LinearProgress } from "@mui/material"
 import DoneIcon from "@mui/icons-material/Done"
+import { useRouter } from "next/router"
+import { assessments } from "../../data/assessment_display"
 
-export const AssessmentCard = ({ assessment }: any) => {
+type Props = {
+  assessment: typeof assessments[number]
+  key?: string | number
+}
+
+export const AssessmentCard = ({ assessment }: Props) => {
+  const router = useRouter()
   return (
     <Container>
       <Justify>
@@ -74,6 +82,9 @@ export const AssessmentCard = ({ assessment }: any) => {
             }}
             variant="contained"
             color="secondary"
+            onClick={() => {
+              router.push(assessment.url)
+            }}
           >
             {assessment.progress > 0
               ? "Continue answering"
