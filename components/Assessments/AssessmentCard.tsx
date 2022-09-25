@@ -53,7 +53,7 @@ export const AssessmentCard = ({ assessment }: any) => {
             <LinearProgress
               variant="determinate"
               value={assessment.progress}
-              color="info"
+              color="greyishColor"
               sx={{
                 backgroundColor: "#EEEEEE",
                 borderRadius: "12px",

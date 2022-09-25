@@ -1,4 +1,19 @@
-import { createTheme } from "@mui/material/styles"
+import { createTheme, PaletteColorOptions } from "@mui/material/styles"
+
+declare module "@mui/material/styles" {
+  interface Palette {
+    greyishColor: PaletteColorOptions
+  }
+  interface PaletteOptions {
+    greyishColor: PaletteColorOptions
+  }
+}
+
+declare module "@mui/material/LinearProgress" {
+  interface LinearProgressPropsColorOverrides {
+    greyishColor: true
+  }
+}
 
 export const theme = createTheme({
   palette: {
@@ -17,7 +32,7 @@ export const theme = createTheme({
     error: {
       main: "#f54d43",
     },
-    info: {
+    greyishColor: {
       main: "#686868",
     },
   },
