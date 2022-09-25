@@ -6,7 +6,12 @@ import NextLink from "next/link"
 import { useRouter } from "next/router"
 import { ROUTES } from "../../../routing/routes"
 
+import BookmarksIcon from "@mui/icons-material/Bookmarks"
+import Bookmark from "./Bookmark/Bookmark"
+import { useState } from "react"
+
 const Header = () => {
+  const [isOpenBookmarked, setIsOpenBookmarked] = useState(false)
   const router = useRouter()
   const isMatchRoute = (route: string): boolean =>
     router.pathname.match(route) !== null
@@ -27,6 +32,20 @@ const Header = () => {
             </LinkWrapper>
           </Nav>
         </LeftContainer>
+        <RightContainer>
+          <div
+            onClick={() => {
+              setIsOpenBookmarked(!isOpenBookmarked)
+            }}
+          >
+            <BookmarksIcon sx={{ color: "#0068FF", cursor: "pointer" }} />
+          </div>
+          {isOpenBookmarked ? (
+            <BookmarkContainer>
+              <Bookmark />
+            </BookmarkContainer>
+          ) : null}
+        </RightContainer>
       </Container>
     </Wrapper>
   )
@@ -55,6 +74,13 @@ const LeftContainer = styled.div`
   display: flex;
   gap: 28px;
 `
+const RightContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 28px;
+  position: relative;
+`
 const Nav = styled.nav`
   display: flex;
   align-items: center;
@@ -64,4 +90,11 @@ const Nav = styled.nav`
 const LinkWrapper = styled.span<{ active: boolean }>`
   color: ${({ active }) => (active ? "#FF5000" : "#0068FF")};
   font-weight: 600;
+`
+
+const BookmarkContainer = styled.div`
+  position: absolute;
+  align-self: flex-end;
+  right: 0;
+  top: 88px;
 `

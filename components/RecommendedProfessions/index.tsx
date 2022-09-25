@@ -4,6 +4,8 @@ import MinimizeIcon from "@mui/icons-material/Minimize"
 import SvgIcon from "@mui/icons-material/Minimize"
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
+import { useBookmarkContext } from "../../context/BookmarkContext"
+import IJob from "../../types/job"
 
 type Props = {
   onClickCallBack: any
@@ -78,8 +80,11 @@ const arrayMock = [
 ]
 
 const RecommendedProfessions = ({ onClickCallBack }: Props) => {
+  const { addBookmarkedJobs, removeBookmarkedJobs, bookmarkedJobs } =
+    useBookmarkContext()
   //Test Animate Layout
   const [arrayIndex, setArrayIndex] = useState(0)
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setArrayIndex(arrayIndex + 1)
@@ -87,6 +92,10 @@ const RecommendedProfessions = ({ onClickCallBack }: Props) => {
 
     return () => clearTimeout(timer)
   }, [])
+
+  const handleBookmarkCallback = (job?: IJob) => {
+    if (job) addBookmarkedJobs(job)
+  }
 
   return (
     <Container>
@@ -108,7 +117,11 @@ const RecommendedProfessions = ({ onClickCallBack }: Props) => {
       <InnerContainer layout>
         <AnimatePresence mode="wait">
           {arrayMock[arrayIndex].map((e) => (
-            <JobCard key={e.id} match_value={e.match_value} />
+            <JobCard
+              key={e.id}
+              jobData={e}
+              onClickBookmarkCallback={handleBookmarkCallback}
+            />
           ))}
         </AnimatePresence>
       </InnerContainer>
