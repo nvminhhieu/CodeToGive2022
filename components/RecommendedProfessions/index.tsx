@@ -5,6 +5,7 @@ import SvgIcon from "@mui/icons-material/Minimize"
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
 import { useBookmarkContext } from "../../context/BookmarkContext"
+import IJob from "../../types/job"
 
 type Props = {
   onClickCallBack: any
@@ -92,9 +93,8 @@ const RecommendedProfessions = ({ onClickCallBack }: Props) => {
     return () => clearTimeout(timer)
   }, [])
 
-  const handleBookmarkCallback = (job: any) => {
-    console.log("jobSentRecommendedBox", job)
-    addBookmarkedJobs(job)
+  const handleBookmarkCallback = (job?: IJob) => {
+    if (job) addBookmarkedJobs(job)
   }
 
   return (

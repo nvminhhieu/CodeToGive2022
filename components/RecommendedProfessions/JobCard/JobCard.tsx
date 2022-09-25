@@ -6,12 +6,13 @@ import { motion } from "framer-motion"
 import BookmarkIcon from "@mui/icons-material/Bookmark"
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot"
 import { useState } from "react"
+import IJob from "../../../types/job"
 
 type Props = {
-  jobData: any
+  jobData: IJob
   image?: string
   bookmarked?: boolean
-  onClickBookmarkCallback?: (e?: any) => void
+  onClickBookmarkCallback?: (job?: IJob) => void
 }
 
 const FALL_BACK_IMAGE =

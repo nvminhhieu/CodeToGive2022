@@ -1,19 +1,20 @@
 import styled from "@emotion/styled"
 import { useBookmarkContext } from "../../../../context/BookmarkContext"
+import IJob from "../../../../types/job"
 import JobCard from "../../../RecommendedProfessions/JobCard/JobCard"
 
 const Bookmark = () => {
   const { addBookmarkedJobs, removeBookmarkedJobs, bookmarkedJobs } =
     useBookmarkContext()
 
-  const handleBookmarkCallback = (job: any) => {
-    removeBookmarkedJobs(job)
+  const handleBookmarkCallback = (job?: IJob) => {
+    if (job) removeBookmarkedJobs(job)
   }
   return (
     <Container>
       <InnerContainer>
         <Title>Bookmarked Jobs</Title>
-        {bookmarkedJobs.map((job: any, i: number) => (
+        {bookmarkedJobs.map((job: IJob, i: number) => (
           <JobContainer key={i}>
             <JobCard
               jobData={job}

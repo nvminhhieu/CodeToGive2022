@@ -1,14 +1,15 @@
-import { createContext, ReactNode, useContext, useState } from "react"
+import { createContext, ReactNode, useContext } from "react"
 import { useLocalStorage } from "../hooks/useLocalStorage"
+import IJob from "../types/job"
 
 type BookmarkProviderProps = {
   children: ReactNode
 }
 
 type BookmarkContext = {
-  addBookmarkedJobs: (inputJob: any) => void
-  removeBookmarkedJobs: (inputJob: any) => void
-  bookmarkedJobs: any
+  addBookmarkedJobs: (inputJob: IJob) => void
+  removeBookmarkedJobs: (inputJob: IJob) => void
+  bookmarkedJobs: IJob[]
 }
 
 const BookmarkContext = createContext({} as BookmarkContext)
@@ -18,14 +19,14 @@ export function useBookmarkContext() {
 }
 
 export function BookmarkProvider({ children }: BookmarkProviderProps) {
-  const [bookmarkedJobs, setBookmarkedJobs] = useLocalStorage<any>(
+  const [bookmarkedJobs, setBookmarkedJobs] = useLocalStorage<IJob[]>(
     "bookmarked-jobs",
     []
   )
 
-  const addBookmarkedJobs = (inputJob: any) => {
+  const addBookmarkedJobs = (inputJob: IJob) => {
     const isNotFoundExistedJobInState = !bookmarkedJobs.find(
-      (stateJob) => stateJob?.id === inputJob?.id
+      (stateJob: IJob) => stateJob?.id === inputJob?.id
     )
 
     if (isNotFoundExistedJobInState) {
@@ -33,11 +34,11 @@ export function BookmarkProvider({ children }: BookmarkProviderProps) {
     }
   }
 
-  const removeBookmarkedJobs = (inputJob: any) => {
+  const removeBookmarkedJobs = (inputJob: IJob) => {
     console.log("stateBookmarked", bookmarkedJobs)
     console.log("inputJobInRemove", inputJob)
     const removedResult = bookmarkedJobs.filter(
-      (stateJob) => stateJob?.id !== inputJob?.id
+      (stateJob: IJob) => stateJob?.id !== inputJob?.id
     )
     setBookmarkedJobs(removedResult)
   }
