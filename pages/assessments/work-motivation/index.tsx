@@ -11,6 +11,7 @@ import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
 import PageTitle from "../../../components/Common/PageTitle"
 import Dictaphone from "../../../components/Common/Dictaphone/Dictaphone"
+import { CustomIconButton } from "../../../components/Common/CustomIconButton/CusotmIconButton"
 
 const WorkMotivation = () => {
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
@@ -86,13 +87,11 @@ const WorkMotivation = () => {
       </CardContainer>
       <Spacer />
 
-      <IconWrapper onClick={() => setIsOpenRecommended(!isOpenRecommended)}>
-        <IconContainer style={{ padding: "20px" }}>
-          <SvgIcon sx={{ fontSize: "30px", color: "#0097F2" }}>
-            <WorkOutlineIcon />
-          </SvgIcon>
-        </IconContainer>
-      </IconWrapper>
+      <CustomIconButton
+        _onClick={() => setIsOpenRecommended(!isOpenRecommended)}
+        icon={<WorkOutlineIcon />}
+        style={{ alignSelf: "center" }}
+      />
 
       <AnimatePresence>
         {isOpenRecommended ? (
@@ -135,13 +134,6 @@ const IconContainer = styled.div`
     0px 15px 17px -1px rgba(5, 125, 236, 0.1);
   border-radius: 50%;
   padding: 10px;
-  cursor: pointer;
-`
-
-const IconWrapper = styled.div`
-  position: fixed;
-  bottom: 2vh;
-  align-self: center;
   cursor: pointer;
 `
 
