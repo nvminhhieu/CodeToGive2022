@@ -6,6 +6,7 @@ import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined"
 export const assessments = [
   {
     title: "Work motivation test",
+    url: "/assessments/work-motivation",
     description:
       "Tell more about your interests so you can find the most suitable job.",
     completed: false,
@@ -18,6 +19,7 @@ export const assessments = [
   },
   {
     title: "English language test",
+    url: "/assessments/english-language-test",
     description:
       "You will be asked some questions about English situations to measure your knowledge.",
     completed: false,
@@ -30,6 +32,7 @@ export const assessments = [
   },
   {
     title: "Visio-perceptual skills",
+    url: "/assessments/visio-perceptual-skills",
     description: "We will measure your sight and hearing.",
     completed: false,
     icon: {
@@ -41,6 +44,7 @@ export const assessments = [
   },
   {
     title: "Some other test",
+    url: "/assessments/other-tests",
     description: "This is some other random test to observe your capabilities.",
     completed: true,
     icon: {

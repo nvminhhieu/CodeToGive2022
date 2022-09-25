@@ -106,7 +106,7 @@ const RecommendedProfessions = ({ onClickCallBack }: Props) => {
       </ContentCont>
 
       <InnerContainer layout>
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence mode="wait">
           {arrayMock[arrayIndex].map((e) => (
             <JobCard key={e.id} match_value={e.match_value} />
           ))}

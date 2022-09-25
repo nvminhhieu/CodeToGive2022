@@ -3,6 +3,9 @@ import AddCircleIcon from "@mui/icons-material/AddCircle"
 import InfoIcon from "@mui/icons-material/Info"
 import { SvgIcon } from "@mui/material"
 import { motion } from "framer-motion"
+import BookmarkIcon from "@mui/icons-material/Bookmark"
+import TurnedInNotIcon from "@mui/icons-material/TurnedInNot"
+import { useState } from "react"
 
 type Props = {
   match_value: number
@@ -17,78 +20,81 @@ const calculateFadeValue = (value: number): number => {
 }
 
 const JobCard = ({ match_value }: Props) => {
+  const [isBookmarked, setIsBookmarked] = useState(false)
   return (
     <Container
-      value={match_value}
       layout
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
+      <ImageThumbnail value={match_value} />
       <AbsoluteInnerContainer>
         <SvgIcon sx={{ color: "white" }}>
           <InfoIcon />
         </SvgIcon>
-        <SvgIcon sx={{ color: "white" }}>
-          <AddCircleIcon />
-        </SvgIcon>
       </AbsoluteInnerContainer>
-      <Title>Shop assistant</Title>
-      <Match>{match_value}% match</Match>
+      <ContentContainer>
+        <Content>
+          <Title>Shop assistant</Title>
+          <Match>{match_value}% match</Match>
+        </Content>
+        <div
+          style={{ cursor: "pointer" }}
+          onClick={() => setIsBookmarked(!isBookmarked)}
+        >
+          {isBookmarked ? (
+            <BookmarkIcon sx={{ color: "#e6d113" }} />
+          ) : (
+            <TurnedInNotIcon />
+          )}
+        </div>
+      </ContentContainer>
     </Container>
   )
 }
 
 export default JobCard
 
-const Container = styled(motion.div)<{ value: number; image?: string }>`
+const Container = styled(motion.div)`
   position: relative;
   width: 100%;
   //max-width: 300px;
-  height: 20vh;
-  padding: 20px 17px;
+  height: 18vh;
+  padding: 12px;
   z-index: 2;
   display: flex;
+  gap: 10px;
   flex-direction: column;
   justify-content: flex-end;
   border-radius: 8px;
-  &:before {
-    z-index: -1;
-    content: "";
-    position: absolute;
-    border-radius: 8px;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: ${({ value }) => calculateFadeValue(value) * 1.3};
-    background: linear-gradient(
-        25.8deg,
-        rgba(0, 0, 0, 0.162) 14.33%,
-        rgba(0, 0, 0, 0) 83.67%
-      ),
-      linear-gradient(
-        288.1deg,
-        rgba(6, 70, 159, ${({ value }) => calculateFadeValue(value)}) 17.87%,
-        rgb(151, 186, 236, ${({ value }) => calculateFadeValue(value)}) 142.8%
-      ),
-      url(${({ image }) => (image ? image : FALL_BACK_IMAGE)});
-    background-position: center;
-    background-size: cover;
-  }
+  background: radial-gradient(
+    216.18% 577.81% at 75.41% 171.32%,
+    rgba(6, 69, 159, 0.08) 0%,
+    rgba(151, 186, 236, 0) 100%
+  );
+`
+
+const ImageThumbnail = styled.div<{ value: number; image?: string }>`
+  background: url(${({ image }) => (image ? image : FALL_BACK_IMAGE)});
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  opacity: ${({ value }) => calculateFadeValue(value) * 1.3};
 `
 
 const Title = styled.p`
-  font-style: normal;
   font-weight: 700;
   font-size: 18px;
-  color: white;
+  color: #191e28;
 `
 const Match = styled.p`
   font-weight: 400;
   font-size: 14px;
   line-height: 19px;
-  color: #08eba7;
+  color: #6a6e77;
 `
 
 const AbsoluteInnerContainer = styled.div`
@@ -98,4 +104,15 @@ const AbsoluteInnerContainer = styled.div`
   gap: 10px;
   display: flex;
   justify-content: flex-end;
+`
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+`
+const ContentContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 `
