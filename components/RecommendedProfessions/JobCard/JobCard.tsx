@@ -46,7 +46,7 @@ const JobCard = ({ jobData, bookmarked, onClickBookmarkCallback }: Props) => {
           style={{ cursor: "pointer" }}
           onClick={() => {
             if (onClickBookmarkCallback) onClickBookmarkCallback(jobData)
-            setIsBookmarked(!isBookmarked)
+            if (!bookmarked) setIsBookmarked(true)
           }}
         >
           {isBookmarked ? (
