@@ -8,19 +8,22 @@ import TurnedInNotIcon from "@mui/icons-material/TurnedInNot"
 import { useState } from "react"
 
 type Props = {
-  match_value: number
+  jobData: any
   image?: string
+  bookmarked?: boolean
+  onClickBookmarkCallback?: (e?: any) => void
 }
 
 const FALL_BACK_IMAGE =
   "https://images.unsplash.com/photo-1661956601030-fdfb9c7e9e2f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=742&q=80"
 
-const calculateFadeValue = (value: number): number => {
+const calculateFadeValue = (value?: number): number => {
+  if (!value) return 0
   return value / 100
 }
 
-const JobCard = ({ match_value }: Props) => {
-  const [isBookmarked, setIsBookmarked] = useState(false)
+const JobCard = ({ jobData, bookmarked, onClickBookmarkCallback }: Props) => {
+  const [isBookmarked, setIsBookmarked] = useState(bookmarked || false)
   return (
     <Container
       layout
@@ -28,7 +31,7 @@ const JobCard = ({ match_value }: Props) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <ImageThumbnail value={match_value} />
+      <ImageThumbnail value={jobData?.match_value} />
       <AbsoluteInnerContainer>
         <SvgIcon sx={{ color: "white" }}>
           <InfoIcon />
@@ -36,12 +39,15 @@ const JobCard = ({ match_value }: Props) => {
       </AbsoluteInnerContainer>
       <ContentContainer>
         <Content>
-          <Title>Shop assistant</Title>
-          <Match>{match_value}% match</Match>
+          <Title>{jobData?.label}</Title>
+          <Match>{jobData?.match_value}% match</Match>
         </Content>
         <div
           style={{ cursor: "pointer" }}
-          onClick={() => setIsBookmarked(!isBookmarked)}
+          onClick={() => {
+            if (onClickBookmarkCallback) onClickBookmarkCallback(jobData)
+            setIsBookmarked(!isBookmarked)
+          }}
         >
           {isBookmarked ? (
             <BookmarkIcon sx={{ color: "#e6d113" }} />
@@ -75,7 +81,7 @@ const Container = styled(motion.div)`
   );
 `
 
-const ImageThumbnail = styled.div<{ value: number; image?: string }>`
+const ImageThumbnail = styled.div<{ value?: number; image?: string }>`
   background: url(${({ image }) => (image ? image : FALL_BACK_IMAGE)});
   background-position: center;
   background-size: cover;
