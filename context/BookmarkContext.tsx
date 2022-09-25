@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react"
+import { useLocalStorage } from "../hooks/useLocalStorage"
 
 type BookmarkProviderProps = {
   children: ReactNode
@@ -17,7 +18,10 @@ export function useBookmarkContext() {
 }
 
 export function BookmarkProvider({ children }: BookmarkProviderProps) {
-  const [bookmarkedJobs, setBookmarkedJobs] = useState<any>([])
+  const [bookmarkedJobs, setBookmarkedJobs] = useLocalStorage<any>(
+    "bookmarked-jobs",
+    []
+  )
 
   const addBookmarkedJobs = (inputJob: any) => {
     const isNotFoundExistedJobInState = !bookmarkedJobs.find(
