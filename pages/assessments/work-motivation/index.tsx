@@ -10,12 +10,18 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
 import PageTitle from "../../../components/Common/PageTitle"
-import Dictaphone from "../../../components/Common/Dictaphone/Dictaphone"
 import { CustomIconButton } from "../../../components/Common/CustomIconButton/CustomIconButton"
+import dynamic from "next/dynamic"
+
+const VoiceAssisstant = dynamic(
+  () => import("../../../components/Common/VoiceAssisstant/VoiceAssisstant"),
+  { ssr: false }
+)
 
 const WorkMotivation = () => {
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [text, setText] = useState(questions[currentQuestionIndex].description)
 
   const handleIndexTransit = (nextValueIndex: number, array: any) => {
     if (nextValueIndex >= 0 && nextValueIndex < array.length)
@@ -27,6 +33,22 @@ const WorkMotivation = () => {
       handleIndexTransit(currentQuestionIndex + 1, questions)
     )
   }
+
+  const onNextQuestion = () => {
+    setCurrentQuestionIndex(
+      handleIndexTransit(currentQuestionIndex + 1, questions)
+    )
+    setText(questions[currentQuestionIndex].description)
+  }
+
+  const onPrevQuestion = () => {
+    setCurrentQuestionIndex(
+      handleIndexTransit(currentQuestionIndex - 1, questions)
+    )
+    setText(questions[currentQuestionIndex].description)
+  }
+
+  console.log(questions[currentQuestionIndex].description)
 
   return (
     <Layout>
@@ -88,20 +110,13 @@ const WorkMotivation = () => {
       <CustomIconButton
         _onClick={() => setIsOpenRecommended(!isOpenRecommended)}
         icon={<WorkOutlineIcon />}
-        style={{ alignSelf: "center" }}
+        align="center"
       />
 
-      <Dictaphone
-        onNext={() =>
-          setCurrentQuestionIndex(
-            handleIndexTransit(currentQuestionIndex + 1, questions)
-          )
-        }
-        onPrev={() =>
-          setCurrentQuestionIndex(
-            handleIndexTransit(currentQuestionIndex - 1, questions)
-          )
-        }
+      <VoiceAssisstant
+        onNext={onNextQuestion}
+        onPrev={onPrevQuestion}
+        text={text}
       />
 
       <AnimatePresence>

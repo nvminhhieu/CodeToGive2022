@@ -4,15 +4,16 @@ import { SvgIcon } from "@mui/material"
 type CustomIconButtonProps = {
   _onClick: () => void
   icon: any
+  align?: string
 }
 
 export const CustomIconButton = ({
   _onClick,
   icon,
-  ...props
+  align,
 }: CustomIconButtonProps) => {
   return (
-    <IconWrapper onClick={_onClick} {...props}>
+    <IconWrapper onClick={_onClick} style={{ alignSelf: align }}>
       <IconContainer style={{ padding: "20px" }}>
         <SvgIcon sx={{ fontSize: "30px", color: "#0097F2" }}>{icon}</SvgIcon>
       </IconContainer>

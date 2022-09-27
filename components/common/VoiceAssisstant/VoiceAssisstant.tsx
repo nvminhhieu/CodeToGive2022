@@ -10,17 +10,37 @@ const appId = "d1a2c48b-bacf-407b-9811-26b11be721d0"
 const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId)
 SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition)
 
-const Dictaphone = ({ onNext, onPrev }) => {
+type VoiceAssisstantProps = {
+  onNext: () => void
+  onPrev: () => void
+  text: string
+}
+
+const VoiceAssisstant = ({ onNext, onPrev, text }: VoiceAssisstantProps) => {
+  const msg = new SpeechSynthesisUtterance()
+
+  const speechHandler = (msg: any) => {
+    msg.text = text
+    window.speechSynthesis.speak(msg)
+  }
+
   const commands = [
     {
       command: "Next",
-      callback: onNext,
+      callback: () => {
+        onNext()
+        speechHandler(msg)
+      },
     },
     {
-      command: "Previous",
-      callback: onPrev,
+      command: "Back",
+      callback: () => {
+        onPrev()
+        speechHandler(msg)
+      },
     },
   ]
+
   const [isListening, setListening] = useState(false)
   const { transcript, listening, browserSupportsSpeechRecognition } =
     useSpeechRecognition({ commands })
@@ -37,12 +57,11 @@ const Dictaphone = ({ onNext, onPrev }) => {
   }
 
   return (
-    <div>
-      <CustomIconButton
-        _onClick={() => setListening(!isListening)}
-        icon={listening ? <MicRounded /> : <MicOffRounded />}
-      />
-    </div>
+    <CustomIconButton
+      _onClick={() => setListening(!isListening)}
+      icon={listening ? <MicRounded /> : <MicOffRounded />}
+      align="self-end"
+    />
   )
 }
-export default Dictaphone
+export default VoiceAssisstant
