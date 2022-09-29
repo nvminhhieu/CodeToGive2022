@@ -84,6 +84,18 @@ const RecommendedProfessions = ({ onClickCallBack }: Props) => {
     useBookmarkContext()
   //Test Animate Layout
   const [arrayIndex, setArrayIndex] = useState(0)
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    const func = async () => {
+      const req = await fetch(`${process.env.HOST}/api/v1/user/suggested-jobs`)
+      const res = await req.json()
+      setData(res)
+    }
+    func()
+  }, [])
+
+  console.log(data)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -116,7 +128,7 @@ const RecommendedProfessions = ({ onClickCallBack }: Props) => {
 
       <InnerContainer layout>
         <AnimatePresence mode="wait">
-          {arrayMock[arrayIndex].map((e) => (
+          {data.map((e: any) => (
             <JobCard
               key={e.id}
               jobData={e}
