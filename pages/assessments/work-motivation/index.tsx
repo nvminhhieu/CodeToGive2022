@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import { SvgIcon } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import PageTitle from "../../../components/common/PageTitle"
 import Layout from "../../../components/Layout"
 import QuestionCard from "../../../components/QuestionCard"
@@ -10,21 +10,40 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
+import IJob from "../../../types/job"
+import { suggestedJobs } from "../../../data/suggested_job"
 
 const WorkMotivation = () => {
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [data, setData] = useState<IJob[]>([])
 
   const handleIndexTransit = (nextValueIndex: number, array: any) => {
     if (nextValueIndex >= 0 && nextValueIndex < array.length)
       return nextValueIndex
     return currentQuestionIndex
   }
+
+  const fetchRecommendedJobsData = async () => {
+    const req = await fetch(`${process.env.HOST}/api/v1/user/suggested-jobs`)
+    const res = await req.json()
+    setData(res)
+  }
+
+  const fetchRecommendedJobsDataTest_REMOVE_LATER = async () => {
+    setData(suggestedJobs)
+  }
+
   const answerOnClickCallBack = () => {
+    fetchRecommendedJobsData()
     setCurrentQuestionIndex(
       handleIndexTransit(currentQuestionIndex + 1, questions)
     )
   }
+
+  useEffect(() => {
+    fetchRecommendedJobsData()
+  }, [])
 
   return (
     <Layout>
@@ -41,6 +60,7 @@ const WorkMotivation = () => {
       <CardContainer>
         <IconContainer
           onClick={() => {
+            fetchRecommendedJobsData()
             setCurrentQuestionIndex(
               handleIndexTransit(currentQuestionIndex - 1, questions)
             )
@@ -72,6 +92,8 @@ const WorkMotivation = () => {
 
         <IconContainer
           onClick={() => {
+            //fetchRecommendedJobsData()
+            fetchRecommendedJobsDataTest_REMOVE_LATER()
             setCurrentQuestionIndex(
               handleIndexTransit(currentQuestionIndex + 1, questions)
             )
@@ -101,6 +123,7 @@ const WorkMotivation = () => {
             exit="fadeout"
           >
             <RecommendedProfessions
+              data={data}
               onClickCallBack={() => setIsOpenRecommended(!isOpenRecommended)}
             />
           </RecommendedProfessionsCont>
