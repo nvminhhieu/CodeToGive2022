@@ -32,7 +32,7 @@ const JobCard = ({ jobData, bookmarked, onClickBookmarkCallback }: Props) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <ImageThumbnail value={jobData?.match_value} />
+      <ImageThumbnail value={jobData?.match_value} image={jobData?.image} />
       <AbsoluteInnerContainer>
         <SvgIcon sx={{ color: "white" }}>
           <InfoIcon />
