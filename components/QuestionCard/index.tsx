@@ -3,6 +3,7 @@ import { ReactElement, useState } from "react"
 import AnswerButton from "./AnswerButton/AnswerButton"
 import CheckIcon from "@mui/icons-material/Check"
 import CloseIcon from "@mui/icons-material/Close"
+import CustomSlider from "../common/CustomSlider/CustomSlider"
 
 type Props = {
   image?: string
@@ -10,7 +11,31 @@ type Props = {
   index: number
   description: string | ReactElement
   totalLength: number
+  formControl: any
 }
+
+const MARKS_MAP = [
+  {
+    value: 1,
+    label: "1",
+  },
+  {
+    value: 2,
+    label: "2",
+  },
+  {
+    value: 3,
+    label: "3",
+  },
+  {
+    value: 4,
+    label: "4",
+  },
+  {
+    value: 5,
+    label: "5",
+  },
+]
 
 const FALL_BACK_IMAGE =
   "https://images.unsplash.com/photo-1661956601030-fdfb9c7e9e2f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=742&q=80"
@@ -21,8 +46,9 @@ const QuestionCard = ({
   onClickCallBack,
   description,
   totalLength,
+  formControl,
 }: Props) => {
-  const [selectedAnswer, setSelectedAnswer] = useState(0)
+  // const [selectedAnswer, setSelectedAnswer] = useState(0)
   return (
     <Container>
       <InnerContainer>
@@ -36,27 +62,20 @@ const QuestionCard = ({
           </Content>
         </ContentContainer>
       </InnerContainer>
+
       <AnswerContainer>
-        <AnswerButton
-          onClick={() => {
-            setSelectedAnswer(1)
-            onClickCallBack()
-          }}
-          icon={<CheckIcon />}
-          active={selectedAnswer === 1}
-        >
-          Agree
-        </AnswerButton>
-        <AnswerButton
-          onClick={() => {
-            setSelectedAnswer(2)
-            onClickCallBack()
-          }}
-          icon={<CloseIcon />}
-          active={selectedAnswer === 2}
-        >
-          Disagree
-        </AnswerButton>
+        <button type="submit">asdad</button>
+        <CustomSlider
+          name="slider_value"
+          control={formControl}
+          aria-label="Temperature"
+          defaultValue={1}
+          valueLabelDisplay="auto"
+          step={1}
+          marks={MARKS_MAP}
+          min={1}
+          max={5}
+        />
       </AnswerContainer>
     </Container>
   )
@@ -125,5 +144,6 @@ const AnswerContainer = styled.div`
   flex-direction: row;
   align-items: center;
   padding: 24px;
+  padding-top: 0;
   gap: 12px;
 `
