@@ -14,6 +14,7 @@ const Test = ({ data }: Props): ReactElement | null => {
   console.log(data)
   const session = useSession()
   console.log("session", session)
+  console.log("env", process.env.HOST)
   return (
     <Layout>
       <PageTitle

@@ -4,6 +4,9 @@ const nextConfig = {
   swcMinify: true,
   output: "standalone",
   basePath: "/client",
-};
+  env: {
+    HOST: process.env.HOST,
+  },
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
