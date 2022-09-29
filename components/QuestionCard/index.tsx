@@ -64,7 +64,6 @@ const QuestionCard = ({
       </InnerContainer>
 
       <AnswerContainer>
-        <button type="submit">asdad</button>
         <CustomSlider
           name="slider_value"
           control={formControl}
