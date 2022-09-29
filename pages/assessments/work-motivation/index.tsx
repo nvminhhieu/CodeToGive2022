@@ -12,11 +12,13 @@ import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
 import IJob from "../../../types/job"
 import { suggestedJobs } from "../../../data/suggested_job"
+import usePrevious from "../../../hooks/usePrevious"
 
 const WorkMotivation = () => {
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [data, setData] = useState<IJob[]>([])
+  const previousDataState = usePrevious(data)
 
   const handleIndexTransit = (nextValueIndex: number, array: any) => {
     if (nextValueIndex >= 0 && nextValueIndex < array.length)
@@ -107,8 +109,19 @@ const WorkMotivation = () => {
       <Spacer />
 
       <IconWrapper onClick={() => setIsOpenRecommended(!isOpenRecommended)}>
-        <IconContainer style={{ padding: "20px" }}>
-          <SvgIcon sx={{ fontSize: "30px", color: "#0097F2" }}>
+        <IconContainer
+          active={JSON.stringify(data) === JSON.stringify(previousDataState)}
+          style={{ padding: "20px" }}
+        >
+          <SvgIcon
+            sx={{
+              fontSize: "30px",
+              color:
+                JSON.stringify(data) === JSON.stringify(previousDataState)
+                  ? "#0097F2"
+                  : "white",
+            }}
+          >
             <WorkOutlineIcon />
           </SvgIcon>
         </IconContainer>
@@ -147,16 +160,17 @@ const Spacer = styled.div`
   width: 100%;
   height: 500px;
 `
-const IconContainer = styled.div`
+const IconContainer = styled.div<{ active?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ffffff;
+  background: ${({ active }) => (active === false ? "#0097F2" : "#ffffff")};
   box-shadow: 0px 0px 7px rgba(7, 31, 54, 0.04),
     0px 15px 17px -1px rgba(5, 125, 236, 0.1);
   border-radius: 50%;
   padding: 10px;
   cursor: pointer;
+  transition: background 0.4s;
 `
 
 const IconWrapper = styled.div`
