@@ -2,6 +2,30 @@ import CustomTextField from "../../components/common/CustomTextField/CustomTextF
 import { useForm } from "react-hook-form"
 import CustomButton from "../../components/common/CustomButton/CustomButton"
 import Layout from "../../components/Layout"
+import CustomSlider from "../../components/common/CustomSlider/CustomSlider"
+
+const marks = [
+  {
+    value: 1,
+    label: "1",
+  },
+  {
+    value: 2,
+    label: "2",
+  },
+  {
+    value: 3,
+    label: "3",
+  },
+  {
+    value: 4,
+    label: "4",
+  },
+  {
+    value: 5,
+    label: "5",
+  },
+]
 
 const Test = () => {
   const { control, handleSubmit } = useForm()
@@ -24,6 +48,17 @@ const Test = () => {
           label="Phone"
           type="phone"
           variant="outlined"
+        />
+        <CustomSlider
+          name="slider_value"
+          control={control}
+          aria-label="Temperature"
+          defaultValue={1}
+          valueLabelDisplay="auto"
+          step={1}
+          marks={marks}
+          min={1}
+          max={5}
         />
 
         <CustomButton

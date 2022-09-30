@@ -9,6 +9,7 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
+import { useForm } from "react-hook-form"
 import IJob from "../../../types/job"
 import { suggestedJobs as mock_suggestedJobs } from "../../../data/suggested_job"
 import usePrevious from "../../../hooks/usePrevious"
@@ -43,6 +44,9 @@ const WorkMotivation = () => {
   }, [uuid])
 
   const questions = assessmentData.questions || mock_questions
+
+  const { control, handleSubmit } = useForm()
+  const onSubmit = (data: any) => console.log(data)
 
   const handleIndexTransit = (nextValueIndex: number, array: any) => {
     if (nextValueIndex >= 0 && nextValueIndex < array.length)
@@ -83,8 +87,9 @@ const WorkMotivation = () => {
         }
       />
 
-      <CardContainer>
+      <CardContainer onSubmit={handleSubmit(onSubmit)}>
         <IconContainer
+          type="submit"
           onClick={() => {
             fetchRecommendedJobsData()
             setCurrentQuestionIndex(
@@ -112,11 +117,13 @@ const WorkMotivation = () => {
               onClickCallBack={answerOnClickCallBack}
               image={questions[currentQuestionIndex]?.image?.src}
               totalLength={questions?.length}
+              formControl={control}
             />
           </motion.div>
         </AnimatePresence>
 
         <IconContainer
+          type="submit"
           onClick={() => {
             //fetchRecommendedJobsData()
             fetchRecommendedJobsDataTest_REMOVE_LATER()
@@ -172,7 +179,7 @@ const WorkMotivation = () => {
 
 export default WorkMotivation
 
-const CardContainer = styled.div`
+const CardContainer = styled.form`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -184,7 +191,7 @@ const Spacer = styled.div`
   width: 100%;
   height: 500px;
 `
-const IconContainer = styled.div<{ active?: boolean }>`
+const IconContainer = styled.button<{ active?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -193,6 +200,8 @@ const IconContainer = styled.div<{ active?: boolean }>`
     0px 15px 17px -1px rgba(5, 125, 236, 0.1);
   border-radius: 50%;
   padding: 10px;
+  outline: none;
+  border: none;
   cursor: pointer;
   transition: background 0.4s;
 `
