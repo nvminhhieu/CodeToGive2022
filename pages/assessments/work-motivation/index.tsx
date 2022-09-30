@@ -12,16 +12,25 @@ import { AnimatePresence, motion } from "framer-motion"
 import PageTitle from "../../../components/Common/PageTitle"
 import { CustomIconButton } from "../../../components/Common/CustomIconButton/CustomIconButton"
 import dynamic from "next/dynamic"
-
-const VoiceAssisstant = dynamic(
-  () => import("../../../components/Common/VoiceAssisstant/VoiceAssisstant"),
-  { ssr: false }
-)
+import { CircularProgress } from "@mui/material"
 
 const WorkMotivation = () => {
+  const VoiceAssisstant = dynamic(
+    () => import("../../../components/Common/VoiceAssisstant/VoiceAssisstant"),
+    {
+      loading: () => (
+        <IconWrapper>
+          <IconContainer style={{ padding: "20px" }}>
+            <CircularProgress />
+          </IconContainer>
+        </IconWrapper>
+      ),
+      ssr: false,
+    }
+  )
+
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-  const [text, setText] = useState(questions[currentQuestionIndex].description)
 
   const handleIndexTransit = (nextValueIndex: number, array: any) => {
     if (nextValueIndex >= 0 && nextValueIndex < array.length)
@@ -38,17 +47,13 @@ const WorkMotivation = () => {
     setCurrentQuestionIndex(
       handleIndexTransit(currentQuestionIndex + 1, questions)
     )
-    setText(questions[currentQuestionIndex].description)
   }
 
   const onPrevQuestion = () => {
     setCurrentQuestionIndex(
       handleIndexTransit(currentQuestionIndex - 1, questions)
     )
-    setText(questions[currentQuestionIndex].description)
   }
-
-  console.log(questions[currentQuestionIndex].description)
 
   return (
     <Layout>
@@ -113,11 +118,7 @@ const WorkMotivation = () => {
         align="center"
       />
 
-      <VoiceAssisstant
-        onNext={onNextQuestion}
-        onPrev={onPrevQuestion}
-        text={text}
-      />
+      <VoiceAssisstant onNext={onNextQuestion} onPrev={onPrevQuestion} />
 
       <AnimatePresence>
         {isOpenRecommended ? (
@@ -160,6 +161,11 @@ const IconContainer = styled.div`
     0px 15px 17px -1px rgba(5, 125, 236, 0.1);
   border-radius: 50%;
   padding: 10px;
+  cursor: pointer;
+`
+const IconWrapper = styled.div`
+  position: fixed;
+  bottom: 2vh;
   cursor: pointer;
 `
 

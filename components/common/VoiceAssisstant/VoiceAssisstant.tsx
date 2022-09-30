@@ -13,30 +13,36 @@ SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition)
 type VoiceAssisstantProps = {
   onNext: () => void
   onPrev: () => void
-  text: string
 }
 
-const VoiceAssisstant = ({ onNext, onPrev, text }: VoiceAssisstantProps) => {
-  const msg = new SpeechSynthesisUtterance()
+const VoiceAssisstant = ({ onNext, onPrev }: VoiceAssisstantProps) => {
+  const voices = () => {
+    const voices = speechSynthesis.getVoices()
+    const voice = voices.filter((v) => v.name === "Google UK English Female")
+    return voice[0]
+  }
 
-  const speechHandler = (msg: any) => {
-    msg.text = text
-    window.speechSynthesis.speak(msg)
+  voices()
+  const speak = (text: string) => {
+    const speech = new SpeechSynthesisUtterance(text)
+    speech.voice = voices()
+    speech.lang = "en-US"
+    speech.rate = 0.9
+    window.speechSynthesis.speak(speech)
   }
 
   const commands = [
     {
       command: "Next",
       callback: () => {
+        speak("Next question")
         onNext()
-        speechHandler(msg)
       },
     },
     {
       command: "Back",
       callback: () => {
         onPrev()
-        speechHandler(msg)
       },
     },
   ]
@@ -60,7 +66,6 @@ const VoiceAssisstant = ({ onNext, onPrev, text }: VoiceAssisstantProps) => {
     <CustomIconButton
       _onClick={() => setListening(!isListening)}
       icon={listening ? <MicRounded /> : <MicOffRounded />}
-      align="self-end"
     />
   )
 }
