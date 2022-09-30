@@ -11,8 +11,8 @@ const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId)
 SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition)
 
 type VoiceAssisstantProps = {
-  onNext: () => void
-  onPrev: () => void
+  onNext?: () => void
+  onPrev?: () => void
 }
 
 const VoiceAssisstant = ({ onNext, onPrev }: VoiceAssisstantProps) => {
@@ -36,13 +36,6 @@ const VoiceAssisstant = ({ onNext, onPrev }: VoiceAssisstantProps) => {
       command: "Next",
       callback: () => {
         speak("Next question")
-        onNext()
-      },
-    },
-    {
-      command: "Back",
-      callback: () => {
-        onPrev()
       },
     },
   ]
@@ -66,6 +59,7 @@ const VoiceAssisstant = ({ onNext, onPrev }: VoiceAssisstantProps) => {
     <CustomIconButton
       _onClick={() => setListening(!isListening)}
       icon={listening ? <MicRounded /> : <MicOffRounded />}
+      right="2vh"
     />
   )
 }

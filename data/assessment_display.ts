@@ -15,7 +15,7 @@ export const assessments = [
       color:
         "radial-gradient(102.34% 102.34% at 50% 50%, #3BC49A 0%, #158787 100%)",
     },
-    progress: 20,
+    progress: 22,
   },
   {
     title: "English language test",
@@ -28,7 +28,7 @@ export const assessments = [
       color:
         "radial-gradient(102.34% 102.34% at 50% 50%, #DA87AF 0%, #802C59 100%)",
     },
-    progress: 0,
+    progress: 60,
   },
   {
     title: "Visio-perceptual skills",
@@ -40,7 +40,7 @@ export const assessments = [
       color:
         "radial-gradient(102.34% 102.34% at 50% 50%, #1D66D3 0%, #06459F 100%)",
     },
-    progress: 80,
+    progress: 86,
   },
   {
     title: "Some other test",

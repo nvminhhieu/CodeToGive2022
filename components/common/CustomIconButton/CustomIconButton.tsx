@@ -11,9 +11,10 @@ export const CustomIconButton = ({
   _onClick,
   icon,
   align,
+  ...props
 }: CustomIconButtonProps) => {
   return (
-    <IconWrapper onClick={_onClick} style={{ alignSelf: align }}>
+    <IconWrapper onClick={_onClick} style={{ alignSelf: align, ...props }}>
       <IconContainer style={{ padding: "20px" }}>
         <SvgIcon sx={{ fontSize: "30px", color: "#0097F2" }}>{icon}</SvgIcon>
       </IconContainer>

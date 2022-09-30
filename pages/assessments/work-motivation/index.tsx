@@ -11,24 +11,8 @@ import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
 import PageTitle from "../../../components/Common/PageTitle"
 import { CustomIconButton } from "../../../components/Common/CustomIconButton/CustomIconButton"
-import dynamic from "next/dynamic"
-import { CircularProgress } from "@mui/material"
 
 const WorkMotivation = () => {
-  const VoiceAssisstant = dynamic(
-    () => import("../../../components/Common/VoiceAssisstant/VoiceAssisstant"),
-    {
-      loading: () => (
-        <IconWrapper>
-          <IconContainer style={{ padding: "20px" }}>
-            <CircularProgress />
-          </IconContainer>
-        </IconWrapper>
-      ),
-      ssr: false,
-    }
-  )
-
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
 
@@ -40,18 +24,6 @@ const WorkMotivation = () => {
   const answerOnClickCallBack = () => {
     setCurrentQuestionIndex(
       handleIndexTransit(currentQuestionIndex + 1, questions)
-    )
-  }
-
-  const onNextQuestion = () => {
-    setCurrentQuestionIndex(
-      handleIndexTransit(currentQuestionIndex + 1, questions)
-    )
-  }
-
-  const onPrevQuestion = () => {
-    setCurrentQuestionIndex(
-      handleIndexTransit(currentQuestionIndex - 1, questions)
     )
   }
 
@@ -117,9 +89,6 @@ const WorkMotivation = () => {
         icon={<WorkOutlineIcon />}
         align="center"
       />
-
-      <VoiceAssisstant onNext={onNextQuestion} onPrev={onPrevQuestion} />
-
       <AnimatePresence>
         {isOpenRecommended ? (
           <RecommendedProfessionsCont
@@ -161,11 +130,6 @@ const IconContainer = styled.div`
     0px 15px 17px -1px rgba(5, 125, 236, 0.1);
   border-radius: 50%;
   padding: 10px;
-  cursor: pointer;
-`
-const IconWrapper = styled.div`
-  position: fixed;
-  bottom: 2vh;
   cursor: pointer;
 `
 
