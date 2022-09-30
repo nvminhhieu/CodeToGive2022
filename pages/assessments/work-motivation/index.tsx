@@ -1,20 +1,49 @@
 import styled from "@emotion/styled"
 import { SvgIcon } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import PageTitle from "../../../components/common/PageTitle"
 import Layout from "../../../components/Layout"
 import QuestionCard from "../../../components/QuestionCard"
 import RecommendedProfessions from "../../../components/RecommendedProfessions"
-import { questions } from "../../../data/work_motivation_questions"
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
 import { useForm } from "react-hook-form"
+import IJob from "../../../types/job"
+import { suggestedJobs as mock_suggestedJobs } from "../../../data/suggested_job"
+import usePrevious from "../../../hooks/usePrevious"
+import { IAssessment } from "../../../types/assessment"
+import { questions as mock_questions } from "../../../data/work_motivation_questions"
+import { useUUIDContext } from "../../../context/UUIDContext"
 
 const WorkMotivation = () => {
+  const { uuid } = useUUIDContext()
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [data, setData] = useState<IJob[]>([])
+  const previousDataState = usePrevious(data)
+
+  const [assessmentData, setAssessmentData] = useState<IAssessment>(
+    {} as IAssessment
+  )
+
+  useEffect(() => {
+    const fetchAssessmentData = async () => {
+      try {
+        const req = await fetch(
+          `${process.env.HOST}/api/v1/${uuid}/work-motivation-test/assessment`
+        )
+        const res = await req.json()
+        setAssessmentData(res)
+      } catch {
+        setAssessmentData({} as IAssessment)
+      }
+    }
+    fetchAssessmentData()
+  }, [uuid])
+
+  const questions = assessmentData.questions || mock_questions
 
   const { control, handleSubmit } = useForm()
   const onSubmit = (data: any) => console.log(data)
@@ -24,11 +53,27 @@ const WorkMotivation = () => {
       return nextValueIndex
     return currentQuestionIndex
   }
+
+  const fetchRecommendedJobsData = async () => {
+    const req = await fetch(`${process.env.HOST}/api/v1/${uuid}/suggested-jobs`)
+    const res = await req.json()
+    setData(res)
+  }
+
+  const fetchRecommendedJobsDataTest_REMOVE_LATER = async () => {
+    setData(mock_suggestedJobs)
+  }
+
   const answerOnClickCallBack = () => {
+    fetchRecommendedJobsData()
     setCurrentQuestionIndex(
       handleIndexTransit(currentQuestionIndex + 1, questions)
     )
   }
+
+  useEffect(() => {
+    fetchRecommendedJobsData()
+  }, [uuid])
 
   return (
     <Layout>
@@ -46,6 +91,7 @@ const WorkMotivation = () => {
         <IconContainer
           type="submit"
           onClick={() => {
+            fetchRecommendedJobsData()
             setCurrentQuestionIndex(
               handleIndexTransit(currentQuestionIndex - 1, questions)
             )
@@ -66,11 +112,11 @@ const WorkMotivation = () => {
             exit="fadeout"
           >
             <QuestionCard
-              index={questions[currentQuestionIndex].index}
-              description={questions[currentQuestionIndex].description}
+              index={questions[currentQuestionIndex]?.index}
+              description={questions[currentQuestionIndex]?.description}
               onClickCallBack={answerOnClickCallBack}
-              image={questions[currentQuestionIndex].image.src}
-              totalLength={questions.length}
+              image={questions[currentQuestionIndex]?.image?.src}
+              totalLength={questions?.length}
               formControl={control}
             />
           </motion.div>
@@ -79,6 +125,8 @@ const WorkMotivation = () => {
         <IconContainer
           type="submit"
           onClick={() => {
+            //fetchRecommendedJobsData()
+            fetchRecommendedJobsDataTest_REMOVE_LATER()
             setCurrentQuestionIndex(
               handleIndexTransit(currentQuestionIndex + 1, questions)
             )
@@ -92,8 +140,19 @@ const WorkMotivation = () => {
       <Spacer />
 
       <IconWrapper onClick={() => setIsOpenRecommended(!isOpenRecommended)}>
-        <IconContainer style={{ padding: "20px" }}>
-          <SvgIcon sx={{ fontSize: "30px", color: "#0097F2" }}>
+        <IconContainer
+          active={JSON.stringify(data) === JSON.stringify(previousDataState)}
+          style={{ padding: "20px" }}
+        >
+          <SvgIcon
+            sx={{
+              fontSize: "30px",
+              color:
+                JSON.stringify(data) === JSON.stringify(previousDataState)
+                  ? "#0097F2"
+                  : "white",
+            }}
+          >
             <WorkOutlineIcon />
           </SvgIcon>
         </IconContainer>
@@ -108,6 +167,7 @@ const WorkMotivation = () => {
             exit="fadeout"
           >
             <RecommendedProfessions
+              data={data}
               onClickCallBack={() => setIsOpenRecommended(!isOpenRecommended)}
             />
           </RecommendedProfessionsCont>
@@ -131,11 +191,11 @@ const Spacer = styled.div`
   width: 100%;
   height: 500px;
 `
-const IconContainer = styled.button`
+const IconContainer = styled.button<{ active?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ffffff;
+  background: ${({ active }) => (active === false ? "#0097F2" : "#ffffff")};
   box-shadow: 0px 0px 7px rgba(7, 31, 54, 0.04),
     0px 15px 17px -1px rgba(5, 125, 236, 0.1);
   border-radius: 50%;
@@ -143,6 +203,7 @@ const IconContainer = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+  transition: background 0.4s;
 `
 
 const IconWrapper = styled.div`

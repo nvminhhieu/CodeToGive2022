@@ -4,9 +4,27 @@ import DoneIcon from "@mui/icons-material/Done"
 import { useRouter } from "next/router"
 import { assessments } from "../../data/assessment_display"
 
+import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
+import TranslateIcon from "@mui/icons-material/Translate"
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined"
+import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined"
+
 type Props = {
   assessment: typeof assessments[number]
   key?: string | number
+}
+
+const handleIcon = (name: string) => {
+  switch (name) {
+    case "WorkOutlineIcon":
+      return <WorkOutlineIcon />
+    case "TranslateIcon":
+      return <TranslateIcon />
+    case "VisibilityOutlinedIcon":
+      return <VisibilityOutlinedIcon />
+    case "QuizOutlinedIcon":
+      return <QuizOutlinedIcon />
+  }
 }
 
 export const AssessmentCard = ({ assessment }: Props) => {
@@ -51,7 +69,7 @@ export const AssessmentCard = ({ assessment }: Props) => {
               opacity: assessment.completed ? "0.5" : 1,
             }}
           >
-            <assessment.icon.name />
+            {handleIcon(assessment.icon.name)}
           </Icon>
         </Flex>
       </Justify>
