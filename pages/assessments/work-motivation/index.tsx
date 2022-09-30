@@ -10,7 +10,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
 import IJob from "../../../types/job"
-import { suggestedJobs } from "../../../data/suggested_job"
+import { suggestedJobs as mock_suggestedJobs } from "../../../data/suggested_job"
 import usePrevious from "../../../hooks/usePrevious"
 import { IAssessment } from "../../../types/assessment"
 import { questions as mock_questions } from "../../../data/work_motivation_questions"
@@ -51,13 +51,13 @@ const WorkMotivation = () => {
   }
 
   const fetchRecommendedJobsData = async () => {
-    const req = await fetch(`${process.env.HOST}/api/v1/user/suggested-jobs`)
+    const req = await fetch(`${process.env.HOST}/api/v1/${uuid}/suggested-jobs`)
     const res = await req.json()
     setData(res)
   }
 
   const fetchRecommendedJobsDataTest_REMOVE_LATER = async () => {
-    setData(suggestedJobs)
+    setData(mock_suggestedJobs)
   }
 
   const answerOnClickCallBack = () => {
@@ -69,7 +69,7 @@ const WorkMotivation = () => {
 
   useEffect(() => {
     fetchRecommendedJobsData()
-  }, [])
+  }, [uuid])
 
   return (
     <Layout>
