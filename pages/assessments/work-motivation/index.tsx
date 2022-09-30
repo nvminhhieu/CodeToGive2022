@@ -11,8 +11,10 @@ import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
 import { IAssessment } from "../../../types/assessment"
 import { questions as mock_questions } from "../../../data/work_motivation_questions"
+import { useUUIDContext } from "../../../context/UUIDContext"
 
 const WorkMotivation = () => {
+  const { uuid } = useUUIDContext()
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
 
@@ -24,7 +26,7 @@ const WorkMotivation = () => {
     const fetchAssessmentData = async () => {
       try {
         const req = await fetch(
-          `${process.env.HOST}/api/v1/user/work-motivation-test/assessment`
+          `${process.env.HOST}/api/v1/${uuid}/work-motivation-test/assessment`
         )
         const res = await req.json()
         setAssessmentData(res)
@@ -33,7 +35,7 @@ const WorkMotivation = () => {
       }
     }
     fetchAssessmentData()
-  }, [])
+  }, [uuid])
 
   const questions = assessmentData.questions || mock_questions
 
