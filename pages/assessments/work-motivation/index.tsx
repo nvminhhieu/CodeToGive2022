@@ -5,7 +5,6 @@ import PageTitle from "../../../components/common/PageTitle"
 import Layout from "../../../components/Layout"
 import QuestionCard from "../../../components/QuestionCard"
 import RecommendedProfessions from "../../../components/RecommendedProfessions"
-import { questions } from "../../../data/work_motivation_questions"
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
@@ -13,12 +12,37 @@ import { AnimatePresence, motion } from "framer-motion"
 import IJob from "../../../types/job"
 import { suggestedJobs } from "../../../data/suggested_job"
 import usePrevious from "../../../hooks/usePrevious"
+import { IAssessment } from "../../../types/assessment"
+import { questions as mock_questions } from "../../../data/work_motivation_questions"
+import { useUUIDContext } from "../../../context/UUIDContext"
 
 const WorkMotivation = () => {
+  const { uuid } = useUUIDContext()
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [data, setData] = useState<IJob[]>([])
   const previousDataState = usePrevious(data)
+
+  const [assessmentData, setAssessmentData] = useState<IAssessment>(
+    {} as IAssessment
+  )
+
+  useEffect(() => {
+    const fetchAssessmentData = async () => {
+      try {
+        const req = await fetch(
+          `${process.env.HOST}/api/v1/${uuid}/work-motivation-test/assessment`
+        )
+        const res = await req.json()
+        setAssessmentData(res)
+      } catch {
+        setAssessmentData({} as IAssessment)
+      }
+    }
+    fetchAssessmentData()
+  }, [uuid])
+
+  const questions = assessmentData.questions || mock_questions
 
   const handleIndexTransit = (nextValueIndex: number, array: any) => {
     if (nextValueIndex >= 0 && nextValueIndex < array.length)
@@ -83,11 +107,11 @@ const WorkMotivation = () => {
             exit="fadeout"
           >
             <QuestionCard
-              index={questions[currentQuestionIndex].index}
-              description={questions[currentQuestionIndex].description}
+              index={questions[currentQuestionIndex]?.index}
+              description={questions[currentQuestionIndex]?.description}
               onClickCallBack={answerOnClickCallBack}
-              image={questions[currentQuestionIndex].image.src}
-              totalLength={questions.length}
+              image={questions[currentQuestionIndex]?.image?.src}
+              totalLength={questions?.length}
             />
           </motion.div>
         </AnimatePresence>

@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
 import { useBookmarkContext } from "../../context/BookmarkContext"
 import IJob from "../../types/job"
+import { useUUIDContext } from "../../context/UUIDContext"
 
 type Props = {
   onClickCallBack: any
@@ -80,11 +81,26 @@ const arrayMock = [
   ],
 ]
 
-const RecommendedProfessions = ({ onClickCallBack, data }: Props) => {
+const RecommendedProfessions = ({ onClickCallBack }: Props) => {
+  const { uuid } = useUUIDContext()
   const { addBookmarkedJobs, removeBookmarkedJobs, bookmarkedJobs } =
     useBookmarkContext()
   //Test Animate Layout
   const [arrayIndex, setArrayIndex] = useState(0)
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    const func = async () => {
+      const req = await fetch(
+        `${process.env.HOST}/api/v1/${uuid}/suggested-jobs`
+      )
+      const res = await req.json()
+      setData(res)
+    }
+    func()
+  }, [uuid])
+
+  console.log(data)
 
   useEffect(() => {
     const timer = setTimeout(() => {

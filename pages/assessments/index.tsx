@@ -1,10 +1,32 @@
+import { useEffect, useState } from "react"
 import { AssessmentCard } from "../../components/Assessments/AssessmentCard"
 import { AssessmentResultCard } from "../../components/Assessments/AssessmentResultCard"
 import PageTitle from "../../components/common/PageTitle"
 import Layout from "../../components/Layout"
-import { assessments } from "../../data/assessment_display"
+import { useUUIDContext } from "../../context/UUIDContext"
+import { assessments as mock_assessment } from "../../data/assessment_display"
 
 const AssessmentsPage = () => {
+  const { uuid } = useUUIDContext()
+  const [assessments, setAssessments] = useState<typeof mock_assessment>([])
+
+  useEffect(() => {
+    const fetchAssessmentData = async () => {
+      try {
+        const req = await fetch(
+          `${process.env.HOST}/api/v1/${uuid}/assessments`
+        )
+        const res = await req.json()
+        setAssessments(res)
+      } catch {
+        setAssessments(mock_assessment)
+      }
+    }
+    if (uuid) {
+      fetchAssessmentData()
+    }
+  }, [uuid])
+
   return (
     <Layout>
       <PageTitle
