@@ -20,5 +20,4 @@ export type Answer = {
   answer_id: number
   description: string
   question_id: number
-  test_id: number
 }
