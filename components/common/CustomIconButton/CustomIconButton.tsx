@@ -5,16 +5,25 @@ type CustomIconButtonProps = {
   _onClick: () => void
   icon: any
   align?: string
+  onMouseDown?: (e: any) => Promise<void>
+  onMouseUp?: (e: any) => Promise<void>
 }
 
 export const CustomIconButton = ({
   _onClick,
   icon,
   align,
+  onMouseDown,
+  onMouseUp,
   ...props
 }: CustomIconButtonProps) => {
   return (
-    <IconWrapper onClick={_onClick} style={{ alignSelf: align, ...props }}>
+    <IconWrapper
+      onMouseUp={onMouseUp}
+      onMouseDown={onMouseDown}
+      onClick={_onClick}
+      style={{ alignSelf: align, ...props }}
+    >
       <IconContainer style={{ padding: "20px" }}>
         <SvgIcon sx={{ fontSize: "30px", color: "#0097F2" }}>{icon}</SvgIcon>
       </IconContainer>

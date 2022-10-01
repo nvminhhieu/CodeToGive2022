@@ -8,6 +8,8 @@ import { CircularProgress } from "@mui/material"
 
 type Props = {
   children: ReactNode
+  commands?: any
+  message?: string
 }
 
 /**
@@ -20,7 +22,7 @@ type Props = {
  * </Layout>
  */
 
-const Layout = ({ children }: Props) => {
+const Layout = ({ commands, message, children }: Props) => {
   const VoiceAssisstant = dynamic(
     () => import("../../components/Common/VoiceAssisstant/VoiceAssisstant"),
     {
@@ -38,7 +40,7 @@ const Layout = ({ children }: Props) => {
     <>
       <Header />
       <Main>{children}</Main>
-      <VoiceAssisstant />
+      <VoiceAssisstant specificCommands={commands} specificMessage={message} />
     </>
   )
 }

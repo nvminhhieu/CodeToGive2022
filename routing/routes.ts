@@ -4,6 +4,7 @@ const ROUTES = {
   test: "/test",
   assessments: "/assessments",
   login: "/form",
+  workMotivation: "/assessments/work-motivation",
 }
 
 const API_ENDPOINTS = {

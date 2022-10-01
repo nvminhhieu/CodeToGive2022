@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import { SvgIcon } from "@mui/material"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Layout from "../../../components/Layout"
 import QuestionCard from "../../../components/QuestionCard"
 import RecommendedProfessions from "../../../components/RecommendedProfessions"
@@ -11,10 +11,12 @@ import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
 import PageTitle from "../../../components/Common/PageTitle"
 import { CustomIconButton } from "../../../components/Common/CustomIconButton/CustomIconButton"
+import { speak } from "../../../components/Common/VoiceAssisstant/VoiceAssisstant"
 
 const WorkMotivation = () => {
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [message, setMessage] = useState("")
 
   const handleIndexTransit = (nextValueIndex: number, array: any) => {
     if (nextValueIndex >= 0 && nextValueIndex < array.length)
@@ -27,8 +29,35 @@ const WorkMotivation = () => {
     )
   }
 
+  const commands = [
+    {
+      command: "Next",
+      callback: () => {
+        speak("Next question")
+        setMessage("Reading next question")
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex + 1, questions)
+        )
+      },
+    },
+    {
+      command: "Previous",
+      callback: () => {
+        speak("Previous question")
+        setMessage("Reading previous question")
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex - 1, questions)
+        )
+      },
+    },
+  ]
+
+  useEffect(() => {
+    setTimeout(() => setMessage(""), 5000)
+  }, [])
+
   return (
-    <Layout>
+    <Layout commands={commands} message={message}>
       <PageTitle
         title="Work motivation test"
         description={

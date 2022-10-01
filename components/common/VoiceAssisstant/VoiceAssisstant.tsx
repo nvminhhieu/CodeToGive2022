@@ -1,3 +1,4 @@
+import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
 import { createSpeechlySpeechRecognition } from "@speechly/speech-recognition-polyfill"
 import SpeechRecognition, {
@@ -5,62 +6,102 @@ import SpeechRecognition, {
 } from "react-speech-recognition"
 import { CustomIconButton } from "../CustomIconButton/CustomIconButton"
 import { MicOffRounded, MicRounded } from "@mui/icons-material"
+import { ROUTES } from "../../../routing/routes"
+import { useRouter } from "next/router"
 
-const appId = "d1a2c48b-bacf-407b-9811-26b11be721d0"
-const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId)
+const appId = process.env.NEXT_PUBLIC_SPEECHLY_APP_ID
+const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId ?? "")
 SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition)
-
-type VoiceAssisstantProps = {
-  onNext?: () => void
-  onPrev?: () => void
+export const speak = (text: string) => {
+  const speech = new SpeechSynthesisUtterance(text)
+  window.speechSynthesis.speak(speech)
+}
+type Props = {
+  specificCommands?: any
+  specificMessage?: string
 }
 
-const VoiceAssisstant = ({ onNext, onPrev }: VoiceAssisstantProps) => {
-  const voices = () => {
-    const voices = speechSynthesis.getVoices()
-    const voice = voices.filter((v) => v.name === "Google UK English Female")
-    return voice[0]
-  }
-
-  voices()
-  const speak = (text: string) => {
-    const speech = new SpeechSynthesisUtterance(text)
-    speech.voice = voices()
-    speech.lang = "en-US"
-    speech.rate = 0.9
-    window.speechSynthesis.speak(speech)
-  }
+const VoiceAssisstant = ({ specificCommands, specificMessage }: Props) => {
+  const router = useRouter()
+  const [message, setMessage] = useState("")
 
   const commands = [
     {
-      command: "Next",
+      command: "Hi",
       callback: () => {
-        speak("Next question")
+        speak("Hi, how can I help you?")
+        setMessage("Hi, how can I help you?")
       },
     },
+    {
+      command: "Assessments page",
+      callback: () => {
+        speak("Okay, taking you to assessments page.")
+        setMessage("Okay, taking you to assessments page.")
+        router.push(ROUTES.assessments)
+      },
+    },
+    {
+      command: "Work motivation test",
+      callback: () => {
+        speak("Okay, opening work motivation test.")
+        setMessage("Okay, opening work motivation test.")
+        router.push(ROUTES.workMotivation)
+      },
+    },
+    ...specificCommands,
   ]
 
-  const [isListening, setListening] = useState(false)
   const { transcript, listening, browserSupportsSpeechRecognition } =
     useSpeechRecognition({ commands })
-  const startListening = () =>
-    SpeechRecognition.startListening({ continuous: true })
+
+  const handleMouseDown = async (e: any) => {
+    e.preventDefault()
+    await SpeechRecognition.startListening({
+      continuous: false,
+      language: "en-US",
+    })
+  }
+
+  const handleMouseUp = async (e: any) => {
+    e.preventDefault()
+    await SpeechRecognition.stopListening()
+  }
 
   useEffect(() => {
-    isListening ? startListening() : SpeechRecognition.stopListening()
-    console.log(transcript)
-  }, [isListening, transcript])
+    setTimeout(() => setMessage(""), 5000)
+  }, [])
+
+  console.log(transcript)
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn&apos;t support speech recognition.</span>
   }
 
   return (
-    <CustomIconButton
-      _onClick={() => setListening(!isListening)}
-      icon={listening ? <MicRounded /> : <MicOffRounded />}
-      right="2vh"
-    />
+    <>
+      <CustomIconButton
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        icon={listening ? <MicRounded /> : <MicOffRounded />}
+        right="2vh"
+      />
+
+      <Text>{message !== "" ? specificMessage : message}</Text>
+    </>
   )
 }
 export default VoiceAssisstant
+
+const Text = styled.div`
+  position: fixed;
+  bottom: 4vh;
+  right: 14vh;
+  background: #ffffff;
+  box-shadow: 0px 0px 7px rgba(7, 31, 54, 0.04),
+    0px 15px 17px -1px rgba(5, 125, 236, 0.1);
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 400;
+`
