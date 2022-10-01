@@ -1,24 +1,24 @@
-export interface IAssessment {
-  id: string | number
+export interface ITest {
+  test_id: string | number
+  title: string
   questions: Question[]
 }
 
 export type Question = {
-  id: number
-  assessment_id: number
-  index: number
+  type: string
+  question_id: number
   description: string
-  answered_value: number | undefined
-  answer: SilderAnswer
+  answered_value?: number
+  answers: Answer[]
   image?: {
     src: string
     alt: string
   }
 }
 
-export type SilderAnswer = {
-  assessment_id: string | number
-  question_id: string | number
+export type Answer = {
+  answer_id: number
   description: string
-  label: string
+  question_id: number
+  test_id: number
 }
