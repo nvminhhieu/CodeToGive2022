@@ -21,7 +21,7 @@ type Props = {
   specificMessage?: string
 }
 
-const VoiceAssisstant = ({ specificCommands, specificMessage }: Props) => {
+const VoiceAssisstant = ({ specificCommands = [], specificMessage }: Props) => {
   const router = useRouter()
   const [message, setMessage] = useState("")
 
@@ -73,6 +73,7 @@ const VoiceAssisstant = ({ specificCommands, specificMessage }: Props) => {
   }, [])
 
   console.log(transcript)
+  console.log(commands)
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn&apos;t support speech recognition.</span>
@@ -86,22 +87,23 @@ const VoiceAssisstant = ({ specificCommands, specificMessage }: Props) => {
         icon={listening ? <MicRounded /> : <MicOffRounded />}
         right="2vh"
       />
-
-      <Text>{message !== "" ? specificMessage : message}</Text>
+      {/* 
+      {message !== "" && <Text>{message}</Text>}
+      {specificMessage !== "" && <Text>{specificMessage}</Text>} */}
     </>
   )
 }
 export default VoiceAssisstant
 
-const Text = styled.div`
-  position: fixed;
-  bottom: 4vh;
-  right: 14vh;
-  background: #ffffff;
-  box-shadow: 0px 0px 7px rgba(7, 31, 54, 0.04),
-    0px 15px 17px -1px rgba(5, 125, 236, 0.1);
-  padding: 10px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 400;
-`
+// const Text = styled.div`
+//   position: fixed;
+//   bottom: 4vh;
+//   right: 14vh;
+//   background: #ffffff;
+//   box-shadow: 0px 0px 7px rgba(7, 31, 54, 0.04),
+//     0px 15px 17px -1px rgba(5, 125, 236, 0.1);
+//   padding: 10px;
+//   border-radius: 20px;
+//   font-size: 14px;
+//   font-weight: 400;
+// `

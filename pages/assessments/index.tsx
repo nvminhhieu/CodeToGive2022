@@ -13,7 +13,6 @@ const AssessmentsPage = () => {
   const incomplete = assessments.filter(
     (assessment) => assessment.progress < 100
   )
-
   useEffect(() => {
     const fetchAssessmentData = async () => {
       try {

@@ -96,21 +96,21 @@ const WorkMotivation = () => {
     {
       command: "Next",
       callback: () => {
-        speak("Next question")
-        setMessage("Reading next question")
         setCurrentQuestionIndex(
           handleIndexTransit(currentQuestionIndex + 1, questions)
         )
+        speak("Next question")
+        setMessage("Reading next question")
       },
     },
     {
       command: "Previous",
       callback: () => {
-        speak("Previous question")
-        setMessage("Reading previous question")
         setCurrentQuestionIndex(
           handleIndexTransit(currentQuestionIndex - 1, questions)
         )
+        speak("Previous question")
+        setMessage("Reading previous question")
       },
     },
   ]
