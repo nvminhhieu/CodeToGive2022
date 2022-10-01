@@ -13,8 +13,8 @@ import { useForm } from "react-hook-form"
 import IJob from "../../../types/job"
 import { suggestedJobs as mock_suggestedJobs } from "../../../data/suggested_job"
 import usePrevious from "../../../hooks/usePrevious"
-import { IAssessment } from "../../../types/assessment"
-import { questions as mock_questions } from "../../../data/work_motivation_questions"
+import { ITest } from "../../../types/assessment"
+import { test as mock_test } from "../../../data/work_motivation_questions"
 import { useUUIDContext } from "../../../context/UUIDContext"
 
 const WorkMotivation = () => {
@@ -23,10 +23,9 @@ const WorkMotivation = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [data, setData] = useState<IJob[]>([])
   const previousDataState = usePrevious(data)
+  const previousQuestionIndex = usePrevious(currentQuestionIndex)
 
-  const [assessmentData, setAssessmentData] = useState<IAssessment>(
-    {} as IAssessment
-  )
+  const [assessmentData, setAssessmentData] = useState<ITest>({} as ITest)
 
   useEffect(() => {
     const fetchAssessmentData = async () => {
@@ -37,16 +36,36 @@ const WorkMotivation = () => {
         const res = await req.json()
         setAssessmentData(res)
       } catch {
-        setAssessmentData({} as IAssessment)
+        setAssessmentData({} as ITest)
       }
     }
     fetchAssessmentData()
   }, [uuid])
 
-  const questions = assessmentData.questions || mock_questions
+  const questions = assessmentData.questions || mock_test.questions
 
   const { control, handleSubmit } = useForm()
-  const onSubmit = (data: any) => console.log(data)
+  const onSubmit = (data: any) => {
+    const constructedAnswer = (data: any) => {
+      if (previousQuestionIndex !== undefined) {
+        const sliderVal = data?.slider_value || 2
+        const answerObj = questions[previousQuestionIndex].answers.find(
+          (e) => parseInt(e.description) == sliderVal
+        )
+        return answerObj
+      } else {
+        //JUST A WORK AROUND
+        console.log("Work AROUND")
+        const answerObj = questions[0].answers[0]
+        return answerObj
+      }
+    }
+
+    console.log(
+      "OnSubmit Answer: " + (previousQuestionIndex + 1),
+      constructedAnswer(data)
+    )
+  }
 
   const handleIndexTransit = (nextValueIndex: number, array: any) => {
     if (nextValueIndex >= 0 && nextValueIndex < array.length)
@@ -112,7 +131,7 @@ const WorkMotivation = () => {
             exit="fadeout"
           >
             <QuestionCard
-              index={questions[currentQuestionIndex]?.index}
+              index={currentQuestionIndex + 1}
               description={questions[currentQuestionIndex]?.description}
               onClickCallBack={answerOnClickCallBack}
               image={questions[currentQuestionIndex]?.image?.src}
