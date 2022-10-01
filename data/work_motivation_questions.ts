@@ -3,12 +3,13 @@ import { ITest } from "../types/assessment"
 export const test: ITest = {
   test_id: 1,
   title: "Work motivation test",
+  type: "MOTIVATION_TEST",
   questions: [
     {
       type: "MOTIVATION_QUESTION",
       description: "Question1",
       question_id: 12,
-      answered_value: 125,
+      answered_id: 125,
       answers: [
         {
           description: "1",
@@ -45,7 +46,7 @@ export const test: ITest = {
       type: "MOTIVATION_QUESTION",
       description: "Question2",
       question_id: 13,
-
+      answered_id: null,
       answers: [
         {
           description: "1",
@@ -73,16 +74,13 @@ export const test: ITest = {
           question_id: 13,
         },
       ],
-      image: {
-        src: "https://images.unsplash.com/photo-1664555723834-ec251e81a3ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1199&q=80",
-        alt: "Alt text",
-      },
+      image: null,
     },
     {
       type: "MOTIVATION_QUESTION",
       description: "Question3",
       question_id: 14,
-
+      answered_id: null,
       answers: [
         {
           description: "1",

@@ -137,7 +137,7 @@ const WorkMotivation = () => {
               image={questions[currentQuestionIndex]?.image?.src}
               totalLength={questions?.length}
               formControl={control}
-              answeredValue={questions[currentQuestionIndex]?.answered_value}
+              answeredId={questions[currentQuestionIndex]?.answered_id}
               answers={questions[currentQuestionIndex]?.answers}
             />
           </motion.div>

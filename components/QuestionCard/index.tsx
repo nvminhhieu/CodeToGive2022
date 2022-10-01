@@ -13,7 +13,7 @@ type Props = {
   description: string | ReactElement
   totalLength: number
   formControl: any
-  answeredValue?: undefined | number
+  answeredId?: null | number
   answers: Answer[]
 }
 
@@ -51,15 +51,15 @@ const QuestionCard = ({
   totalLength,
   formControl,
   answers,
-  answeredValue,
+  answeredId,
 }: Props) => {
   // const [selectedAnswer, setSelectedAnswer] = useState(0)
-  const findAnswerValue = (answer_id: number | undefined) => {
+  const findAnswerValue = (answer_id: number | null | undefined) => {
     if (answer_id)
       return answers.find((e) => e.answer_id === answer_id)?.description
     return undefined
   }
-  const answeredValueDefault = findAnswerValue(answeredValue)
+  const answeredValueDefault = findAnswerValue(answeredId)
   return (
     <Container>
       <InnerContainer>
