@@ -31,7 +31,7 @@ const WorkMotivation = () => {
     const fetchTestData = async () => {
       try {
         const req = await fetch(
-          `${process.env.HOST}/api/v1/${uuid}/work-motivation-test/assessment`
+          `${process.env.HOST}/api/v1/assessments/${uuid}/work-motivation-test`
         )
         const res = await req.json()
         setTestData(res)
