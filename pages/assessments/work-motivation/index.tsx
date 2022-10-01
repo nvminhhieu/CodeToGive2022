@@ -25,24 +25,24 @@ const WorkMotivation = () => {
   const previousDataState = usePrevious(data)
   const previousQuestionIndex = usePrevious(currentQuestionIndex)
 
-  const [assessmentData, setAssessmentData] = useState<ITest>({} as ITest)
+  const [testData, setTestData] = useState<ITest>({} as ITest)
 
   useEffect(() => {
-    const fetchAssessmentData = async () => {
+    const fetchTestData = async () => {
       try {
         const req = await fetch(
           `${process.env.HOST}/api/v1/${uuid}/work-motivation-test/assessment`
         )
         const res = await req.json()
-        setAssessmentData(res)
+        setTestData(res)
       } catch {
-        setAssessmentData({} as ITest)
+        setTestData({} as ITest)
       }
     }
-    fetchAssessmentData()
+    fetchTestData()
   }, [uuid])
 
-  const questions = assessmentData.questions || mock_test.questions
+  const questions = testData.questions || mock_test.questions
 
   const { control, handleSubmit } = useForm()
   const onSubmit = (data: any) => {
@@ -137,6 +137,8 @@ const WorkMotivation = () => {
               image={questions[currentQuestionIndex]?.image?.src}
               totalLength={questions?.length}
               formControl={control}
+              answeredValue={questions[currentQuestionIndex]?.answered_value}
+              answers={questions[currentQuestionIndex]?.answers}
             />
           </motion.div>
         </AnimatePresence>

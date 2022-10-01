@@ -4,6 +4,7 @@ import AnswerButton from "./AnswerButton/AnswerButton"
 import CheckIcon from "@mui/icons-material/Check"
 import CloseIcon from "@mui/icons-material/Close"
 import CustomSlider from "../common/CustomSlider/CustomSlider"
+import { Answer } from "../../types/assessment"
 
 type Props = {
   image?: string
@@ -12,6 +13,8 @@ type Props = {
   description: string | ReactElement
   totalLength: number
   formControl: any
+  answeredValue?: undefined | number
+  answers: Answer[]
 }
 
 const MARKS_MAP = [
@@ -47,8 +50,16 @@ const QuestionCard = ({
   description,
   totalLength,
   formControl,
+  answers,
+  answeredValue,
 }: Props) => {
   // const [selectedAnswer, setSelectedAnswer] = useState(0)
+  const findAnswerValue = (answer_id: number | undefined) => {
+    if (answer_id)
+      return answers.find((e) => e.answer_id === answer_id)?.description
+    return undefined
+  }
+  const answeredValueDefault = findAnswerValue(answeredValue)
   return (
     <Container>
       <InnerContainer>
@@ -68,7 +79,11 @@ const QuestionCard = ({
           name="slider_value"
           control={formControl}
           aria-label="Temperature"
-          defaultValue={1}
+          defaultValue={
+            answeredValueDefault === undefined
+              ? 1
+              : parseInt(answeredValueDefault)
+          }
           valueLabelDisplay="auto"
           step={1}
           marks={MARKS_MAP}
