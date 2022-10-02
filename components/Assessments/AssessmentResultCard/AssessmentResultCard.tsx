@@ -1,6 +1,8 @@
 import styled from "@emotion/styled"
 import { Button } from "@mui/material"
+import CustomTextField from "../../Common/CustomTextField/CustomTextField"
 import ModalWrapper from "../../Common/Modal"
+import { useForm } from "react-hook-form"
 
 type AssessmentResultCardProps = {
   isCompleted: boolean
@@ -9,6 +11,7 @@ type AssessmentResultCardProps = {
 export const AssessmentResultCard = ({
   isCompleted,
 }: AssessmentResultCardProps) => {
+  const { control, handleSubmit } = useForm()
   return (
     <Container>
       <div>
@@ -22,8 +25,43 @@ export const AssessmentResultCard = ({
             title="Get the report"
             text="Please provide the following information before getting the assessment summary."
             buttonTitle="Get the report"
+            isDisabled={isCompleted}
           >
-            <>Hello</>
+            <Label>Full name</Label>
+            <CustomTextField
+              control={control}
+              name="name"
+              label="Full name"
+              type="text"
+              variant="outlined"
+              sx={{ marginBottom: "24px" }}
+            />
+            <Label>E-mail address</Label>
+            <CustomTextField
+              control={control}
+              name="email"
+              label="E-mail address"
+              type="email"
+              variant="outlined"
+              sx={{ marginBottom: "24px" }}
+            />
+            <Label>Phone number (06 XX XXX XXXX)</Label>
+            <CustomTextField
+              control={control}
+              name="phone"
+              label="Phone number"
+              type="phone"
+              variant="outlined"
+              sx={{ marginBottom: "48px" }}
+            />
+            <div
+              style={{
+                width: "100%",
+                textAlign: "center",
+              }}
+            >
+              <Button variant="contained">Get the report</Button>
+            </div>
           </ModalWrapper>
           <Text>
             The results are available after finishing all questionnaires.
@@ -71,4 +109,10 @@ const Text = styled.p`
   color: white;
   margin-left: 10px;
   height: fit-content;
+`
+const Label = styled.p`
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  padding-bottom: 8px;
 `

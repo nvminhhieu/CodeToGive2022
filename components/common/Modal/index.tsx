@@ -7,18 +7,19 @@ import { Dialog } from "@mui/material"
 
 type ModalWrapperProps = {
   buttonTitle: string
-  buttonVariant?: string
   title: string
   text?: string
+  isDisabled?: boolean
   children: any
 }
 
 const ModalWrapper = ({
   buttonTitle,
-  buttonVariant,
   title,
   text,
+  isDisabled,
   children,
+  ...props
 }: ModalWrapperProps) => {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
@@ -32,9 +33,10 @@ const ModalWrapper = ({
           boxShadow: "none",
           height: "41px",
           borderRadius: "8px",
+          ...props,
         }}
-        color="secondary"
         onClick={handleOpen}
+        disabled={isDisabled}
       >
         {buttonTitle}
       </Button>
@@ -55,7 +57,7 @@ const ModalWrapper = ({
           },
         }}
       >
-        <div style={{ position: "relative", width: "100%" }}>
+        <div style={{ position: "relative", width: "100%", height: "100%" }}>
           <IconWrapper>
             <CloseIcon
               sx={{
@@ -65,8 +67,10 @@ const ModalWrapper = ({
               onClick={handleClose}
             />
           </IconWrapper>
-          <Title>{title}</Title>
-          <Text>{text}</Text>
+          <div style={{ marginBottom: 48 }}>
+            <Title>{title}</Title>
+            {text && <Text>{text}</Text>}
+          </div>
           {children}
         </div>
       </Dialog>

@@ -5,8 +5,10 @@ import { Controller } from "react-hook-form"
 const CusTextField = styled(TextField)`
   width: 100%;
   div {
-    border-radius: 100px;
+    border-radius: 8px;
     background-color: white;
+    bordercolor: 1px solid;
+    height: 50px;
   }
 `
 
