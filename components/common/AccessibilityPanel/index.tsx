@@ -23,9 +23,10 @@ import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice"
 
 type Props = {
   toggleDrawer: () => void
+  onClick: () => void
 }
 
-const DrawerContent = ({ toggleDrawer }: Props) => {
+const DrawerContent = ({ toggleDrawer, onClick }: Props) => {
   const drawerItems = [
     { name: "Larger text", icon: ZoomInIcon },
     { name: "Smaller text", icon: ZoomOutIcon },
@@ -55,7 +56,7 @@ const DrawerContent = ({ toggleDrawer }: Props) => {
         <Title>Voice</Title>
         <List>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={onClick}>
               <ListItemIcon>
                 <KeyboardVoiceIcon />
               </ListItemIcon>
@@ -68,7 +69,11 @@ const DrawerContent = ({ toggleDrawer }: Props) => {
   )
 }
 
-export const AccessibilityPanel = () => {
+type PropsPanel = {
+  onClick: () => void
+}
+
+export const AccessibilityPanel = ({ onClick }: PropsPanel) => {
   const [open, setOpen] = React.useState(false)
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -93,7 +98,7 @@ export const AccessibilityPanel = () => {
             onClick={toggleDrawer(false)}
           />
         </IconWrapper>
-        <DrawerContent toggleDrawer={toggleDrawer(false)} />
+        <DrawerContent toggleDrawer={toggleDrawer(false)} onClick={onClick} />
       </Drawer>
     </Container>
   )
