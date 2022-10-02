@@ -21,7 +21,7 @@ export default function CustomTextField(props: any) {
         field: { onChange, value },
         fieldState: { error },
         formState,
-      }) => <CusTextField onChange={onChange} value={value || ""} {...props} />}
+      }) => <CusTextField onChange={onChange} {...props} />}
     />
   )
 }
