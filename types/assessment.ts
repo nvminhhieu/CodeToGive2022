@@ -1,3 +1,19 @@
+export interface ITestDisplay {
+  test_id: string | number
+  title: string
+  type:
+    | "MOTIVATION_TEST"
+    | "ENGLISH_TEST"
+    | "VISIO_PERCEPTUAL_TEST"
+    | "SOCIAL_SITUATION_TEST"
+  questions: any
+  progress: number
+  completed: boolean
+  description: string
+  url: string
+  assessment_uuid: string
+}
+
 export interface ITest {
   test_id: string | number
   title: string

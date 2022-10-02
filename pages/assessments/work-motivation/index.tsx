@@ -33,7 +33,7 @@ const WorkMotivation = () => {
     const fetchTestData = async () => {
       try {
         const req = await fetch(
-          `${process.env.HOST}/api/v1/assessments/${uuid}/work-motivation-test`
+          `${process.env.HOST}/api/v1/assessments/${uuid}/tests?test_type=MOTIVATION_TEST`
         )
         const res = await req.json()
         setTestData(res)
@@ -48,25 +48,38 @@ const WorkMotivation = () => {
 
   const { control, handleSubmit } = useForm()
   const onSubmit = (data: any) => {
+    //Constructing answer obj
     const constructedAnswer = (data: any) => {
       if (previousQuestionIndex !== undefined) {
         const sliderVal = data?.slider_value || 2
         const answerObj = questions[previousQuestionIndex].answers.find(
           (e) => parseInt(e.description) == sliderVal
         )
-        return answerObj
+        return {
+          test_id: testData.test_id,
+          ...answerObj,
+        }
       } else {
         //JUST A WORK AROUND
         console.log("Work AROUND")
         const answerObj = questions[0].answers[0]
-        return answerObj
+        return {
+          test_id: testData.test_id,
+          ...answerObj,
+        }
       }
     }
 
-    console.log(
-      "OnSubmit Answer: " + (previousQuestionIndex + 1),
-      constructedAnswer(data)
-    )
+    //Submit answer
+    const submitingAnswer = async (data: any) => {
+      const res = await fetch(`${process.env.HOST}/api/v1/answers/submit`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+      })
+      const req = await res.json()
+    }
+
+    submitingAnswer(constructedAnswer(data))
   }
 
   const handleIndexTransit = (nextValueIndex: number, array: any) => {

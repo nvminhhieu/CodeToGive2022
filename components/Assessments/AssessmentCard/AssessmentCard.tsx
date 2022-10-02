@@ -9,9 +9,10 @@ import TranslateIcon from "@mui/icons-material/Translate"
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined"
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined"
 import CustomButton from "../../common/CustomButton/CustomButton"
+import { ITestDisplay } from "../../../types/assessment"
 
 type Props = {
-  assessment: typeof assessments[number]
+  assessment: ITestDisplay
   key?: string | number
 }
 
@@ -28,8 +29,47 @@ const handleIcon = (name: string) => {
   }
 }
 
+const HashedMapIcon = {
+  ENGLISH_TEST: {
+    icon: {
+      name: "TranslateIcon",
+      color:
+        "radial-gradient(102.34% 102.34% at 50% 50%, #DA87AF 0%, #802C59 100%)",
+    },
+    url: "/assessments/english-language-test",
+  },
+  MOTIVATION_TEST: {
+    icon: {
+      name: "WorkOutlineIcon",
+      color:
+        "radial-gradient(102.34% 102.34% at 50% 50%, #3BC49A 0%, #158787 100%)",
+    },
+    url: "/assessments/work-motivation",
+  },
+  SOCIAL_SITUATION_TEST: {
+    icon: {
+      name: "VisibilityOutlinedIcon",
+      color:
+        "radial-gradient(102.34% 102.34% at 50% 50%, #1D66D3 0%, #06459F 100%)",
+    },
+    url: "/assessments/social-situation-test",
+  },
+  VISIO_PERCEPTUAL_TEST: {
+    icon: {
+      name: "QuizOutlinedIcon",
+      color:
+        "radial-gradient(102.34% 102.34% at 50% 50%, #8B7560 0%, #58390A 100%)",
+    },
+    url: "/assessments/visio-perceptual-skills",
+  },
+}
+
 export const AssessmentCard = ({ assessment }: Props) => {
   const router = useRouter()
+  console.log(
+    "HashedMapIcon[assessment.type].icon.color",
+    HashedMapIcon[assessment.type]?.icon?.color
+  )
   return (
     <Container>
       <Justify>
@@ -66,11 +106,11 @@ export const AssessmentCard = ({ assessment }: Props) => {
           )}
           <Icon
             style={{
-              background: assessment.icon.color,
+              background: HashedMapIcon[assessment.type]?.icon?.color,
               opacity: assessment.completed ? "0.5" : 1,
             }}
           >
-            {handleIcon(assessment.icon.name)}
+            {handleIcon(HashedMapIcon[assessment.type]?.icon?.name)}
           </Icon>
         </Flex>
       </Justify>
@@ -101,7 +141,7 @@ export const AssessmentCard = ({ assessment }: Props) => {
             variant="contained"
             color="primary"
             onClick={() => {
-              router.push(assessment.url)
+              router.push(HashedMapIcon[assessment.type].url)
             }}
           >
             {assessment.progress > 0

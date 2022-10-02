@@ -4,25 +4,27 @@ import { AssessmentResultCard } from "../../components/Assessments/AssessmentRes
 import PageTitle from "../../components/common/PageTitle"
 import Layout from "../../components/Layout"
 import { useUUIDContext } from "../../context/UUIDContext"
-import { assessments as mock_assessment } from "../../data/assessment_display"
+import { assessments as mock_assessments_display } from "../../data/assessment_display"
+import { ITestDisplay } from "../../types/assessment"
 
 const AssessmentsPage = () => {
   const { uuid } = useUUIDContext()
-  const [assessments, setAssessments] = useState<typeof mock_assessment>([])
+  const [assessments, setAssessments] = useState<ITestDisplay[]>([])
 
-  const incomplete = assessments.filter(
+  console.log("assessments", assessments)
+  const incomplete = assessments?.filter(
     (assessment) => assessment.progress < 100
   )
   useEffect(() => {
     const fetchAssessmentData = async () => {
       try {
         const req = await fetch(
-          `${process.env.HOST}/api/v1/${uuid}/assessments`
+          `${process.env.HOST}/api/v1/assessments/${uuid}`
         )
         const res = await req.json()
-        setAssessments(res)
+        setAssessments(res.tests)
       } catch {
-        setAssessments(mock_assessment)
+        setAssessments(mock_assessments_display)
       }
     }
     if (uuid) {
