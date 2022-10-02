@@ -1,7 +1,7 @@
 import { Alert, Slider } from "@mui/material"
 import { GetStaticProps } from "next"
 import { ReactElement, useState } from "react"
-import PageTitle from "../../components/common/PageTitle"
+import PageTitle from "../../components/Common/PageTitle"
 import Layout from "../../components/Layout"
 import { useSession } from "next-auth/react"
 import { useForm } from "react-hook-form"

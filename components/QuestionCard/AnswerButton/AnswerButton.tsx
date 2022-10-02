@@ -1,6 +1,5 @@
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
-import { ReactNode } from "react"
 
 const AnswerButton = (props: any) => {
   return (
