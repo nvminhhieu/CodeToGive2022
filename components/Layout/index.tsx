@@ -5,6 +5,7 @@ import Main from "./Main/Main"
 
 import dynamic from "next/dynamic"
 import { CircularProgress } from "@mui/material"
+import { AccessibilityPanel } from "../Common/AccessibilityPanel"
 
 type Props = {
   children: ReactNode
@@ -40,6 +41,7 @@ const Layout = ({ commands, message, children }: Props) => {
     <>
       <Header />
       <Main>{children}</Main>
+      <AccessibilityPanel />
       <VoiceAssisstant specificCommands={commands} specificMessage={message} />
     </>
   )
