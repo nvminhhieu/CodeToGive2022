@@ -5,7 +5,7 @@ import { Controller } from "react-hook-form"
 const CusTextField = styled(TextField)`
   width: 100%;
   div {
-    border-radius: 100px;
+    border-radius: 8px;
     background-color: white;
   }
 `
@@ -19,7 +19,7 @@ export default function CustomTextField(props: any) {
         field: { onChange, value },
         fieldState: { error },
         formState,
-      }) => <CusTextField onChange={onChange} value={value || ""} {...props} />}
+      }) => <CusTextField onChange={onChange} {...props} />}
     />
   )
 }
