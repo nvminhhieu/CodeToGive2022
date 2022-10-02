@@ -8,6 +8,9 @@ import CustomTextField from "../../CustomTextField/CustomTextField"
 import { useForm } from "react-hook-form"
 import Select, { SelectChangeEvent } from "@mui/material/Select"
 import AttachFileIcon from "@mui/icons-material/AttachFile"
+import { Slider } from "../QuestionEditModal.tsx/QuestionType/Slider"
+import { MultipleChoice } from "./QuestionType/MultipleChoise"
+
 type ModalProps = {
   onClick: () => void
 }
@@ -81,7 +84,7 @@ const QuestionEditModal = ({ onClick }: ModalProps) => {
             />
           </IconWrapper>
           <div style={{ marginBottom: 48 }}>
-            <Title>Add question</Title>
+            <Title>Add/modify question</Title>
           </div>
           <Label>Question</Label>
           <CustomTextField
@@ -92,7 +95,8 @@ const QuestionEditModal = ({ onClick }: ModalProps) => {
             variant="outlined"
             sx={{ marginBottom: "24px" }}
           />
-          <FormControl fullWidth>
+          <Label>Type</Label>
+          <FormControl sx={{ marginBottom: "24px" }} fullWidth>
             <InputLabel>Type</InputLabel>
             <Select
               value={type}
@@ -104,6 +108,9 @@ const QuestionEditModal = ({ onClick }: ModalProps) => {
               <MenuItem value={"multipleChoice"}>Multiple choice</MenuItem>
             </Select>
           </FormControl>
+
+          {type === "slider" && <Slider />}
+          {type === "multipleChoice" && <MultipleChoice />}
 
           <div
             style={{
