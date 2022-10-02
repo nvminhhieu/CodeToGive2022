@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { AssessmentCard } from "../../components/Assessments/AssessmentCard/AssessmentCard"
 import { AssessmentResultCard } from "../../components/Assessments/AssessmentResultCard/AssessmentResultCard"
-import PageTitle from "../../components/Common/PageTitle"
+import PageTitle from "../../components/common/PageTitle"
 import Layout from "../../components/Layout"
 import { useUUIDContext } from "../../context/UUIDContext"
 import { assessments as mock_assessment } from "../../data/assessment_display"
