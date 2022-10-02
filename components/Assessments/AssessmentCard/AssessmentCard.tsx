@@ -99,7 +99,7 @@ export const AssessmentCard = ({ assessment }: Props) => {
               borderRadius: "8px",
             }}
             variant="contained"
-            color="secondary"
+            color="primary"
             onClick={() => {
               router.push(assessment.url)
             }}

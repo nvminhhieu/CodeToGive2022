@@ -1,12 +1,22 @@
 export interface ITest {
   test_id: string | number
   title: string
-  type: "MOTIVATION_TEST" | string
+  type:
+    | "MOTIVATION_TEST"
+    | "ENGLISH_TEST"
+    | "VISIO_PERCEPTUAL_TEST"
+    | "SOCIAL_SITUATION_TEST"
+    | string
   questions: Question[]
 }
 
 export type Question = {
-  type: string | "MOTIVATION_QUESTION"
+  type:
+    | string
+    | "MOTIVATION_QUESTION"
+    | "ENGLISH_QUESTION"
+    | "VISIO_PERCEPTUAL_QUESTION"
+    | "SOCIAL_SITUATION_QUESTION"
   question_id: number
   description: string
   answered_id?: number | null
