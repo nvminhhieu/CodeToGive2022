@@ -1,4 +1,4 @@
-import useAuthenticate from '../../hooks/useAuthenticate'
+import useAuthenticate from "../../hooks/useAuthenticate"
 
 const AdminPage = <> ADmin PAge</>
 

@@ -10,6 +10,9 @@ const AssessmentsPage = () => {
   const { uuid } = useUUIDContext()
   const [assessments, setAssessments] = useState<typeof mock_assessment>([])
 
+  const incomplete = assessments.filter(
+    (assessment) => assessment.progress < 100
+  )
   useEffect(() => {
     const fetchAssessmentData = async () => {
       try {
@@ -34,7 +37,11 @@ const AssessmentsPage = () => {
         description="Here you can find the assessments required to get a job. Please select the test you would like to do."
       />
       <div style={{ paddingBottom: "100px" }}>
+<<<<<<< HEAD
         <AssessmentResultCard isCompleted={false} />
+=======
+        <AssessmentResultCard isCompleted={incomplete.length === 0} />
+>>>>>>> main
         {assessments.map((assessment, i) => (
           <AssessmentCard key={i} assessment={assessment} />
         ))}
