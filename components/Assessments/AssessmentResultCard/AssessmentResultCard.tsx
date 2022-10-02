@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import { Button } from "@mui/material"
+import CustomButton from "../../common/CustomButton/CustomButton"
 
 type AssessmentResultCardProps = {
   isCompleted: boolean
@@ -17,18 +18,18 @@ export const AssessmentResultCard = ({
           to.
         </Description>
         <Flex>
-          <Button
+          <CustomButton
             variant="contained"
             style={{
               boxShadow: "none",
-              height: "41px",
               borderRadius: "8px",
+              background: !isCompleted ? "#D5D9E0" : "#0097F2",
             }}
-            color="secondary"
+            color="primary"
             disabled={!isCompleted}
           >
             Learn more
-          </Button>
+          </CustomButton>
           <Text>
             The results are available after finishing all questionnaires.
           </Text>

@@ -8,6 +8,7 @@ import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import TranslateIcon from "@mui/icons-material/Translate"
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined"
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined"
+import CustomButton from "../../common/CustomButton/CustomButton"
 
 type Props = {
   assessment: typeof assessments[number]
@@ -90,12 +91,11 @@ export const AssessmentCard = ({ assessment }: Props) => {
 
             <Text>{assessment.progress}% ready</Text>
           </Flex>
-          <Button
+          <CustomButton
             style={{
               marginTop: "40px",
               boxShadow: "none",
-              width: "227px",
-              height: "41px",
+              padding: "8px 22px",
               borderRadius: "8px",
             }}
             variant="contained"
@@ -107,7 +107,7 @@ export const AssessmentCard = ({ assessment }: Props) => {
             {assessment.progress > 0
               ? "Continue answering"
               : "Fill the questionnaire"}
-          </Button>
+          </CustomButton>
         </>
       )}
     </Container>
