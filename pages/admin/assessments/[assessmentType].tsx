@@ -10,6 +10,7 @@ import PageTitle from "../../../components/common/PageTitle"
 import Layout from "../../../components/Layout"
 import { ITest, Question } from "../../../types/assessment"
 import CheckIcon from "@mui/icons-material/Check"
+import AddIcon from "@mui/icons-material/Add"
 
 const filterQuestionType = (arrayAllQuestions: Question[], type: any) => {
   return arrayAllQuestions.filter((question) => question.type === type)
@@ -23,7 +24,7 @@ const handleQueryRouteToTypeQuestion = (
   queryText: string | undefined | string[]
 ) => {
   switch (queryText) {
-    case "motivation-question":
+    case "work-motivation":
       return "MOTIVATION_QUESTION"
     default:
       return ""
@@ -34,7 +35,7 @@ const handleQueryRouteToTypeTest = (
   queryText: string | undefined | string[]
 ) => {
   switch (queryText) {
-    case "motivation-question":
+    case "work-motivation":
       return "MOTIVATION_TEST"
     default:
       return ""
@@ -130,6 +131,20 @@ const AssessmentTypeEdit = () => {
       <SubTitle style={{ margin: "40px 0" }}>Questions</SubTitle>
 
       <Table questionsData={questionData} />
+
+      <AddButtonContainer>
+        <CustomButton
+          onClick={() => {
+            setIsSaved(true)
+          }}
+          variant="contained"
+        >
+          Add New
+          <AddIcon
+            sx={{ color: "white", fontSize: "20px", marginLeft: "5px" }}
+          />
+        </CustomButton>
+      </AddButtonContainer>
     </Layout>
   )
 }
@@ -152,4 +167,10 @@ const Flex = styled.div`
   align-items: center;
   width: 100%;
   justify-content: space-between;
+`
+const AddButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin: 40px 0;
 `

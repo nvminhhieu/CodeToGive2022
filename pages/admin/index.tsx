@@ -6,7 +6,7 @@ import Link from "next/link"
 const AdminPage = (
   <Layout>
     <PageTitle title="Admin" description="This is admin Interface" />
-    <Link href="admin/assessment">
+    <Link href="admin/assessments">
       <a>Assessment</a>
     </Link>
   </Layout>

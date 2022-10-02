@@ -24,9 +24,9 @@ const Table = ({ questionsData }: Props) => {
           <p>{ind + 1}</p>
           <p>{question.description}</p>
           <p>{question.type}</p>
-          <p>{question.answered_id}</p>
+          <p>{question.answers.map((e) => e.description + " ")}</p>
           <p>{question.type}</p>
-          <p>{question.type}</p>
+          <p>{question.image?.src}</p>
           <ButtonsContainer>
             <EditButton>
               <EditIcon sx={{ color: "white", fontSize: "20px" }} />

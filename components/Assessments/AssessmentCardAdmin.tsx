@@ -72,7 +72,7 @@ const AssessmentCardAdmin = ({ assessment }: Props) => {
           variant="contained"
           color="primary"
           onClick={() => {
-            router.push("/admin/assessment/motivation-question")
+            router.push(`/admin/${assessment.url}`)
           }}
         >
           <Flex style={{ gap: "10px" }}>
