@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import { SvgIcon } from "@mui/material"
 import { useEffect, useState } from "react"
-import PageTitle from "../../../components/common/PageTitle"
+import PageTitle from "../../../components/Common/PageTitle"
 import Layout from "../../../components/Layout"
 import QuestionCard from "../../../components/QuestionCard"
 import RecommendedProfessions from "../../../components/RecommendedProfessions"

@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import { Button } from "@mui/material"
+import ModalWrapper from "../../Common/Modal"
 
 type AssessmentResultCardProps = {
   isCompleted: boolean
@@ -17,18 +18,13 @@ export const AssessmentResultCard = ({
           to.
         </Description>
         <Flex>
-          <Button
-            variant="contained"
-            style={{
-              boxShadow: "none",
-              height: "41px",
-              borderRadius: "8px",
-            }}
-            color="secondary"
-            disabled={!isCompleted}
+          <ModalWrapper
+            title="Get the report"
+            text="Please provide the following information before getting the assessment summary."
+            buttonTitle="Get the report"
           >
-            Learn more
-          </Button>
+            <>Hello</>
+          </ModalWrapper>
           <Text>
             The results are available after finishing all questionnaires.
           </Text>
