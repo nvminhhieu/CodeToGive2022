@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { AssessmentCard } from "../../components/Assessments/AssessmentCard"
-import { AssessmentResultCard } from "../../components/Assessments/AssessmentResultCard"
-import PageTitle from "../../components/common/PageTitle"
+import { AssessmentCard } from "../../components/Assessments/AssessmentCard/AssessmentCard"
+import { AssessmentResultCard } from "../../components/Assessments/AssessmentResultCard/AssessmentResultCard"
+import PageTitle from "../../components/Common/PageTitle"
 import Layout from "../../components/Layout"
 import { useUUIDContext } from "../../context/UUIDContext"
 import { assessments as mock_assessment } from "../../data/assessment_display"
@@ -10,6 +10,9 @@ const AssessmentsPage = () => {
   const { uuid } = useUUIDContext()
   const [assessments, setAssessments] = useState<typeof mock_assessment>([])
 
+  const incomplete = assessments.filter(
+    (assessment) => assessment.progress < 100
+  )
   useEffect(() => {
     const fetchAssessmentData = async () => {
       try {
@@ -34,7 +37,7 @@ const AssessmentsPage = () => {
         description="Here you can find the assessments required to get a job. Please select the test you would like to do."
       />
       <div style={{ paddingBottom: "100px" }}>
-        <AssessmentResultCard isCompleted={true} />
+        <AssessmentResultCard isCompleted={incomplete.length === 0} />
         {assessments.map((assessment, i) => (
           <AssessmentCard key={i} assessment={assessment} />
         ))}

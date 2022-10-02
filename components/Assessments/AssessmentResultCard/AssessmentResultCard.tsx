@@ -54,6 +54,9 @@ const Container = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 24px;
   background-color: #0288d1;
+  background-image: url("results.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 `
 
 const Title = styled.h2`

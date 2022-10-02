@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import { SvgIcon } from "@mui/material"
-import { useEffect, useState } from "react"
-import PageTitle from "../../../components/common/PageTitle"
+import { useState, useEffect } from "react"
+import PageTitle from "../../../components/Common/PageTitle"
 import Layout from "../../../components/Layout"
 import QuestionCard from "../../../components/QuestionCard"
 import RecommendedProfessions from "../../../components/RecommendedProfessions"
@@ -9,6 +9,7 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
+import { speak } from "../../../components/Common/VoiceAssisstant/VoiceAssisstant"
 import { useForm } from "react-hook-form"
 import IJob from "../../../types/job"
 import { suggestedJobs as mock_suggestedJobs } from "../../../data/suggested_job"
@@ -21,6 +22,7 @@ const WorkMotivation = () => {
   const { uuid } = useUUIDContext()
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [message, setMessage] = useState("")
   const [data, setData] = useState<IJob[]>([])
   const previousDataState = usePrevious(data)
   const previousQuestionIndex = usePrevious(currentQuestionIndex)
@@ -90,12 +92,38 @@ const WorkMotivation = () => {
     )
   }
 
+  const commands = [
+    {
+      command: "Next",
+      callback: () => {
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex + 1, questions)
+        )
+        speak("Next question")
+        setMessage("Reading next question")
+      },
+    },
+    {
+      command: "Previous",
+      callback: () => {
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex - 1, questions)
+        )
+        speak("Previous question")
+        setMessage("Reading previous question")
+      },
+    },
+  ]
+
+  useEffect(() => {
+    setTimeout(() => setMessage(""), 5000)
+  }, [])
   useEffect(() => {
     fetchRecommendedJobsData()
   }, [uuid])
 
   return (
-    <Layout>
+    <Layout commands={commands} message={message}>
       <PageTitle
         title="Work motivation test"
         description={
@@ -227,19 +255,18 @@ const IconContainer = styled.button<{ active?: boolean }>`
   transition: background 0.4s;
 `
 
-const IconWrapper = styled.div`
-  position: fixed;
-  bottom: 2vh;
-  align-self: center;
-  cursor: pointer;
-`
-
 const RecommendedProfessionsCont = styled(motion.div)`
   position: fixed;
   bottom: 2vh;
   align-self: center;
   width: 80%;
   max-width: 1080px;
+`
+
+const IconWrapper = styled.div`
+  position: fixed;
+  bottom: 2vh;
+  cursor: pointer;
 `
 
 const toggleAnimation = {
