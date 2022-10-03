@@ -11,15 +11,27 @@ const CusTextField = styled(TextField)`
 `
 
 export default function CustomTextField(props: any) {
+  const propsObj = { ...props }
+  delete propsObj.setValue
   return (
     <Controller
       name={props.name}
       control={props.control}
+      defaultValue={""}
       render={({
         field: { onChange, value },
         fieldState: { error },
         formState,
-      }) => <CusTextField onChange={onChange} {...props} />}
+      }) => (
+        <CusTextField
+          value={value}
+          onChange={({ target: { value } }) => {
+            onChange()
+            props.setValue(props.name, value)
+          }}
+          {...propsObj}
+        />
+      )}
     />
   )
 }

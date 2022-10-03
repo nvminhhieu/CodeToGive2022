@@ -49,9 +49,9 @@ const AssessmentTypeEdit = () => {
 
   const testTypeRoute = handleQueryRouteToTypeTest(routerQuery)
   const [questionData, setQuestionData] = useState<Question[]>([])
-  const [testData, setTestData] = useState<ITest>()
 
   const [isSaved, setIsSaved] = useState(false)
+  const { control, handleSubmit, setValue } = useForm()
 
   const fetchData = async () => {
     try {
@@ -65,7 +65,7 @@ const AssessmentTypeEdit = () => {
       const resTest = await reqTest.json()
       const allTypeTestData = resTest
 
-      setTestData(filterTestType(allTypeTestData, testTypeRoute)[0]) //JUST A WORK AROUND, CAUSE NO GENERAL TEST TYPE
+      setValue("title", filterTestType(allTypeTestData, testTypeRoute)[0].title) //JUST A WORK AROUND, CAUSE NO GENERAL TEST TYPE
 
       setQuestionData(
         filterQuestionType(allTypeQuestionsData, questionTypeRoute)
@@ -75,58 +75,64 @@ const AssessmentTypeEdit = () => {
     }
   }
 
-  const { control, handleSubmit } = useForm()
+  const submitData = (data: any) => {
+    console.log("submitData", data)
+  }
 
   return (
     <Layout>
-      <Flex>
-        <PageTitle
-          title={"Edit " + testTypeRoute}
-          description="Edit Assessment and modify data"
-        />
-        <CustomButton
-          onClick={() => {
-            setIsSaved(true)
-          }}
-          sx={{ width: "10%" }}
-          variant="contained"
-          disabled={isSaved}
-        >
-          Save
-          {isSaved ? "d" : null}
-          {isSaved ? (
-            <CheckIcon
-              sx={{ color: "#A0A2A3", fontSize: "20px", marginLeft: "5px" }}
-            />
-          ) : null}
-        </CustomButton>
-      </Flex>
-      <UpperContainerForm>
-        <CustomButton
-          onClick={fetchData}
-          sx={{ width: "20%" }}
-          variant="contained"
-        >
-          Fetch Data
-        </CustomButton>
-        <SubTitle>Assessment Information</SubTitle>
-        <CustomTextField
-          control={control}
-          name="title"
-          label="Title"
-          type="text"
-          variant="outlined"
-          value={testData ? testData.title : ""}
-        />
-        <CustomTextField
-          control={control}
-          name="description"
-          label="Description"
-          type="text"
-          variant="outlined"
-          value={testData ? testData.title : ""}
-        />
-      </UpperContainerForm>
+      <form onSubmit={handleSubmit(submitData)}>
+        <Flex>
+          <PageTitle
+            title={"Edit " + testTypeRoute}
+            description="Edit Assessment and modify data"
+          />
+          <CustomButton
+            type="submit"
+            onClick={() => {
+              setIsSaved(true)
+            }}
+            sx={{ width: "10%" }}
+            variant="contained"
+            // disabled={isSaved}
+          >
+            Save
+            {isSaved ? "d" : null}
+            {isSaved ? (
+              <CheckIcon
+                sx={{ color: "#A0A2A3", fontSize: "20px", marginLeft: "5px" }}
+              />
+            ) : null}
+          </CustomButton>
+        </Flex>
+
+        <UpperContainerForm>
+          <CustomButton
+            onClick={fetchData}
+            sx={{ width: "20%" }}
+            variant="contained"
+          >
+            Fetch Data
+          </CustomButton>
+          <SubTitle>Assessment Information</SubTitle>
+          <CustomTextField
+            control={control}
+            name="title"
+            label="Title"
+            type="text"
+            variant="outlined"
+            setValue={setValue}
+          />
+          <CustomTextField
+            control={control}
+            name="description"
+            label="Description"
+            type="text"
+            variant="outlined"
+            setValue={setValue}
+          />
+        </UpperContainerForm>
+      </form>
 
       <SubTitle style={{ margin: "40px 0" }}>Questions</SubTitle>
 
@@ -151,7 +157,7 @@ const AssessmentTypeEdit = () => {
 
 export default AssessmentTypeEdit
 
-const UpperContainerForm = styled.form`
+const UpperContainerForm = styled.div`
   display: flex;
   flex-direction: column;
   width: 60%;
