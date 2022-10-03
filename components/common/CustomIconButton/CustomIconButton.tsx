@@ -2,29 +2,19 @@ import styled from "@emotion/styled"
 import { SvgIcon } from "@mui/material"
 
 type CustomIconButtonProps = {
-  _onClick?: () => void
+  _onClick?: any
   icon: any
   align?: string
-  onMouseDown?: (e: any) => Promise<void>
-  onMouseUp?: (e: any) => Promise<void>
-  right: string
 }
 
 export const CustomIconButton = ({
   _onClick,
   icon,
   align,
-  onMouseDown,
-  onMouseUp,
   ...props
 }: CustomIconButtonProps) => {
   return (
-    <IconWrapper
-      onMouseUp={onMouseUp}
-      onMouseDown={onMouseDown}
-      onClick={_onClick}
-      style={{ alignSelf: align, ...props }}
-    >
+    <IconWrapper onClick={_onClick} style={{ alignSelf: align, ...props }}>
       <IconContainer style={{ padding: "20px" }}>
         <SvgIcon sx={{ fontSize: "30px", color: "#0097F2" }}>{icon}</SvgIcon>
       </IconContainer>

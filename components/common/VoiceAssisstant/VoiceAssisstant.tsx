@@ -19,9 +19,14 @@ export const speak = (text: string) => {
 type Props = {
   specificCommands?: any
   specificMessage?: string
+  assisstant: boolean
 }
 
-const VoiceAssisstant = ({ specificCommands = [], specificMessage }: Props) => {
+const VoiceAssisstant = ({
+  specificCommands = [],
+  specificMessage,
+  assisstant,
+}: Props) => {
   const router = useRouter()
   const [message, setMessage] = useState("")
 
@@ -55,18 +60,18 @@ const VoiceAssisstant = ({ specificCommands = [], specificMessage }: Props) => {
   const { transcript, listening, browserSupportsSpeechRecognition } =
     useSpeechRecognition({ commands })
 
-  const handleMouseDown = async (e: any) => {
-    e.preventDefault()
-    await SpeechRecognition.startListening({
-      continuous: false,
-      language: "en-US",
-    })
-  }
+  useEffect(() => {
+    if (assisstant) {
+      SpeechRecognition.startListening({
+        continuous: true,
+        language: "en-US",
+      })
+    } else {
+      SpeechRecognition.stopListening()
+    }
+  }, [])
 
-  const handleMouseUp = async (e: any) => {
-    e.preventDefault()
-    await SpeechRecognition.stopListening()
-  }
+  console.log(listening)
 
   useEffect(() => {
     const timer = setTimeout(() => setMessage(""), 5000)
@@ -82,12 +87,7 @@ const VoiceAssisstant = ({ specificCommands = [], specificMessage }: Props) => {
 
   return (
     <>
-      <CustomIconButton
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        icon={listening ? <MicRounded /> : <MicOffRounded />}
-        right="2vh"
-      />
+      <CustomIconButton icon={<MicRounded />} right="2vh" />
       {/* 
       {message !== "" && <Text>{message}</Text>}
       {specificMessage !== "" && <Text>{specificMessage}</Text>} */}

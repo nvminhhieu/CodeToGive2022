@@ -11,6 +11,7 @@ import Layout from "../../../components/Layout"
 import { ITest, Question } from "../../../types/assessment"
 import CheckIcon from "@mui/icons-material/Check"
 import AddIcon from "@mui/icons-material/Add"
+import QuestionEditModal from "../../../components/common/Modal/QuestionEditModal"
 
 const filterQuestionType = (arrayAllQuestions: Question[], type: any) => {
   return arrayAllQuestions.filter((question) => question.type === type)
@@ -138,19 +139,11 @@ const AssessmentTypeEdit = () => {
 
       <Table questionsData={questionData} />
 
-      <AddButtonContainer>
-        <CustomButton
-          onClick={() => {
-            setIsSaved(true)
-          }}
-          variant="contained"
-        >
-          Add New
-          <AddIcon
-            sx={{ color: "white", fontSize: "20px", marginLeft: "5px" }}
-          />
-        </CustomButton>
-      </AddButtonContainer>
+      <QuestionEditModal
+        onClick={() => {
+          setIsSaved(true)
+        }}
+      />
     </Layout>
   )
 }
