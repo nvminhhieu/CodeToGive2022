@@ -1,19 +1,22 @@
 import styled from "@emotion/styled"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AssessmentCardAdmin from "../../../components/Assessments/AssessmentCardAdmin"
 import PageTitle from "../../../components/common/PageTitle"
 import Layout from "../../../components/Layout"
 import { assessments as mock_assessment } from "../../../data/assessment_display"
-import { Question } from "../../../types/assessment"
+import { ITest, Question } from "../../../types/assessment"
 import CustomButton from "../../../components/common/CustomButton/CustomButton"
 import ModalWrapper from "../../../components/common/Modal"
 import CustomTextField from "../../../components/common/CustomTextField/CustomTextField"
 import { Controller, useForm } from "react-hook-form"
 import { MenuItem, Select } from "@mui/material"
 
+const MOCK_UUID = "e50a19fe-9130-4f41-afdc-a90fe66d317b"
+
 const Assessment = () => {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [isOpenCreateModal, setIsOpenCreateModal] = useState(false)
+  const [assessmentData, setAssessmentData] = useState<ITest[]>([])
   const {
     control: controlLink,
     handleSubmit: handleSubmitLink,
@@ -25,6 +28,28 @@ const Assessment = () => {
     handleSubmit: handleSubmitCreate,
     setValue: setValueCreate,
   } = useForm()
+
+  const fetchDataAssessment = () => {
+    setTimeout(async () => {
+      try {
+        const req = await fetch(
+          `${process.env.HOST}/api/v1/assessments/${MOCK_UUID}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        const res = await req.json()
+        setAssessmentData(res.tests)
+      } catch {}
+    }, 1000) //SO after create, it can show the changes right after create. Cause take times to UI send, store in DB, then fetch it back to UI
+  }
+
+  useEffect(() => {
+    fetchDataAssessment()
+  }, [])
 
   const handleOnClickModalClose = () => {
     setIsOpenModal(false)
@@ -39,7 +64,7 @@ const Assessment = () => {
     const fetchCreateTest = async (data) => {
       const constructedObject = {
         ...data,
-        assessment_uuid: "e50a19fe-9130-4f41-afdc-a90fe66d317b", //REMOVE LATER, ONLY FOR TESTING
+        assessment_uuid: MOCK_UUID, //REMOVE LATER, ONLY FOR TESTING
       }
       try {
         const req = await fetch(`${process.env.HOST}/api/v1/tests/`, {
@@ -53,6 +78,7 @@ const Assessment = () => {
       } catch {}
     }
     fetchCreateTest(data)
+    fetchDataAssessment()
   }
   return (
     <Layout>
@@ -89,7 +115,7 @@ const Assessment = () => {
         />
       </ModalWrapper>
 
-      {mock_assessment.map((assessment, i) => (
+      {assessmentData.map((assessment, i) => (
         <AssessmentCardAdmin key={i} assessment={assessment} />
       ))}
 
@@ -138,10 +164,6 @@ const Assessment = () => {
           </CustomButton>
         </FormCreateContainer>
       </ModalWrapper>
-
-      {mock_assessment.map((assessment, i) => (
-        <AssessmentCardAdmin key={i} assessment={assessment} />
-      ))}
 
       <button
         onClick={() => {
