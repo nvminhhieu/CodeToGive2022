@@ -30,6 +30,10 @@ const Assessment = () => {
     setIsOpenModal(false)
   }
 
+  const handleOnClickModalCreateClose = () => {
+    setIsOpenCreateModal(false)
+  }
+
   const onCreateSubmit = (data) => {
     console.log("createSubmitData", data)
   }
@@ -74,7 +78,7 @@ const Assessment = () => {
 
       <ModalWrapper
         title="Add a Test"
-        onClickCallBack={handleOnClickModalClose}
+        onClickCallBack={handleOnClickModalCreateClose}
         isOpen={isOpenCreateModal}
       >
         <FormCreateContainer onSubmit={handleSubmitCreate(onCreateSubmit)}>
@@ -84,7 +88,6 @@ const Assessment = () => {
             label="Title"
             type="text"
             variant="outlined"
-            sx={{ marginBottom: "24px" }}
           />
 
           <CustomTextField
@@ -93,17 +96,22 @@ const Assessment = () => {
             label="Description"
             type="text"
             variant="outlined"
-            sx={{ marginBottom: "24px" }}
           />
 
           <Controller
-            name="level"
-            defaultValue={""}
+            name="type"
+            defaultValue={"MOTIVATION_TEST"}
             control={controlCreate}
             render={({ field }) => (
-              <Select labelId="level-label" {...field}>
-                <MenuItem value={0}>0</MenuItem>
-                <MenuItem value={1}>1</MenuItem>
+              <Select labelId="level-label" {...field} sx={{ width: "100%" }}>
+                <MenuItem value={"MOTIVATION_TEST"}>MOTIVATION_TEST</MenuItem>
+                <MenuItem value={"ENGLISH_TEST"}>ENGLISH_TEST</MenuItem>
+                <MenuItem value={"VISIO_PERCEPTUAL_TEST"}>
+                  VISIO_PERCEPTUAL_TEST
+                </MenuItem>
+                <MenuItem value={"SOCIAL_SITUATION_TEST"}>
+                  SOCIAL_SITUATION_TEST
+                </MenuItem>
               </Select>
             )}
           />
@@ -138,4 +146,10 @@ const Flex = styled.div`
   justify-content: space-between;
 `
 
-const FormCreateContainer = styled.form``
+const FormCreateContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 40vw;
+  max-width: 500px;
+`
