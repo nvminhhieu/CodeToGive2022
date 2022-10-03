@@ -46,7 +46,6 @@ export const AssessmentResultCard = ({
           <ModalWrapper
             title="Get the report"
             text="Please provide the following information before getting the assessment summary."
-            buttonTitle="Get the report"
             isDisabled={isCompleted}
             onClickCallBack={handleOnClickModalClose}
             isOpen={isOpenModal}
