@@ -8,7 +8,7 @@ import { useBookmarkContext } from "../../context/BookmarkContext"
 import IJob from "../../types/job"
 
 type Props = {
-  onClickCallBack: any
+  onClickCallBack?: any
   data: IJob[]
 }
 
@@ -100,20 +100,22 @@ const RecommendedProfessions = ({ onClickCallBack, data }: Props) => {
 
   return (
     <Container>
-      <ContentCont>
-        <Title>Recommended professions</Title>
-        <div onClick={() => onClickCallBack()}>
-          <SvgIcon
-            sx={{
-              fontSize: "40px",
-              color: "#0097F2",
-              transform: "translateY(-5px)",
-            }}
-          >
-            <MinimizeIcon />
-          </SvgIcon>
-        </div>
-      </ContentCont>
+      {onClickCallBack && (
+        <ContentCont>
+          <Title>Recommended professions</Title>
+          <div onClick={() => onClickCallBack()}>
+            <SvgIcon
+              sx={{
+                fontSize: "40px",
+                color: "#0097F2",
+                transform: "translateY(-5px)",
+              }}
+            >
+              <MinimizeIcon />
+            </SvgIcon>
+          </div>
+        </ContentCont>
+      )}
 
       <InnerContainer layout>
         <AnimatePresence mode="wait">

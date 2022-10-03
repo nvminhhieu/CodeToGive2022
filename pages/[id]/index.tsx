@@ -74,7 +74,7 @@ const AssessmentsPage = () => {
     )
 
   return (
-    <Layout>
+    <Layout title="Assessments">
       <PageTitle
         title="Assessments"
         description="Here you can find the assessments required to get a job. Please select the test you would like to do."

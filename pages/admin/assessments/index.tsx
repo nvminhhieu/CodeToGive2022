@@ -5,10 +5,10 @@ import { assessments as mock_assessment } from "../../../data/assessment_display
 
 const Assessment = () => {
   return (
-    <Layout>
+    <Layout title="Assessments (Admin)">
       <PageTitle
-        title="Assessment"
-        description="You can control assessment, and create question here"
+        title="Assessments"
+        description="You can the control assessments, and create questions here"
       />
 
       {mock_assessment.map((assessment, i) => (

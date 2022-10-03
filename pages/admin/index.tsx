@@ -4,7 +4,7 @@ import PageTitle from "../../components/Common/PageTitle"
 import Link from "next/link"
 
 const AdminPage = (
-  <Layout>
+  <Layout title="Admin">
     <PageTitle title="Admin" description="This is admin Interface" />
     <Link href="admin/assessments">
       <a>Assessment</a>
