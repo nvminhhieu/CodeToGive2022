@@ -3,7 +3,7 @@ import { FormControl, InputLabel, MenuItem } from "@mui/material"
 import Select from "@mui/material/Select"
 import styled from "@emotion/styled"
 
-export const Slider = ({ tags }) => {
+export const Slider = ({ tags }: any) => {
   const [tag, setTag] = React.useState(null)
 
   const handleChange = (event: SelectChangeEvent) => {

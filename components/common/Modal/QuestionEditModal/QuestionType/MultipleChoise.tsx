@@ -5,7 +5,7 @@ import styled from "@emotion/styled"
 import CustomTextField from "../../../CustomTextField/CustomTextField"
 import { useForm } from "react-hook-form"
 
-export const MultipleChoice = ({ tags }) => {
+export const MultipleChoice = ({ tags }: any) => {
   const { control, handleSubmit } = useForm()
   const [tag, setTag] = React.useState(null)
 

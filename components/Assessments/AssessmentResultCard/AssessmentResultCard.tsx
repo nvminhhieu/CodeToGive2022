@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import { Button } from "@mui/material"
-import CustomTextField from "../../Common/CustomTextField/CustomTextField"
-import ModalWrapper from "../../Common/Modal"
+import CustomTextField from "../../common/CustomTextField/CustomTextField"
+import ModalWrapper from "../../common/Modal"
 import { useForm } from "react-hook-form"
 
 type AssessmentResultCardProps = {

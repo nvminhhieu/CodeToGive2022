@@ -8,7 +8,7 @@ import CustomTextField from "../../CustomTextField/CustomTextField"
 import { useForm } from "react-hook-form"
 import Select, { SelectChangeEvent } from "@mui/material/Select"
 import AttachFileIcon from "@mui/icons-material/AttachFile"
-import { Slider } from "../QuestionEditModal.tsx/QuestionType/Slider"
+import { Slider } from "./QuestionType/Slider"
 import { MultipleChoice } from "./QuestionType/MultipleChoise"
 
 type ModalProps = {
@@ -27,10 +27,10 @@ const QuestionEditModal = ({ onClick }: ModalProps) => {
     setType(event.target.value as string)
   }
 
-  const hiddenFileInput = React.useRef(null)
+  const hiddenFileInput = React.useRef<any>(null)
 
   const handleClick = (e) => {
-    hiddenFileInput.current.click()
+    hiddenFileInput.current?.click()
   }
 
   const handleFileChange = (e) => {

@@ -94,7 +94,7 @@ const Title = styled.h2`
 const Text = styled.p`
   font-size: 18px;
   font-weight: 400;
-  marign-top: 6px;
+  margin-top: 6px;
   color: rgba(0, 0, 0, 0.6);
   line-height: 25px;
 `
