@@ -8,9 +8,12 @@ import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import TranslateIcon from "@mui/icons-material/Translate"
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined"
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined"
+import CustomButton from "../../common/CustomButton/CustomButton"
+import { ITestDisplay } from "../../../types/assessment"
+import { HashedMapIcon } from "../Assessment.const"
 
 type Props = {
-  assessment: typeof assessments[number]
+  assessment: ITestDisplay
   key?: string | number
 }
 
@@ -29,6 +32,7 @@ const handleIcon = (name: string) => {
 
 export const AssessmentCard = ({ assessment }: Props) => {
   const router = useRouter()
+
   return (
     <Container>
       <Justify>
@@ -65,11 +69,11 @@ export const AssessmentCard = ({ assessment }: Props) => {
           )}
           <Icon
             style={{
-              background: assessment.icon.color,
+              background: HashedMapIcon[assessment.type]?.icon?.color,
               opacity: assessment.completed ? "0.5" : 1,
             }}
           >
-            {handleIcon(assessment.icon.name)}
+            {handleIcon(HashedMapIcon[assessment.type]?.icon?.name)}
           </Icon>
         </Flex>
       </Justify>
@@ -90,24 +94,23 @@ export const AssessmentCard = ({ assessment }: Props) => {
 
             <Text>{assessment.progress}% ready</Text>
           </Flex>
-          <Button
+          <CustomButton
             style={{
               marginTop: "40px",
               boxShadow: "none",
-              width: "227px",
-              height: "41px",
+              padding: "8px 22px",
               borderRadius: "8px",
             }}
             variant="contained"
-            color="secondary"
+            color="primary"
             onClick={() => {
-              router.push(assessment.url)
+              router.push(HashedMapIcon[assessment.type].url)
             }}
           >
             {assessment.progress > 0
               ? "Continue answering"
               : "Fill the questionnaire"}
-          </Button>
+          </CustomButton>
         </>
       )}
     </Container>

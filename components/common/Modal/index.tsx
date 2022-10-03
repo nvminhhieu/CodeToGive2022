@@ -11,6 +11,8 @@ type ModalWrapperProps = {
   text?: string
   isDisabled?: boolean
   children: any
+  onClickCallBack: any
+  isOpen: boolean
 }
 
 const ModalWrapper = ({
@@ -19,30 +21,15 @@ const ModalWrapper = ({
   text,
   isDisabled,
   children,
+  onClickCallBack,
+  isOpen,
   ...props
 }: ModalWrapperProps) => {
-  const [open, setOpen] = React.useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
-
   return (
     <div>
-      <Button
-        variant="contained"
-        style={{
-          boxShadow: "none",
-          height: "41px",
-          borderRadius: "8px",
-          ...props,
-        }}
-        onClick={handleOpen}
-        disabled={isDisabled}
-      >
-        {buttonTitle}
-      </Button>
       <Dialog
-        open={open}
-        onClose={handleClose}
+        open={isOpen}
+        onClose={onClickCallBack}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         PaperProps={{
@@ -64,7 +51,7 @@ const ModalWrapper = ({
                 cursor: "pointer",
                 color: "rgba(0, 0, 0, 0.54);",
               }}
-              onClick={handleClose}
+              onClick={onClickCallBack}
             />
           </IconWrapper>
           <div style={{ marginBottom: 48 }}>

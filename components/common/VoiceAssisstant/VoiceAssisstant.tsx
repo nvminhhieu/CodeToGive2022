@@ -74,11 +74,12 @@ const VoiceAssisstant = ({
   console.log(listening)
 
   useEffect(() => {
-    setTimeout(() => setMessage(""), 5000)
+    const timer = setTimeout(() => setMessage(""), 5000)
+    return () => clearTimeout(timer)
   }, [])
 
-  console.log(transcript)
-  console.log(commands)
+  // console.log(transcript)
+  // console.log(commands)
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn&apos;t support speech recognition.</span>

@@ -15,6 +15,7 @@ type Props = {
   formControl: any
   answeredId?: null | number
   answers: Answer[]
+  setValue: any
 }
 
 const MARKS_MAP = [
@@ -49,17 +50,18 @@ const QuestionCard = ({
   onClickCallBack,
   description,
   totalLength,
-  formControl,
   answers,
   answeredId,
+  setValue,
 }: Props) => {
-  // const [selectedAnswer, setSelectedAnswer] = useState(0)
+  const [selectedAnswer, setSelectedAnswer] = useState(0)
   const findAnswerValue = (answer_id: number | null | undefined) => {
     if (answer_id)
       return answers.find((e) => e.answer_id === answer_id)?.description
     return undefined
   }
   const answeredValueDefault = findAnswerValue(answeredId)
+
   return (
     <Container>
       <InnerContainer>
@@ -75,21 +77,27 @@ const QuestionCard = ({
       </InnerContainer>
 
       <AnswerContainer>
-        <CustomSlider
-          name="slider_value"
-          control={formControl}
-          aria-label="Temperature"
-          defaultValue={
-            answeredValueDefault === undefined
-              ? 1
-              : parseInt(answeredValueDefault)
-          }
-          valueLabelDisplay="auto"
-          step={1}
-          marks={MARKS_MAP}
-          min={1}
-          max={5}
-        />
+        <AnswerTextSpectrum>Not Important</AnswerTextSpectrum>
+        {answers.map((e, i) => {
+          return (
+            <AnswerButton
+              type="submit"
+              key={e.answer_id}
+              onClick={() => {
+                setValue("description", e.description)
+                //setSelectedAnswer(i + 1)
+                onClickCallBack()
+              }}
+              active={
+                //selectedAnswer === i + 1 ||
+                answeredValueDefault === e.description
+              }
+            >
+              {e.description}
+            </AnswerButton>
+          )
+        })}
+        <AnswerTextSpectrum>Very Important</AnswerTextSpectrum>
       </AnswerContainer>
     </Container>
   )
@@ -153,11 +161,19 @@ const Description = styled.p`
   color: rgba(0, 0, 0, 0.87);
 `
 const AnswerContainer = styled.div`
-  width: 60%;
+  width: 80%;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   padding: 24px;
   padding-top: 0;
   gap: 12px;
+`
+
+const AnswerTextSpectrum = styled.p`
+  display: flex;
+  flex: none;
+  font-size: 14px;
+  color: #6a6e77;
 `

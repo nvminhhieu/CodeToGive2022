@@ -1,52 +1,52 @@
-export const assessments = [
+import { ITestDisplay } from "../types/assessment"
+
+export const assessments: ITestDisplay[] = [
   {
-    title: "Work motivation test",
-    url: "/assessments/work-motivation",
+    type: "ENGLISH_TEST",
+    title: "English test",
     description:
       "Tell more about your interests so you can find the most suitable job.",
-    completed: false,
-    icon: {
-      name: "WorkOutlineIcon",
-      color:
-        "radial-gradient(102.34% 102.34% at 50% 50%, #3BC49A 0%, #158787 100%)",
-    },
-    progress: 22,
-  },
-  {
-    title: "English language test",
-    url: "/assessments/english-language-test",
-    description:
-      "You will be asked some questions about English situations to measure your knowledge.",
-    completed: false,
-    icon: {
-      name: "TranslateIcon",
-      color:
-        "radial-gradient(102.34% 102.34% at 50% 50%, #DA87AF 0%, #802C59 100%)",
-    },
-    progress: 60,
-  },
-  {
-    title: "Visio-perceptual skills",
-    url: "/assessments/visio-perceptual-skills",
-    description: "We will measure your sight and hearing.",
-    completed: false,
-    icon: {
-      name: "VisibilityOutlinedIcon",
-      color:
-        "radial-gradient(102.34% 102.34% at 50% 50%, #1D66D3 0%, #06459F 100%)",
-    },
-    progress: 86,
-  },
-  {
-    title: "Some other test",
-    url: "/assessments/other-tests",
-    description: "This is some other random test to observe your capabilities.",
+    test_id: 19,
+    assessment_uuid: "ecd10d3b-9c6c-4223-ae4f-6d6ff8a74f9b",
+    questions: [],
+    url: "/assessments/ecd10d3b-9c6c-4223-ae4f-6d6ff8a74f9b/tests?test_type=ENGLISH_TEST",
     completed: true,
-    icon: {
-      name: "QuizOutlinedIcon",
-      color:
-        "radial-gradient(102.34% 102.34% at 50% 50%, #8B7560 0%, #58390A 100%)",
-    },
+    progress: 100,
+  },
+  {
+    type: "MOTIVATION_TEST",
+    title: "Work motivation test",
+    description:
+      "Tell more about your interests so you can find the most suitable job.",
+    test_id: 21,
+    assessment_uuid: "ecd10d3b-9c6c-4223-ae4f-6d6ff8a74f9b",
+    questions: [],
+    url: "/assessments/ecd10d3b-9c6c-4223-ae4f-6d6ff8a74f9b/tests?test_type=MOTIVATION_TEST",
+    completed: false,
+    progress: 0,
+  },
+  {
+    type: "SOCIAL_SITUATION_TEST",
+    title: "Interpretation of Social Situations test",
+    description:
+      "Tell more about your interests so you can find the most suitable job.",
+    test_id: 23,
+    assessment_uuid: "ecd10d3b-9c6c-4223-ae4f-6d6ff8a74f9b",
+    questions: [],
+    url: "/assessments/ecd10d3b-9c6c-4223-ae4f-6d6ff8a74f9b/tests?test_type=SOCIAL_SITUATION_TEST",
+    completed: true,
+    progress: 100,
+  },
+  {
+    type: "VISIO_PERCEPTUAL_TEST",
+    title: "Measurement of Visio-perceptual abilities test",
+    description:
+      "Tell more about your interests so you can find the most suitable job.",
+    test_id: 25,
+    assessment_uuid: "ecd10d3b-9c6c-4223-ae4f-6d6ff8a74f9b",
+    questions: [],
+    url: "/assessments/ecd10d3b-9c6c-4223-ae4f-6d6ff8a74f9b/tests?test_type=VISIO_PERCEPTUAL_TEST",
+    completed: true,
     progress: 100,
   },
 ]

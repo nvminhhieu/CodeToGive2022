@@ -16,7 +16,9 @@ import { suggestedJobs as mock_suggestedJobs } from "../../../data/suggested_job
 import usePrevious from "../../../hooks/usePrevious"
 import { ITest } from "../../../types/assessment"
 import { test as mock_test } from "../../../data/work_motivation_questions"
+import DoneIcon from "@mui/icons-material/Done"
 import { useUUIDContext } from "../../../context/UUIDContext"
+import Link from "next/link"
 
 const WorkMotivation = () => {
   const { uuid } = useUUIDContext()
@@ -24,7 +26,7 @@ const WorkMotivation = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [message, setMessage] = useState("")
   const [data, setData] = useState<IJob[]>([])
-  const previousDataState = usePrevious(data)
+  const [suggestedJobNoti, setSuggestedJobNoti] = useState(false)
   const previousQuestionIndex = usePrevious(currentQuestionIndex)
 
   const [testData, setTestData] = useState<ITest>({} as ITest)
@@ -33,7 +35,7 @@ const WorkMotivation = () => {
     const fetchTestData = async () => {
       try {
         const req = await fetch(
-          `${process.env.HOST}/api/v1/assessments/${uuid}/work-motivation-test`
+          `${process.env.HOST}/api/v1/assessments/${uuid}/tests?test_type=MOTIVATION_TEST`
         )
         const res = await req.json()
         setTestData(res)
@@ -42,31 +44,53 @@ const WorkMotivation = () => {
       }
     }
     fetchTestData()
-  }, [uuid])
+  }, [uuid, currentQuestionIndex])
 
   const questions = testData.questions || mock_test.questions
 
-  const { control, handleSubmit } = useForm()
+  const { control, handleSubmit, setValue, reset } = useForm()
   const onSubmit = (data: any) => {
+    //Constructing answer obj
     const constructedAnswer = (data: any) => {
       if (previousQuestionIndex !== undefined) {
-        const sliderVal = data?.slider_value || 2
+        // const answerId = data?.slider_value || 2
+        const answerDescription = data?.description
         const answerObj = questions[previousQuestionIndex].answers.find(
-          (e) => parseInt(e.description) == sliderVal
+          (e) => parseInt(e.description) == answerDescription
         )
-        return answerObj
+        return {
+          test_id: testData.test_id,
+          ...answerObj,
+        }
       } else {
         //JUST A WORK AROUND
         console.log("Work AROUND")
         const answerObj = questions[0].answers[0]
-        return answerObj
+        return {
+          test_id: testData.test_id,
+          ...answerObj,
+        }
       }
     }
 
-    console.log(
-      "OnSubmit Answer: " + (previousQuestionIndex + 1),
-      constructedAnswer(data)
-    )
+    //Submit answer
+    const submitingAnswer = async (data: any) => {
+      try {
+        const req = await fetch(`${process.env.HOST}/api/v1/answers/submit`, {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+      } catch (error) {
+        console.log("skipQuestion", error)
+      }
+    }
+
+    submitingAnswer(constructedAnswer(data))
+    setSuggestedJobNoti(true)
+    reset({})
   }
 
   const handleIndexTransit = (nextValueIndex: number, array: any) => {
@@ -116,7 +140,8 @@ const WorkMotivation = () => {
   ]
 
   useEffect(() => {
-    setTimeout(() => setMessage(""), 5000)
+    const timer = setTimeout(() => setMessage(""), 5000)
+    return () => clearTimeout(timer)
   }, [])
   useEffect(() => {
     fetchRecommendedJobsData()
@@ -167,6 +192,7 @@ const WorkMotivation = () => {
               formControl={control}
               answeredId={questions[currentQuestionIndex]?.answered_id}
               answers={questions[currentQuestionIndex]?.answers}
+              setValue={setValue}
             />
           </motion.div>
         </AnimatePresence>
@@ -181,25 +207,32 @@ const WorkMotivation = () => {
             )
           }}
         >
-          <SvgIcon sx={{ fontSize: "50px", color: "#0097F2" }}>
-            <NavigateNextIcon />
-          </SvgIcon>
+          {currentQuestionIndex + 1 === questions.length ? (
+            <Link href="/assessments">
+              <SvgIcon sx={{ fontSize: "50px", color: "#0097F2" }}>
+                <DoneIcon />
+              </SvgIcon>
+            </Link>
+          ) : (
+            <SvgIcon sx={{ fontSize: "50px", color: "#0097F2" }}>
+              <NavigateNextIcon />
+            </SvgIcon>
+          )}
         </IconContainer>
       </CardContainer>
       <Spacer />
 
-      <IconWrapper onClick={() => setIsOpenRecommended(!isOpenRecommended)}>
-        <IconContainer
-          active={JSON.stringify(data) === JSON.stringify(previousDataState)}
-          style={{ padding: "20px" }}
-        >
+      <IconWrapper
+        onClick={() => {
+          setSuggestedJobNoti(false)
+          setIsOpenRecommended(!isOpenRecommended)
+        }}
+      >
+        <IconContainer active={!suggestedJobNoti} style={{ padding: "20px" }}>
           <SvgIcon
             sx={{
               fontSize: "30px",
-              color:
-                JSON.stringify(data) === JSON.stringify(previousDataState)
-                  ? "#0097F2"
-                  : "white",
+              color: !suggestedJobNoti ? "#0097F2" : "white",
             }}
           >
             <WorkOutlineIcon />

@@ -1,8 +1,10 @@
 import styled from "@emotion/styled"
 import { Button } from "@mui/material"
+import CustomButton from "../../common/CustomButton/CustomButton"
 import CustomTextField from "../../common/CustomTextField/CustomTextField"
 import ModalWrapper from "../../common/Modal"
 import { useForm } from "react-hook-form"
+import { useState } from "react"
 
 type AssessmentResultCardProps = {
   isCompleted: boolean
@@ -12,6 +14,11 @@ export const AssessmentResultCard = ({
   isCompleted,
 }: AssessmentResultCardProps) => {
   const { control, handleSubmit } = useForm()
+  const [isOpenModal, setIsOpenModal] = useState(false)
+
+  const handleOnClickModalClose = () => {
+    setIsOpenModal(false)
+  }
   return (
     <Container>
       <div>
@@ -21,11 +28,28 @@ export const AssessmentResultCard = ({
           to.
         </Description>
         <Flex>
+          <CustomButton
+            variant="contained"
+            style={{
+              boxShadow: "none",
+              borderRadius: "8px",
+              background: !isCompleted ? "#D5D9E0" : "#0097F2",
+            }}
+            color="primary"
+            onClick={() => {
+              setIsOpenModal(true)
+            }}
+            disabled={!isCompleted}
+          >
+            Learn more
+          </CustomButton>
           <ModalWrapper
             title="Get the report"
             text="Please provide the following information before getting the assessment summary."
             buttonTitle="Get the report"
             isDisabled={isCompleted}
+            onClickCallBack={handleOnClickModalClose}
+            isOpen={isOpenModal}
           >
             <Label>Full name</Label>
             <CustomTextField

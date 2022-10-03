@@ -3,26 +3,27 @@ import styled from "@emotion/styled"
 
 const AnswerButton = (props: any) => {
   return (
-    <Container {...props}>
+    <ContainerButton {...props}>
       <InnerContainer>
         <span>{props.children}</span>
-        {props.icon}
+        {props?.icon}
       </InnerContainer>
-    </Container>
+    </ContainerButton>
   )
 }
 
 export default AnswerButton
 
-const Container = styled.div<{ active: boolean }>`
+const ContainerButton = styled.button<{ active: boolean }>`
   background: #f0f7fb;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 8px;
+  padding: 16px 32px;
   border-radius: 8px;
+  border: none;
   font-size: 18px;
   font-weight: 700;
   color: #06459f;
