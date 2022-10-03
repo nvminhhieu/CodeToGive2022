@@ -72,8 +72,12 @@ const WorkMotivation = () => {
 
     //Submit answer
     const submitingAnswer = async (data: any) => {
+      console.log("stringify", JSON.stringify(data))
       const res = await fetch(`${process.env.HOST}/api/v1/answers/submit`, {
         method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
         body: JSON.stringify(data),
       })
       const req = await res.json()
@@ -129,7 +133,8 @@ const WorkMotivation = () => {
   ]
 
   useEffect(() => {
-    setTimeout(() => setMessage(""), 5000)
+    const timer = setTimeout(() => setMessage(""), 5000)
+    return () => clearTimeout(timer)
   }, [])
   useEffect(() => {
     fetchRecommendedJobsData()
