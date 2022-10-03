@@ -96,21 +96,23 @@ export const AssessmentCard = ({ assessment }: Props) => {
 
             <Text>{assessment.progress}% ready</Text>
           </Flex>
-          <NextLink href={`/${UUID}/${HashedMapIcon[assessment.type].url}`}>
-            <CustomButton
-              style={{
-                marginTop: "40px",
-                boxShadow: "none",
-                padding: "8px 22px",
-                borderRadius: "8px",
-              }}
-              variant="contained"
-              color="primary"
-            >
-              {assessment.progress > 0
-                ? "Continue answering"
-                : "Fill the questionnaire"}
-            </CustomButton>
+          <NextLink href={`/${UUID}${HashedMapIcon[assessment.type].url}`}>
+            <div>
+              <CustomButton
+                style={{
+                  marginTop: "40px",
+                  boxShadow: "none",
+                  padding: "8px 22px",
+                  borderRadius: "8px",
+                }}
+                variant="contained"
+                color="primary"
+              >
+                {assessment.progress > 0
+                  ? "Continue answering"
+                  : "Fill the questionnaire"}
+              </CustomButton>
+            </div>
           </NextLink>
         </>
       )}

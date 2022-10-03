@@ -4,7 +4,6 @@ import { useLocalStorage } from "../hooks/useLocalStorage"
 
 type UUIDProviderProps = {
   children: ReactNode
-  uuid: any
 }
 
 type UUIDContext = {
@@ -20,14 +19,8 @@ export function useUUIDContext() {
 
 const NAME = "uuid-store"
 
-export function UUIDProvider({ uuid, children }: UUIDProviderProps) {
+export function UUIDProvider({ children }: UUIDProviderProps) {
   const [UUID, setUUID] = useLocalStorage<any>(NAME, null)
-
-  useEffect(() => {
-    if (!UUID) {
-      setUUID(uuid)
-    }
-  }, [UUID, setUUID, uuid])
 
   return (
     <UUIDContext.Provider value={{ UUID, setUUID }}>
