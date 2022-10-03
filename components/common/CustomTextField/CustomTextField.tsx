@@ -7,6 +7,7 @@ const CusTextField = styled(TextField)`
   div {
     border-radius: 8px;
     background-color: white;
+    height: 50px;
   }
 `
 
