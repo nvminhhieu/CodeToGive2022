@@ -5,6 +5,15 @@ import { useEffect, useState } from "react"
 import styled from "@emotion/styled"
 import RecommendedProfessions from "../../../components/RecommendedProfessions"
 import IJob from "../../../types/job"
+import Accordion from "@mui/material/Accordion"
+import AccordionSummary from "@mui/material/AccordionSummary"
+import AccordionDetails from "@mui/material/AccordionDetails"
+import Typography from "@mui/material/Typography"
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import { Button } from "@mui/material"
+import { rearrangedArray } from ".."
+import { assessments as mock_assessments_display } from "../../../data/assessment_display"
+import { ITestDisplay } from "../../../types/assessment"
 
 type Props = {
   text: string
@@ -24,6 +33,7 @@ const ReportPage = () => {
   const { UUID } = useUUIDContext()
   const [data, setData] = useState<IJob[]>([])
   const [user, setUser] = useState()
+  const [assessments, setAssessments] = useState<ITestDisplay[]>([])
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -41,7 +51,25 @@ const ReportPage = () => {
       setData(res)
     }
     fetchRecommendedJobsData()
+
+    const fetchAssessmentData = async () => {
+      try {
+        const req = await fetch(
+          `${process.env.HOST}/api/v1/assessments/${UUID}`
+        )
+        const res = await req.json()
+
+        const testsArray = rearrangedArray(2, 0, res.tests)
+
+        setAssessments(testsArray)
+      } catch {
+        setAssessments(mock_assessments_display)
+      }
+    }
+    fetchAssessmentData()
   }, [UUID])
+
+  console.log(assessments)
 
   return (
     <Layout title="Report">
@@ -50,7 +78,14 @@ const ReportPage = () => {
         description="Here you can find the summary of your assessments."
       />
       <div style={{ paddingBottom: "60px" }}>
-        <Title>Personal data</Title>
+        <Title
+          style={{
+            marginTop: "60px",
+            marginBottom: "40px",
+          }}
+        >
+          Personal data
+        </Title>
         <Container>
           <DetailsWrapper text="Full name" detail="Kovács Sándor" />
           <DetailsWrapper
@@ -63,8 +98,61 @@ const ReportPage = () => {
           />
           <DetailsWrapper text="Phone number" detail="06 20 234 5678" />
         </Container>
-        <Title>Test results</Title>
-        <Title>Recommended jobs</Title>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: "60px",
+            marginBottom: "40px",
+          }}
+        >
+          <Title>Test results</Title>
+          <Button variant="contained" style={{ height: "fit-content" }}>
+            Download PDF
+          </Button>
+        </div>
+        {assessments.map((assessment, i) => (
+          <Accordion
+            key={i}
+            style={{
+              border: "1px solid rgba(0, 0, 0, 0.1)",
+              boxShadow:
+                "0px 0px 7px rgba(7, 31, 54, 0.04), 0px 15px 17px -1px rgba(5, 125, 236, 0.1)",
+              borderRadius: "16px",
+              marginBottom: "24px",
+              padding: "24px 0",
+            }}
+            sx={{
+              "&:before": {
+                display: "none",
+              },
+            }}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <SubTitle>{assessment.title}</SubTitle>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+                eget.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+        ))}
+        <Title
+          style={{
+            marginTop: "60px",
+            marginBottom: "40px",
+          }}
+        >
+          Recommended jobs
+        </Title>
         <RecommendedProfessions data={data} />
       </div>
     </Layout>
@@ -94,11 +182,14 @@ const Grid = styled.div`
 `
 
 const Title = styled.h2`
-  margin-top: 60px;
-  margin-bottom: 40px;
   font-size: 56px;
   color: black;
   font-weight: 600;
+`
+const SubTitle = styled.h3`
+  font-size: 32px;
+  color: black;
+  font-weight: 700;
 `
 const Text = styled.p`
   font-size: 18px;
