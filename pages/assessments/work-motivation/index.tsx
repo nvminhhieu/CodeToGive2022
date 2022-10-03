@@ -280,6 +280,7 @@ const IconWrapper = styled.div`
   position: fixed;
   bottom: 2vh;
   cursor: pointer;
+  align-self: center;
 `
 
 const toggleAnimation = {
