@@ -42,18 +42,19 @@ const WorkMotivation = () => {
       }
     }
     fetchTestData()
-  }, [uuid])
+  }, [uuid, currentQuestionIndex])
 
   const questions = testData.questions || mock_test.questions
 
-  const { control, handleSubmit } = useForm()
+  const { control, handleSubmit, setValue, reset } = useForm()
   const onSubmit = (data: any) => {
     //Constructing answer obj
     const constructedAnswer = (data: any) => {
       if (previousQuestionIndex !== undefined) {
-        const sliderVal = data?.slider_value || 2
+        // const answerId = data?.slider_value || 2
+        const answerDescription = data?.description
         const answerObj = questions[previousQuestionIndex].answers.find(
-          (e) => parseInt(e.description) == sliderVal
+          (e) => parseInt(e.description) == answerDescription
         )
         return {
           test_id: testData.test_id,
@@ -72,17 +73,21 @@ const WorkMotivation = () => {
 
     //Submit answer
     const submitingAnswer = async (data: any) => {
-      const res = await fetch(`${process.env.HOST}/api/v1/answers/submit`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-      const req = await res.json()
+      try {
+        const req = await fetch(`${process.env.HOST}/api/v1/answers/submit`, {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+      } catch (error) {
+        console.log("skipQuestion", error)
+      }
     }
 
     submitingAnswer(constructedAnswer(data))
+    reset({})
   }
 
   const handleIndexTransit = (nextValueIndex: number, array: any) => {
@@ -184,6 +189,7 @@ const WorkMotivation = () => {
               formControl={control}
               answeredId={questions[currentQuestionIndex]?.answered_id}
               answers={questions[currentQuestionIndex]?.answers}
+              setValue={setValue}
             />
           </motion.div>
         </AnimatePresence>
