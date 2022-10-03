@@ -3,7 +3,9 @@ const ROUTES = {
   home: "/",
   test: "/test",
   assessments: "/assessments",
-  login: "/form",
+  assessments_admin: "/admin/assessments",
+  admin: "/admin",
+  login: "/login",
   workMotivation: "/assessments/work-motivation",
 }
 

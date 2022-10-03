@@ -9,12 +9,15 @@ import { ROUTES } from "../../../routing/routes"
 import BookmarksIcon from "@mui/icons-material/Bookmarks"
 import Bookmark from "./Bookmark/Bookmark"
 import { useState } from "react"
+import { useSession } from "next-auth/react"
 
 const Header = () => {
   const [isOpenBookmarked, setIsOpenBookmarked] = useState(false)
+  const session = useSession()
   const router = useRouter()
   const isMatchRoute = (route: string): boolean =>
     router.pathname.match(route) !== null
+
   return (
     <Wrapper>
       <Container>
@@ -24,9 +27,18 @@ const Header = () => {
             <LinkWrapper active={router.pathname === ROUTES.home}>
               <NextLink href={ROUTES.home}>Home</NextLink>
             </LinkWrapper>
-            <LinkWrapper active={isMatchRoute(ROUTES.assessments)}>
-              <NextLink href={ROUTES.assessments}>Assessments</NextLink>
-            </LinkWrapper>
+            {isMatchRoute(ROUTES.assessments_admin) ? (
+              <LinkWrapper active={isMatchRoute(ROUTES.assessments_admin)}>
+                <NextLink href={ROUTES.assessments_admin}>
+                  Assessments (Admin)
+                </NextLink>
+              </LinkWrapper>
+            ) : (
+              <LinkWrapper active={isMatchRoute(ROUTES.assessments)}>
+                <NextLink href={ROUTES.assessments}>Assessments</NextLink>
+              </LinkWrapper>
+            )}
+
             <LinkWrapper active={isMatchRoute(ROUTES.login)}>
               <NextLink href={ROUTES.login}>Log in</NextLink>
             </LinkWrapper>
