@@ -5,7 +5,7 @@ export const HashedMapIcon = {
       color:
         "radial-gradient(102.34% 102.34% at 50% 50%, #DA87AF 0%, #802C59 100%)",
     },
-    url: "/[id]/english-language-test",
+    url: "/english-language-test",
   },
   MOTIVATION_TEST: {
     icon: {
@@ -13,7 +13,7 @@ export const HashedMapIcon = {
       color:
         "radial-gradient(102.34% 102.34% at 50% 50%, #3BC49A 0%, #158787 100%)",
     },
-    url: "/[id]/work-motivation",
+    url: "/work-motivation",
   },
   SOCIAL_SITUATION_TEST: {
     icon: {
@@ -21,7 +21,7 @@ export const HashedMapIcon = {
       color:
         "radial-gradient(102.34% 102.34% at 50% 50%, #1D66D3 0%, #06459F 100%)",
     },
-    url: "/[id]/social-situation-test",
+    url: "//social-situation-test",
   },
   VISIO_PERCEPTUAL_TEST: {
     icon: {
@@ -29,6 +29,6 @@ export const HashedMapIcon = {
       color:
         "radial-gradient(102.34% 102.34% at 50% 50%, #8B7560 0%, #58390A 100%)",
     },
-    url: "/[id]/visio-perceptual-skills",
+    url: "/visio-perceptual-skills",
   },
 }
