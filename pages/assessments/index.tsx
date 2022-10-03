@@ -7,11 +7,19 @@ import { useUUIDContext } from "../../context/UUIDContext"
 import { assessments as mock_assessments_display } from "../../data/assessment_display"
 import { ITestDisplay } from "../../types/assessment"
 
+function rearrangedArray(from: number, to: number, arr: any) {
+  const newArr = [...arr]
+
+  const item = newArr.splice(from, 1)[0]
+  newArr.splice(to, 0, item)
+
+  return newArr
+}
+
 const AssessmentsPage = () => {
   const { uuid } = useUUIDContext()
   const [assessments, setAssessments] = useState<ITestDisplay[]>([])
 
-  console.log("assessments", assessments)
   const incomplete = assessments?.filter(
     (assessment) => assessment.progress < 100
   )
@@ -22,7 +30,10 @@ const AssessmentsPage = () => {
           `${process.env.HOST}/api/v1/assessments/${uuid}`
         )
         const res = await req.json()
-        setAssessments(res.tests)
+
+        const testsArray = rearrangedArray(2, 0, res.tests)
+
+        setAssessments(testsArray)
       } catch {
         setAssessments(mock_assessments_display)
       }

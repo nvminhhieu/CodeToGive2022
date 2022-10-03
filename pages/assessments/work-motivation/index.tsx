@@ -72,7 +72,6 @@ const WorkMotivation = () => {
 
     //Submit answer
     const submitingAnswer = async (data: any) => {
-      console.log("stringify", JSON.stringify(data))
       const res = await fetch(`${process.env.HOST}/api/v1/answers/submit`, {
         method: "PUT",
         headers: {
