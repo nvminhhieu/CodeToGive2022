@@ -16,7 +16,9 @@ import { suggestedJobs as mock_suggestedJobs } from "../../../data/suggested_job
 import usePrevious from "../../../hooks/usePrevious"
 import { ITest } from "../../../types/assessment"
 import { test as mock_test } from "../../../data/work_motivation_questions"
+import DoneIcon from "@mui/icons-material/Done"
 import { useUUIDContext } from "../../../context/UUIDContext"
+import Link from "next/link"
 
 const WorkMotivation = () => {
   const { uuid } = useUUIDContext()
@@ -205,9 +207,17 @@ const WorkMotivation = () => {
             )
           }}
         >
-          <SvgIcon sx={{ fontSize: "50px", color: "#0097F2" }}>
-            <NavigateNextIcon />
-          </SvgIcon>
+          {currentQuestionIndex + 1 === questions.length ? (
+            <Link href="/assessments">
+              <SvgIcon sx={{ fontSize: "50px", color: "#0097F2" }}>
+                <DoneIcon />
+              </SvgIcon>
+            </Link>
+          ) : (
+            <SvgIcon sx={{ fontSize: "50px", color: "#0097F2" }}>
+              <NavigateNextIcon />
+            </SvgIcon>
+          )}
         </IconContainer>
       </CardContainer>
       <Spacer />
