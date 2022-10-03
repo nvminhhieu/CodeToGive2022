@@ -11,6 +11,7 @@ import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined"
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
 import EditIcon from "@mui/icons-material/Edit"
 import CustomButton from "../common/CustomButton/CustomButton"
+import { HashedMapIcon } from "./Assessment.const"
 
 type Props = {
   assessment: typeof assessments[number]
@@ -54,11 +55,11 @@ const AssessmentCardAdmin = ({ assessment }: Props) => {
         <Flex>
           <Icon
             style={{
-              background: assessment.icon.color,
+              background: HashedMapIcon[assessment.type]?.icon?.color,
               opacity: 1,
             }}
           >
-            {handleIcon(assessment.icon.name)}
+            {handleIcon(HashedMapIcon[assessment.type]?.icon?.name)}
           </Icon>
         </Flex>
       </Justify>
@@ -72,7 +73,7 @@ const AssessmentCardAdmin = ({ assessment }: Props) => {
           variant="contained"
           color="primary"
           onClick={() => {
-            router.push(`/admin/${assessment.url}`)
+            router.push(`/admin/${HashedMapIcon[assessment.type].url}`)
           }}
         >
           <Flex style={{ gap: "10px" }}>
