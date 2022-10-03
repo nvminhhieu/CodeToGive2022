@@ -1,10 +1,11 @@
 import styled from "@emotion/styled"
-import React, { ReactNode } from "react"
+import React, { ReactNode, useState } from "react"
 import Header from "./Header/Header"
 import Main from "./Main/Main"
 
 import dynamic from "next/dynamic"
 import { CircularProgress } from "@mui/material"
+import { AccessibilityPanel } from "../Common/AccessibilityPanel"
 
 type Props = {
   children: ReactNode
@@ -23,6 +24,7 @@ type Props = {
  */
 
 const Layout = ({ commands, message, children }: Props) => {
+  const [assisstant, setAssisstant] = useState(false)
   const VoiceAssisstant = dynamic(
     () => import("../../components/Common/VoiceAssisstant/VoiceAssisstant"),
     {
@@ -36,11 +38,19 @@ const Layout = ({ commands, message, children }: Props) => {
       ssr: false,
     }
   )
+
   return (
     <>
       <Header />
       <Main>{children}</Main>
-      <VoiceAssisstant specificCommands={commands} specificMessage={message} />
+      <AccessibilityPanel onClick={() => setAssisstant(!assisstant)} />
+      {assisstant && (
+        <VoiceAssisstant
+          assisstant={assisstant}
+          specificCommands={commands}
+          specificMessage={message}
+        />
+      )}
     </>
   )
 }
