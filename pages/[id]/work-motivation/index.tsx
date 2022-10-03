@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import { SvgIcon } from "@mui/material"
 import { useState, useEffect } from "react"
-import PageTitle from "../../../components/common/PageTitle"
+import PageTitle from "../../../components/Common/PageTitle"
 import Layout from "../../../components/Layout"
 import QuestionCard from "../../../components/QuestionCard"
 import RecommendedProfessions from "../../../components/RecommendedProfessions"
@@ -21,7 +21,7 @@ import { useUUIDContext } from "../../../context/UUIDContext"
 import Link from "next/link"
 
 const WorkMotivation = () => {
-  const { uuid } = useUUIDContext()
+  const { UUID } = useUUIDContext()
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [message, setMessage] = useState("")
@@ -35,7 +35,7 @@ const WorkMotivation = () => {
     const fetchTestData = async () => {
       try {
         const req = await fetch(
-          `${process.env.HOST}/api/v1/assessments/${uuid}/tests?test_type=MOTIVATION_TEST`
+          `${process.env.HOST}/api/v1/assessments/${UUID}/tests?test_type=MOTIVATION_TEST`
         )
         const res = await req.json()
         setTestData(res)
@@ -44,7 +44,7 @@ const WorkMotivation = () => {
       }
     }
     fetchTestData()
-  }, [uuid, currentQuestionIndex])
+  }, [UUID, currentQuestionIndex])
 
   const questions = testData.questions || mock_test.questions
 
@@ -100,7 +100,7 @@ const WorkMotivation = () => {
   }
 
   const fetchRecommendedJobsData = async () => {
-    const req = await fetch(`${process.env.HOST}/api/v1/${uuid}/suggested-jobs`)
+    const req = await fetch(`${process.env.HOST}/api/v1/${UUID}/suggested-jobs`)
     const res = await req.json()
     setData(res)
   }
@@ -145,7 +145,7 @@ const WorkMotivation = () => {
   }, [])
   useEffect(() => {
     fetchRecommendedJobsData()
-  }, [uuid])
+  }, [UUID])
 
   return (
     <Layout commands={commands} message={message}>

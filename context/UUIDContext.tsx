@@ -1,12 +1,15 @@
-import { createContext, ReactNode, useContext } from "react"
-import useUUID from "../hooks/useUUID"
+import { createContext, ReactNode, useContext, useEffect } from "react"
+import { useLocalStorage } from "../hooks/useLocalStorage"
+//import useUUID from "../hooks/useUUID"
 
 type UUIDProviderProps = {
   children: ReactNode
+  uuid: any
 }
 
 type UUIDContext = {
-  uuid: any
+  UUID: any
+  setUUID: any
 }
 
 const UUIDContext = createContext({} as UUIDContext)
@@ -15,10 +18,20 @@ export function useUUIDContext() {
   return useContext(UUIDContext)
 }
 
-export function UUIDProvider({ children }: UUIDProviderProps) {
-  const uuid = useUUID()
+const NAME = "uuid-store"
+
+export function UUIDProvider({ uuid, children }: UUIDProviderProps) {
+  const [UUID, setUUID] = useLocalStorage<any>(NAME, null)
+
+  useEffect(() => {
+    if (!UUID) {
+      setUUID(uuid)
+    }
+  }, [UUID, setUUID, uuid])
 
   return (
-    <UUIDContext.Provider value={{ uuid }}>{children}</UUIDContext.Provider>
+    <UUIDContext.Provider value={{ UUID, setUUID }}>
+      {children}
+    </UUIDContext.Provider>
   )
 }

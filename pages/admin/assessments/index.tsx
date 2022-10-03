@@ -1,9 +1,7 @@
-import { useState } from "react"
 import AssessmentCardAdmin from "../../../components/Assessments/AssessmentCardAdmin"
-import PageTitle from "../../../components/common/PageTitle"
+import PageTitle from "../../../components/Common/PageTitle"
 import Layout from "../../../components/Layout"
 import { assessments as mock_assessment } from "../../../data/assessment_display"
-import { Question } from "../../../types/assessment"
 
 const Assessment = () => {
   return (
