@@ -26,8 +26,8 @@ export default function CustomTextField(props: any) {
         <CusTextField
           value={value}
           onChange={({ target: { value } }) => {
-            onChange()
-            props.setValue(props.name, value)
+            onChange(value)
+            if (props?.setValue) props.setValue(props.name, value)
           }}
           {...propsObj}
         />
