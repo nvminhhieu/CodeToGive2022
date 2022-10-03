@@ -36,6 +36,23 @@ const Assessment = () => {
 
   const onCreateSubmit = (data) => {
     console.log("createSubmitData", data)
+    const fetchCreateTest = async (data) => {
+      const constructedObject = {
+        ...data,
+        assessment_uuid: "e50a19fe-9130-4f41-afdc-a90fe66d317b", //REMOVE LATER, ONLY FOR TESTING
+      }
+      try {
+        const req = await fetch(`${process.env.HOST}/api/v1/tests/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(constructedObject),
+        })
+        const res = await req.json()
+      } catch {}
+    }
+    fetchCreateTest(data)
   }
   return (
     <Layout>
