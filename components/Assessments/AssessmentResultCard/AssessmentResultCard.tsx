@@ -1,9 +1,9 @@
 import styled from "@emotion/styled"
 import { Button } from "@mui/material"
+import CustomButton from "../../common/CustomButton/CustomButton"
 import CustomTextField from "../../common/CustomTextField/CustomTextField"
 import ModalWrapper from "../../common/Modal"
 import { useForm } from "react-hook-form"
-import CustomButton from "../../common/CustomButton/CustomButton"
 
 type AssessmentResultCardProps = {
   isCompleted: boolean
@@ -22,6 +22,18 @@ export const AssessmentResultCard = ({
           to.
         </Description>
         <Flex>
+          <CustomButton
+            variant="contained"
+            style={{
+              boxShadow: "none",
+              borderRadius: "8px",
+              background: !isCompleted ? "#D5D9E0" : "#0097F2",
+            }}
+            color="primary"
+            disabled={!isCompleted}
+          >
+            Learn more
+          </CustomButton>
           <ModalWrapper
             title="Get the report"
             text="Please provide the following information before getting the assessment summary."
@@ -61,18 +73,7 @@ export const AssessmentResultCard = ({
                 textAlign: "center",
               }}
             >
-              <CustomButton
-                variant="contained"
-                style={{
-                  boxShadow: "none",
-                  borderRadius: "8px",
-                  background: !isCompleted ? "#D5D9E0" : "#0097F2",
-                }}
-                color="primary"
-                disabled={!isCompleted}
-              >
-                Learn more
-              </CustomButton>
+              <Button variant="contained">Get the report</Button>
             </div>
           </ModalWrapper>
           <Text>
