@@ -21,7 +21,7 @@ const ContainerButton = styled.button<{ active: boolean }>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 8px;
+  padding: 16px 32px;
   border-radius: 8px;
   border: none;
   font-size: 18px;

@@ -77,6 +77,7 @@ const QuestionCard = ({
       </InnerContainer>
 
       <AnswerContainer>
+        <AnswerTextSpectrum>Not Important</AnswerTextSpectrum>
         {answers.map((e, i) => {
           return (
             <AnswerButton
@@ -96,6 +97,7 @@ const QuestionCard = ({
             </AnswerButton>
           )
         })}
+        <AnswerTextSpectrum>Very Important</AnswerTextSpectrum>
       </AnswerContainer>
     </Container>
   )
@@ -159,11 +161,19 @@ const Description = styled.p`
   color: rgba(0, 0, 0, 0.87);
 `
 const AnswerContainer = styled.div`
-  width: 60%;
+  width: 80%;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   padding: 24px;
   padding-top: 0;
   gap: 12px;
+`
+
+const AnswerTextSpectrum = styled.p`
+  display: flex;
+  flex: none;
+  font-size: 14px;
+  color: #6a6e77;
 `

@@ -24,7 +24,7 @@ const WorkMotivation = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [message, setMessage] = useState("")
   const [data, setData] = useState<IJob[]>([])
-  const previousDataState = usePrevious(data)
+  const [suggestedJobNoti, setSuggestedJobNoti] = useState(false)
   const previousQuestionIndex = usePrevious(currentQuestionIndex)
 
   const [testData, setTestData] = useState<ITest>({} as ITest)
@@ -87,6 +87,7 @@ const WorkMotivation = () => {
     }
 
     submitingAnswer(constructedAnswer(data))
+    setSuggestedJobNoti(true)
     reset({})
   }
 
@@ -211,18 +212,17 @@ const WorkMotivation = () => {
       </CardContainer>
       <Spacer />
 
-      <IconWrapper onClick={() => setIsOpenRecommended(!isOpenRecommended)}>
-        <IconContainer
-          active={JSON.stringify(data) === JSON.stringify(previousDataState)}
-          style={{ padding: "20px" }}
-        >
+      <IconWrapper
+        onClick={() => {
+          setSuggestedJobNoti(false)
+          setIsOpenRecommended(!isOpenRecommended)
+        }}
+      >
+        <IconContainer active={!suggestedJobNoti} style={{ padding: "20px" }}>
           <SvgIcon
             sx={{
               fontSize: "30px",
-              color:
-                JSON.stringify(data) === JSON.stringify(previousDataState)
-                  ? "#0097F2"
-                  : "white",
+              color: !suggestedJobNoti ? "#0097F2" : "white",
             }}
           >
             <WorkOutlineIcon />

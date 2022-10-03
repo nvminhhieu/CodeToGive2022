@@ -2,11 +2,12 @@ import styled from "@emotion/styled"
 import { SvgIcon } from "@mui/material"
 
 type CustomIconButtonProps = {
-  _onClick: () => void
+  _onClick?: () => void
   icon: any
   align?: string
   onMouseDown?: (e: any) => Promise<void>
   onMouseUp?: (e: any) => Promise<void>
+  right: string
 }
 
 export const CustomIconButton = ({
