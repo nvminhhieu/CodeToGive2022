@@ -13,8 +13,9 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import { Button, CircularProgress } from "@mui/material"
 import { rearrangedArray } from "../../[id]"
 import { assessments as mock_assessments_display } from "../../../data/assessment_display"
-import { ITest, ITestDisplay } from "../../../types/assessment"
+import { ITest, ITestDisplay, Question } from "../../../types/assessment"
 import { useRouter } from "next/router"
+import React from "react"
 
 type Props = {
   text: string
@@ -31,11 +32,10 @@ const DetailsWrapper = ({ text, detail }: Props) => {
 }
 
 const ReportPage = () => {
-  const { UUID } = useUUIDContext()
   const [data, setData] = useState<IJob[]>([])
   const [user, setUser] = useState()
   const [assessments, setAssessments] = useState<ITestDisplay[]>([])
-  const [testData, setTestData] = useState({})
+  const [testData, setTestData] = useState<any>({})
   const router = useRouter()
   const id = router.query.id
 
@@ -151,14 +151,7 @@ const ReportPage = () => {
               <SubTitle>{assessment.title}</SubTitle>
             </AccordionSummary>
             <AccordionDetails>
-              {assessment.type === testData?.type &&
-                testData?.questions?.map((question, i) => {
-                  const answer = question.answers.find(
-                    (value) => value.answered_id == question.answered_id
-                  )
-                  console.log(answer)
-                  return <p key={i}>{question.description}</p>
-                })}
+              <Table questionsData={testData?.questions} />
             </AccordionDetails>
           </Accordion>
         ))}
@@ -218,4 +211,61 @@ const Detail = styled.p`
   color: black;
   font-weight: 400;
   color: black;
+`
+
+type PropsTable = {
+  questionsData: Question[]
+}
+
+const Table = ({ questionsData }: PropsTable) => {
+  return (
+    <GridContainer>
+      <span className="Position">#</span>
+      <span className="Question">Question</span>
+      <span className="Type">Type</span>
+      <span className="Answers"> Answers</span>
+
+      {questionsData?.map((question, ind) => (
+        <React.Fragment key={ind}>
+          <p>{ind + 1}</p>
+          <p>{question.description}</p>
+          <p>{question.type}</p>
+          <p>
+            {
+              question.answers.find((e) => e.answer_id === question.answered_id)
+                ?.description
+            }
+          </p>
+        </React.Fragment>
+      ))}
+    </GridContainer>
+  )
+}
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: auto 3fr 2fr 1fr;
+  align-items: center;
+  span {
+    font-weight: 700;
+    font-size: 18px;
+  }
+  & > * {
+    min-width: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #d5d9e0;
+    padding: 20px;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+  }
+`
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  gap: 10px;
 `
