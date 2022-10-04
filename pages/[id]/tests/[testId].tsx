@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import { SvgIcon } from "@mui/material"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import PageTitle from "../../../components/common/PageTitle"
 import Layout from "../../../components/Layout"
 import QuestionCard from "../../../components/QuestionCard"
@@ -147,6 +147,7 @@ const WorkMotivation = () => {
     },
   ]
 
+  const ref = useRef()
   const navigate = useCallback(
     (event: any) => {
       if (event.keyCode === 37) {
@@ -161,27 +162,35 @@ const WorkMotivation = () => {
         setIsOpenRecommended(!isOpenRecommended)
       } else if (event.keyCode === 49 || event.keyCode === 97) {
         setValue("description", "1")
-        handleSubmit(onSubmit)
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex + 1, questions)
+        )
       } else if (event.keyCode === 50 || event.keyCode === 98) {
         setValue("description", "2")
-        handleSubmit(onSubmit)
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex + 1, questions)
+        )
       } else if (event.keyCode === 51 || event.keyCode === 99) {
         setValue("description", "3")
-        handleSubmit(onSubmit)
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex + 1, questions)
+        )
       } else if (event.keyCode === 52 || event.keyCode === 100) {
         setValue("description", "4")
-        handleSubmit(onSubmit)
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex + 1, questions)
+        )
       } else if (event.keyCode === 53 || event.keyCode === 101) {
         setValue("description", "5")
-        handleSubmit(onSubmit)
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex + 1, questions)
+        )
       }
     },
     [
       currentQuestionIndex,
       handleIndexTransit,
-      handleSubmit,
       isOpenRecommended,
-      onSubmit,
       questions,
       setValue,
     ]
@@ -216,7 +225,7 @@ const WorkMotivation = () => {
         }
       />
 
-      <CardContainer onSubmit={handleSubmit(onSubmit)}>
+      <CardContainer onSubmit={handleSubmit(onSubmit)} ref={ref}>
         <IconContainer
           type="submit"
           onClick={() => {
