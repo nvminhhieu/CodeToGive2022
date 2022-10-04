@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import { SvgIcon } from "@mui/material"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import PageTitle from "../../../components/common/PageTitle"
 import Layout from "../../../components/Layout"
 import QuestionCard from "../../../components/QuestionCard"
@@ -139,6 +139,20 @@ const WorkMotivation = () => {
     },
   ]
 
+  const navigate = useCallback((event: any) => {
+    if (event.keyCode === 37) {
+      setCurrentQuestionIndex(
+        handleIndexTransit(currentQuestionIndex - 1, questions)
+      )
+    } else if (event.keyCode === 39) {
+      setCurrentQuestionIndex(
+        handleIndexTransit(currentQuestionIndex + 1, questions)
+      )
+    }
+  }, [])
+
+  console.log(currentQuestionIndex)
+
   useEffect(() => {
     const timer = setTimeout(() => setMessage(""), 5000)
     return () => clearTimeout(timer)
@@ -146,6 +160,14 @@ const WorkMotivation = () => {
   useEffect(() => {
     fetchRecommendedJobsData()
   }, [UUID])
+
+  useEffect(() => {
+    document.addEventListener("keydown", navigate, false)
+
+    return () => {
+      document.removeEventListener("keydown", navigate, false)
+    }
+  }, [])
 
   return (
     <Layout commands={commands} message={message} title="Work Motivation Test">
