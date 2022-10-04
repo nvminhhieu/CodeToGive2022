@@ -36,6 +36,7 @@ const ReportPage = () => {
   const [user, setUser] = useState()
   const [assessments, setAssessments] = useState<ITestDisplay[]>([])
   const [testData, setTestData] = useState<any>({})
+  // TODO: ADD 3 MORE TestDATA State for each of the tests
   const router = useRouter()
   const id = router.query.id
 
@@ -44,12 +45,8 @@ const ReportPage = () => {
       `${process.env.HOST}/api/v1/assessments/${id}/tests?test_type=${testType}`
     )
     const res = await req.json()
-    console.log("res", res)
-    console.log("questions", res.questions)
     setTestData(res)
   }
-
-  console.log("testData", testData)
 
   useEffect(() => {
     if (assessments.length > 0) {
