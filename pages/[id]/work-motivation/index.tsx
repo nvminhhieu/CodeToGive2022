@@ -157,6 +157,7 @@ const WorkMotivation = () => {
             job.
           </>
         }
+        showTooltip
       />
 
       <CardContainer onSubmit={handleSubmit(onSubmit)}>
