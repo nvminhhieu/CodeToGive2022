@@ -159,6 +159,7 @@ const WorkMotivation = () => {
     <Layout commands={commands} message={message}>
       <PageTitle
         title="Work motivation test"
+        backURL={`/${UUID}`}
         description={
           <>
             Tell more about your interests so you can find the most suitable
