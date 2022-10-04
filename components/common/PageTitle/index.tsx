@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import Link from "next/link"
 import { ReactElement } from "react"
 import IconButton from "@mui/material/IconButton"
 import Tooltip, { tooltipClasses, TooltipProps } from "@mui/material/Tooltip"
@@ -28,12 +29,23 @@ const CustomTooltip = styled(({ className, ...props }: TooltipProps) => (
 type Props = {
   title: string
   description?: string | ReactElement
+  backURL?: string
   showTooltip?: boolean
 }
 
-const PageTitle = ({ title, description, showTooltip = false }: Props) => {
+const PageTitle = ({
+  title,
+  description,
+  backURL,
+  showTooltip = false,
+}: Props) => {
   return (
     <Container>
+      {backURL ? (
+        <Link href={backURL}>
+          <Anchor>Back to Assessment</Anchor>
+        </Link>
+      ) : null}
       <div
         style={{
           display: "flex",
@@ -111,4 +123,11 @@ const TooltipText = styled.p`
   font-weight: 600;
   color: rgba(102, 102, 102, 1);
   margin-top: 6px;
+`
+
+const Anchor = styled.a`
+  font-weight: 700;
+  font-size: 14px;
+  color: #0068ff;
+  cursor: pointer;
 `

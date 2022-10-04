@@ -10,7 +10,7 @@ import { assessments as mock_assessments_display } from "../../data/assessment_d
 import { useLocalStorage } from "../../hooks/useLocalStorage"
 import { ITestDisplay } from "../../types/assessment"
 
-function rearrangedArray(from: number, to: number, arr: any) {
+export function rearrangedArray(from: number, to: number, arr: any) {
   const newArr = [...arr]
 
   const item = newArr.splice(from, 1)[0]

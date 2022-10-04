@@ -6,7 +6,6 @@ import styled from "@emotion/styled"
 import { Dialog } from "@mui/material"
 
 type ModalWrapperProps = {
-  buttonTitle: string
   title: string
   text?: string
   isDisabled?: boolean
@@ -16,7 +15,6 @@ type ModalWrapperProps = {
 }
 
 const ModalWrapper = ({
-  buttonTitle,
   title,
   text,
   isDisabled,
