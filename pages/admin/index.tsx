@@ -52,7 +52,7 @@ const Table = () => {
             <CustomButton
               variant="contained"
               onClick={() => {
-                router.push(`/admin/${assessment?.uuid}/report`)
+                router.push(`/admin/reports/${assessment?.uuid}`)
               }}
             >
               Check report
