@@ -9,7 +9,6 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
-import { speak } from "../../../components/common/VoiceAssisstant/VoiceAssisstant"
 import { useForm } from "react-hook-form"
 import IJob from "../../../types/job"
 import { suggestedJobs as mock_suggestedJobs } from "../../../data/suggested_job"
@@ -20,6 +19,7 @@ import DoneIcon from "@mui/icons-material/Done"
 import { useUUIDContext } from "../../../context/UUIDContext"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { speak } from "../../../components/common/VoiceAssisstant/VoiceAssisstant"
 
 const WorkMotivation = () => {
   const { UUID } = useUUIDContext()

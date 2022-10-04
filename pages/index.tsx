@@ -5,12 +5,12 @@ import styles from "../styles/Home.module.css"
 
 const Home: NextPage = () => {
   const router = useRouter()
-  const { uuid } = useUUIDContext()
+  const { UUID } = useUUIDContext()
   return (
     <div
       className={styles.container}
       onClick={() => {
-        router.push(`${uuid}`)
+        router.push(`${UUID}`)
       }}
     >
       To assessments page
