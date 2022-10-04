@@ -49,6 +49,7 @@ const Assessment = () => {
 
   useEffect(() => {
     fetchDataAssessment()
+    setValueLink("link", `${process.env.HOST}/client/${MOCK_UUID}`) //NEED TO CHANGE THIS LATER, ALSO DEPENEDS ON GET ASSESSMENT UUID GENERATE API
   }, [])
 
   const handleOnClickModalClose = () => {
@@ -104,15 +105,17 @@ const Assessment = () => {
         onClickCallBack={handleOnClickModalClose}
         isOpen={isOpenModal}
       >
-        <CustomTextField
-          style={{ width: "30vw" }}
-          control={controlLink}
-          name="name"
-          label="Full name"
-          type="text"
-          variant="outlined"
-          sx={{ marginBottom: "24px" }}
-        />
+        <FormGenContainer>
+          <CustomTextField
+            style={{ width: "30vw" }}
+            control={controlLink}
+            name="link"
+            label="Private Assessment Link"
+            type="text"
+            variant="outlined"
+            sx={{ marginBottom: "24px" }}
+          />
+        </FormGenContainer>
       </ModalWrapper>
 
       {assessmentData.map((assessment, i) => (
@@ -186,6 +189,13 @@ const Flex = styled.div`
 `
 
 const FormCreateContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 40vw;
+  max-width: 500px;
+`
+const FormGenContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 20px;
