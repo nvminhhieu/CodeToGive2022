@@ -9,7 +9,7 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
-import { speak } from "../../../components/Common/VoiceAssisstant/VoiceAssisstant"
+import { speak } from "../../../components/common/VoiceAssisstant/VoiceAssisstant"
 import { useForm } from "react-hook-form"
 import IJob from "../../../types/job"
 import { suggestedJobs as mock_suggestedJobs } from "../../../data/suggested_job"
@@ -22,9 +22,10 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 
 const WorkMotivation = () => {
-  const { uuid } = useUUIDContext()
+  const { UUID } = useUUIDContext()
   const router = useRouter()
   const testId = router.query.testId
+
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [message, setMessage] = useState("")
@@ -51,7 +52,7 @@ const WorkMotivation = () => {
     }
 
     fetchTestData()
-  }, [uuid, currentQuestionIndex])
+  }, [UUID, currentQuestionIndex])
 
   const questions = testData.questions || mock_test.questions
 
@@ -107,7 +108,7 @@ const WorkMotivation = () => {
   }
 
   const fetchRecommendedJobsData = async () => {
-    const req = await fetch(`${process.env.HOST}/api/v1/${uuid}/suggested-jobs`)
+    const req = await fetch(`${process.env.HOST}/api/v1/${UUID}/suggested-jobs`)
     const res = await req.json()
     setData(res)
   }
@@ -152,7 +153,7 @@ const WorkMotivation = () => {
   }, [])
   useEffect(() => {
     fetchRecommendedJobsData()
-  }, [uuid])
+  }, [UUID])
 
   return (
     <Layout commands={commands} message={message}>
