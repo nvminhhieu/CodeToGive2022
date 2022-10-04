@@ -61,34 +61,6 @@ const QuestionCard = ({
     return undefined
   }
   const answeredValueDefault = findAnswerValue(answeredId)
-
-  const navigate = useCallback((event: any) => {
-    if (event.keyCode === 49 || event.keyCode === 97) {
-      setValue("description", "1")
-      onClickCallBack()
-    } else if (event.keyCode === 50 || event.keyCode === 98) {
-      setValue("description", "2")
-      onClickCallBack()
-    } else if (event.keyCode === 51 || event.keyCode === 99) {
-      setValue("description", "3")
-      onClickCallBack()
-    } else if (event.keyCode === 52 || event.keyCode === 100) {
-      setValue("description", "4")
-      onClickCallBack()
-    } else if (event.keyCode === 53 || event.keyCode === 101) {
-      setValue("description", "5")
-      onClickCallBack()
-    }
-  }, [])
-
-  useEffect(() => {
-    document.addEventListener("keydown", navigate, false)
-
-    return () => {
-      document.removeEventListener("keydown", navigate, false)
-    }
-  }, [])
-
   return (
     <Container>
       <InnerContainer>
