@@ -1,8 +1,8 @@
-import CustomTextField from "../../components/common/CustomTextField/CustomTextField"
+import CustomTextField from "../../components/Common/CustomTextField/CustomTextField"
 import { useForm } from "react-hook-form"
-import CustomButton from "../../components/common/CustomButton/CustomButton"
+import CustomButton from "../../components/Common/CustomButton/CustomButton"
 import Layout from "../../components/Layout"
-import CustomSlider from "../../components/common/CustomSlider/CustomSlider"
+import CustomSlider from "../../components/Common/CustomSlider/CustomSlider"
 
 const marks = [
   {

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import { Button } from "@mui/material"
-import CustomButton from "../../common/CustomButton/CustomButton"
+import CustomButton from "../../Common/CustomButton/CustomButton"
 import CustomTextField from "../../Common/CustomTextField/CustomTextField"
 import ModalWrapper from "../../Common/Modal"
 import { useForm } from "react-hook-form"

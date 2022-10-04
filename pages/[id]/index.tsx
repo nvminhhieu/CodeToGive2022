@@ -27,10 +27,8 @@ const AssessmentsPage = () => {
   const { UUID, setUUID } = useUUIDContext()
   const [assessments, setAssessments] = useState<ITestDisplay[]>([])
 
-  console.log(id, UUID)
-
   useEffect(() => {
-    if (!UUID) {
+    if (!UUID && typeof id === "string") {
       setUUID(id)
       localStorage.setItem(NAME, id)
     }

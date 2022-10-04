@@ -26,7 +26,7 @@ type Props = {
 const Layout = ({ commands, message, children }: Props) => {
   const [assisstant, setAssisstant] = useState(false)
   const VoiceAssisstant = dynamic(
-    () => import("../../components/Common/VoiceAssisstant/VoiceAssisstant"),
+    () => import("../Common/VoiceAssisstant/VoiceAssisstant"),
     {
       loading: () => (
         <IconWrapper>
