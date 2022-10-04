@@ -17,7 +17,7 @@ const MOCK_UUID = "e50a19fe-9130-4f41-afdc-a90fe66d317b"
 const Assessment = () => {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [isOpenCreateModal, setIsOpenCreateModal] = useState(false)
-  const [assessmentData, setAssessmentData] = useState<ITest[]>([])
+  const [assessmentData, setAssessmentData] = useState<ITest[] | any>([])
   const {
     control: controlLink,
     handleSubmit: handleSubmitLink,
@@ -61,9 +61,9 @@ const Assessment = () => {
     setIsOpenCreateModal(false)
   }
 
-  const onCreateSubmit = (data) => {
+  const onCreateSubmit = (data: any) => {
     console.log("createSubmitData", data)
-    const fetchCreateTest = async (data) => {
+    const fetchCreateTest = async (data: any) => {
       const constructedObject = {
         ...data,
         assessment_uuid: MOCK_UUID, //REMOVE LATER, ONLY FOR TESTING
@@ -119,7 +119,7 @@ const Assessment = () => {
         </FormGenContainer>
       </ModalWrapper>
 
-      {assessmentData.map((assessment, i) => (
+      {assessmentData.map((assessment: any, i: number) => (
         <AssessmentCardAdmin key={i} assessment={assessment} />
       ))}
 

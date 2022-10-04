@@ -156,7 +156,7 @@ const WorkMotivation = () => {
   }, [UUID])
 
   return (
-    <Layout commands={commands} message={message}>
+    <Layout commands={commands} message={message} title="Work Motivation Test">
       <PageTitle
         title="Work motivation test"
         backURL={`/${UUID}`}

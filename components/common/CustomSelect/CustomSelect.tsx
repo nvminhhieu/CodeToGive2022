@@ -5,8 +5,8 @@ export default function CustomSelect() {
   return (
     <Controller
       name="level"
-      defaultValue={level}
-      control={control}
+      defaultValue={""}
+      //control={control}
       render={({ field }) => (
         <Select labelId="level-label" {...field}>
           <MenuItem value={0}>0</MenuItem>

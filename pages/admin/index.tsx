@@ -43,7 +43,7 @@ const Table = () => {
 
       <span />
 
-      {assessmentData.map((assessment, ind) => (
+      {assessmentData.map((assessment: any, ind: any) => (
         <React.Fragment key={ind}>
           <p>{ind + 1}</p>
           <p>{assessment?.uuid}</p>
@@ -52,7 +52,7 @@ const Table = () => {
             <CustomButton
               variant="contained"
               onClick={() => {
-                router.push(`/admin/${assessment?.uuid}/report`)
+                router.push(`/admin/reports/${assessment?.uuid}`)
               }}
             >
               Check report
@@ -93,7 +93,7 @@ const ButtonsContainer = styled.div`
 `
 
 const AdminPage = (
-  <Layout>
+  <Layout title="Admin">
     <PageTitle title="Admin" description="This is admin Interface" />
     <Container>
       <Link href="admin/assessments">
