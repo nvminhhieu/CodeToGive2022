@@ -3,7 +3,7 @@ import { ReactElement, useState } from "react"
 import AnswerButton from "./AnswerButton/AnswerButton"
 import CheckIcon from "@mui/icons-material/Check"
 import CloseIcon from "@mui/icons-material/Close"
-import CustomSlider from "../Common/CustomSlider/CustomSlider"
+import CustomSlider from "../common/CustomSlider/CustomSlider"
 import { Answer } from "../../types/assessment"
 
 type Props = {

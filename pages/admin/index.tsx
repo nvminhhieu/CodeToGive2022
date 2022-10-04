@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout"
 import useAuthenticate from "../../hooks/useAuthenticate"
-import PageTitle from "../../components/Common/PageTitle"
+import PageTitle from "../../components/common/PageTitle"
 import Link from "next/link"
 
 const AdminPage = (

@@ -1,5 +1,5 @@
 import AssessmentCardAdmin from "../../../components/Assessments/AssessmentCardAdmin"
-import PageTitle from "../../../components/Common/PageTitle"
+import PageTitle from "../../../components/common/PageTitle"
 import Layout from "../../../components/Layout"
 import { assessments as mock_assessment } from "../../../data/assessment_display"
 

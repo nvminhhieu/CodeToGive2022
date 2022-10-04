@@ -10,7 +10,7 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined"
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined"
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
 import EditIcon from "@mui/icons-material/Edit"
-import CustomButton from "../Common/CustomButton/CustomButton"
+import CustomButton from "../common/CustomButton/CustomButton"
 import { HashedMapIcon } from "./Assessment.const"
 
 type Props = {
