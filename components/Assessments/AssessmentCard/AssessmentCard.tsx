@@ -96,7 +96,7 @@ export const AssessmentCard = ({ assessment }: Props) => {
 
             <Text>{assessment.progress}% ready</Text>
           </Flex>
-          <NextLink href={`/${UUID}${HashedMapIcon[assessment.type].url}`}>
+          <NextLink href={`/${UUID}/tests/${assessment.test_id}`}>
             <div>
               <CustomButton
                 style={{

@@ -73,7 +73,7 @@ const AssessmentCardAdmin = ({ assessment }: Props) => {
           variant="contained"
           color="primary"
           onClick={() => {
-            router.push(`/admin/${HashedMapIcon[assessment.type].url}`)
+            router.push(`/admin/assessments/tests/${assessment.test_id}`)
           }}
         >
           <Flex style={{ gap: "10px" }}>

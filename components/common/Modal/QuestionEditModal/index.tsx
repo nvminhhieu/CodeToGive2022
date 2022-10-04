@@ -10,7 +10,7 @@ import AttachFileIcon from "@mui/icons-material/AttachFile"
 import CustomButton from "../../CustomButton/CustomButton"
 import CustomTextField from "../../CustomTextField/CustomTextField"
 import { Slider } from "./QuestionType/Slider"
-import { MultipleChoice } from "./QuestionType/MultipleChoise"
+import { MultipleChoice } from "./QuestionType/MultipleChoice"
 
 type ModalProps = {
   onClick: () => void

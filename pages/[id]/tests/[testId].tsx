@@ -9,7 +9,6 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
-import { speak } from "../../../components/common/VoiceAssisstant/VoiceAssisstant"
 import { useForm } from "react-hook-form"
 import IJob from "../../../types/job"
 import { suggestedJobs as mock_suggestedJobs } from "../../../data/suggested_job"
@@ -19,9 +18,14 @@ import { test as mock_test } from "../../../data/work_motivation_questions"
 import DoneIcon from "@mui/icons-material/Done"
 import { useUUIDContext } from "../../../context/UUIDContext"
 import Link from "next/link"
+import { useRouter } from "next/router"
+import { speak } from "../../../components/common/VoiceAssisstant/VoiceAssisstant"
 
 const WorkMotivation = () => {
   const { UUID } = useUUIDContext()
+  const router = useRouter()
+  const testId = router.query.testId
+
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [message, setMessage] = useState("")
@@ -33,16 +37,20 @@ const WorkMotivation = () => {
 
   useEffect(() => {
     const fetchTestData = async () => {
-      try {
-        const req = await fetch(
-          `${process.env.HOST}/api/v1/assessments/${UUID}/tests?test_type=MOTIVATION_TEST`
-        )
-        const res = await req.json()
-        setTestData(res)
-      } catch {
-        setTestData({} as ITest)
+      if (typeof testId === "string") {
+        try {
+          const req = await fetch(
+            //`${process.env.HOST}/api/v1/assessments/${uuid}/tests?test_type=MOTIVATION_TEST`
+            `${process.env.HOST}/api/v1/tests/${testId}`
+          )
+          const res = await req.json()
+          setTestData(res)
+        } catch {
+          setTestData({} as ITest)
+        }
       }
     }
+
     fetchTestData()
   }, [UUID, currentQuestionIndex])
 
@@ -199,6 +207,7 @@ const WorkMotivation = () => {
     <Layout commands={commands} message={message} title="Work Motivation Test">
       <PageTitle
         title="Work motivation test"
+        backURL={`/${UUID}`}
         description={
           <>
             Tell more about your interests so you can find the most suitable
