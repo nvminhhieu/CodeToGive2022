@@ -10,10 +10,11 @@ const Assessment = () => {
         title="Assessments"
         description="You can the control assessments, and create questions here"
       />
-
-      {mock_assessment.map((assessment, i) => (
-        <AssessmentCardAdmin key={i} assessment={assessment} />
-      ))}
+      <div style={{ paddingBottom: "100px" }}>
+        {mock_assessment.map((assessment, i) => (
+          <AssessmentCardAdmin key={i} assessment={assessment} />
+        ))}
+      </div>
     </Layout>
   )
 }

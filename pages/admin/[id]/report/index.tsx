@@ -1,19 +1,20 @@
-import { useUUIDContext } from "../../../context/UUIDContext"
-import PageTitle from "../../../components/Common/PageTitle"
-import Layout from "../../../components/Layout"
+import { useUUIDContext } from "../../../../context/UUIDContext"
+import PageTitle from "../../../../components/common/PageTitle"
+import Layout from "../../../../components/Layout"
 import { useEffect, useState } from "react"
 import styled from "@emotion/styled"
-import RecommendedProfessions from "../../../components/RecommendedProfessions"
-import IJob from "../../../types/job"
+import RecommendedProfessions from "../../../../components/RecommendedProfessions"
+import IJob from "../../../../types/job"
 import Accordion from "@mui/material/Accordion"
 import AccordionSummary from "@mui/material/AccordionSummary"
 import AccordionDetails from "@mui/material/AccordionDetails"
 import Typography from "@mui/material/Typography"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
-import { Button } from "@mui/material"
-import { rearrangedArray } from ".."
-import { assessments as mock_assessments_display } from "../../../data/assessment_display"
-import { ITestDisplay } from "../../../types/assessment"
+import { Button, CircularProgress } from "@mui/material"
+import { rearrangedArray } from "../../../[id]"
+import { assessments as mock_assessments_display } from "../../../../data/assessment_display"
+import { ITest, ITestDisplay } from "../../../../types/assessment"
+import { useRouter } from "next/router"
 
 type Props = {
   text: string
@@ -34,19 +35,38 @@ const ReportPage = () => {
   const [data, setData] = useState<IJob[]>([])
   const [user, setUser] = useState()
   const [assessments, setAssessments] = useState<ITestDisplay[]>([])
+  const [testData, setTestData] = useState({})
+  const router = useRouter()
+  const id = router.query.id
+
+  const fetchTestData = async (testType: string) => {
+    const req = await fetch(
+      `${process.env.HOST}/api/v1/assessments/${id}/tests?test_type=${testType}`
+    )
+    const res = await req.json()
+    console.log("res", res)
+    console.log("questions", res.questions)
+    setTestData(res)
+  }
+
+  console.log("testData", testData)
+
+  useEffect(() => {
+    if (assessments.length > 0) {
+      fetchTestData(assessments[0].type)
+    }
+  }, [assessments])
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const req = await fetch(`${process.env.HOST}/api/v1/users/${UUID}`)
+      const req = await fetch(`${process.env.HOST}/api/v1/users/${id}`)
       const res = await req.json()
       setUser(res)
     }
     fetchUserData()
 
     const fetchRecommendedJobsData = async () => {
-      const req = await fetch(
-        `${process.env.HOST}/api/v1/${UUID}/suggested-jobs`
-      )
+      const req = await fetch(`${process.env.HOST}/api/v1/${id}/suggested-jobs`)
       const res = await req.json()
       setData(res)
     }
@@ -54,22 +74,16 @@ const ReportPage = () => {
 
     const fetchAssessmentData = async () => {
       try {
-        const req = await fetch(
-          `${process.env.HOST}/api/v1/assessments/${UUID}`
-        )
+        const req = await fetch(`${process.env.HOST}/api/v1/assessments/${id}`)
         const res = await req.json()
 
         const testsArray = rearrangedArray(2, 0, res.tests)
 
         setAssessments(testsArray)
-      } catch {
-        setAssessments(mock_assessments_display)
-      }
+      } catch {}
     }
     fetchAssessmentData()
-  }, [UUID])
-
-  console.log(assessments)
+  }, [id])
 
   return (
     <Layout title="Report">
@@ -121,7 +135,7 @@ const ReportPage = () => {
                 "0px 0px 7px rgba(7, 31, 54, 0.04), 0px 15px 17px -1px rgba(5, 125, 236, 0.1)",
               borderRadius: "16px",
               marginBottom: "24px",
-              padding: "24px 0",
+              padding: "12px 0",
             }}
             sx={{
               "&:before": {
@@ -137,11 +151,14 @@ const ReportPage = () => {
               <SubTitle>{assessment.title}</SubTitle>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-              </Typography>
+              {assessment.type === testData?.type &&
+                testData?.questions?.map((question, i) => {
+                  const answer = question.answers.find(
+                    (value) => value.answered_id == question.answered_id
+                  )
+                  console.log(answer)
+                  return <p key={i}>{question.description}</p>
+                })}
             </AccordionDetails>
           </Accordion>
         ))}
