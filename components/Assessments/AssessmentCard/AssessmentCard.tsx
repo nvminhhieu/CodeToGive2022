@@ -104,7 +104,9 @@ export const AssessmentCard = ({ assessment }: Props) => {
             variant="contained"
             color="primary"
             onClick={() => {
-              router.push(HashedMapIcon[assessment.type].url)
+              router.push(
+                HashedMapIcon[assessment.type].url + "/" + assessment.test_id
+              )
             }}
           >
             {assessment.progress > 0

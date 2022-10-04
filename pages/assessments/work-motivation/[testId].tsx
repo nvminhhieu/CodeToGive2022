@@ -19,9 +19,12 @@ import { test as mock_test } from "../../../data/work_motivation_questions"
 import DoneIcon from "@mui/icons-material/Done"
 import { useUUIDContext } from "../../../context/UUIDContext"
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 const WorkMotivation = () => {
   const { uuid } = useUUIDContext()
+  const router = useRouter()
+  const testId = router.query.testId
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [message, setMessage] = useState("")
@@ -33,16 +36,20 @@ const WorkMotivation = () => {
 
   useEffect(() => {
     const fetchTestData = async () => {
-      try {
-        const req = await fetch(
-          `${process.env.HOST}/api/v1/assessments/${uuid}/tests?test_type=MOTIVATION_TEST`
-        )
-        const res = await req.json()
-        setTestData(res)
-      } catch {
-        setTestData({} as ITest)
+      if (typeof testId === "string") {
+        try {
+          const req = await fetch(
+            //`${process.env.HOST}/api/v1/assessments/${uuid}/tests?test_type=MOTIVATION_TEST`
+            `${process.env.HOST}/api/v1/tests/${testId}`
+          )
+          const res = await req.json()
+          setTestData(res)
+        } catch {
+          setTestData({} as ITest)
+        }
       }
     }
+
     fetchTestData()
   }, [uuid, currentQuestionIndex])
 
