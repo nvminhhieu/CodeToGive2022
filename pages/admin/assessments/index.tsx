@@ -10,6 +10,7 @@ import ModalWrapper from "../../../components/common/Modal"
 import CustomTextField from "../../../components/common/CustomTextField/CustomTextField"
 import { Controller, useForm } from "react-hook-form"
 import { MenuItem, Select } from "@mui/material"
+import AddIcon from "@mui/icons-material/Add"
 
 const MOCK_UUID = "e50a19fe-9130-4f41-afdc-a90fe66d317b"
 
@@ -85,8 +86,8 @@ const Assessment = () => {
     <Layout>
       <Flex>
         <PageTitle
-          title="Assessment"
-          description="You can control assessment, and create question here"
+          title="Create Assessment"
+          description="You can generate assessment, and create question here"
         />
         <CustomButton
           type="submit"
@@ -168,13 +169,13 @@ const Assessment = () => {
         </FormCreateContainer>
       </ModalWrapper>
 
-      <button
+      <CreateNewTestButton
         onClick={() => {
           setIsOpenCreateModal(true)
         }}
       >
-        Create new Test
-      </button>
+        <AddIcon sx={{ color: "rgba(0, 0, 0, 0.54)" }} />
+      </CreateNewTestButton>
     </Layout>
   )
 }
@@ -201,4 +202,21 @@ const FormGenContainer = styled.form`
   gap: 20px;
   width: 40vw;
   max-width: 500px;
+`
+
+const CreateNewTestButton = styled.div`
+  display: flex;
+  align-self: center;
+  border-radius: 50%;
+  padding: 23px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  margin: 40px 0;
+  cursor: pointer;
+  transition: border 0.3s;
+  &:hover {
+    border: 2px solid #0097f2;
+  }
+  &:hover svg {
+    color: #0097f2;
+  }
 `
