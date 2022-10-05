@@ -152,7 +152,7 @@ const WorkMotivation = () => {
     },
   ]
 
-  const ref = useRef()
+  const formRef = useRef<any>(null)
   const navigate = useCallback(
     (event: any) => {
       if (event.keyCode === 37) {
@@ -167,26 +167,46 @@ const WorkMotivation = () => {
         setIsOpenRecommended(!isOpenRecommended)
       } else if (event.keyCode === 49 || event.keyCode === 97) {
         setValue("description", "1")
+        formRef.current &&
+          formRef.current.dispatchEvent(
+            new Event("submit", { cancelable: true, bubbles: true })
+          )
         setCurrentQuestionIndex(
           handleIndexTransit(currentQuestionIndex + 1, questions)
         )
       } else if (event.keyCode === 50 || event.keyCode === 98) {
         setValue("description", "2")
+        formRef.current &&
+          formRef.current.dispatchEvent(
+            new Event("submit", { cancelable: true, bubbles: true })
+          )
         setCurrentQuestionIndex(
           handleIndexTransit(currentQuestionIndex + 1, questions)
         )
       } else if (event.keyCode === 51 || event.keyCode === 99) {
         setValue("description", "3")
+        formRef.current &&
+          formRef.current.dispatchEvent(
+            new Event("submit", { cancelable: true, bubbles: true })
+          )
         setCurrentQuestionIndex(
           handleIndexTransit(currentQuestionIndex + 1, questions)
         )
       } else if (event.keyCode === 52 || event.keyCode === 100) {
         setValue("description", "4")
+        formRef.current &&
+          formRef.current.dispatchEvent(
+            new Event("submit", { cancelable: true, bubbles: true })
+          )
         setCurrentQuestionIndex(
           handleIndexTransit(currentQuestionIndex + 1, questions)
         )
       } else if (event.keyCode === 53 || event.keyCode === 101) {
         setValue("description", "5")
+        formRef.current &&
+          formRef.current.dispatchEvent(
+            new Event("submit", { cancelable: true, bubbles: true })
+          )
         setCurrentQuestionIndex(
           handleIndexTransit(currentQuestionIndex + 1, questions)
         )
@@ -231,7 +251,7 @@ const WorkMotivation = () => {
         showTooltip
       />
 
-      <CardContainer onSubmit={handleSubmit(onSubmit)}>
+      <CardContainer ref={formRef} onSubmit={handleSubmit(onSubmit)}>
         <IconContainer
           type="submit"
           onClick={() => {
