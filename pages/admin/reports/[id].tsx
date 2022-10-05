@@ -86,6 +86,8 @@ const ReportPage = () => {
     fetchAssessmentData()
   }, [id])
 
+  const myStartDate = new Date(Date.now() - 10 * 1000 * 60)
+
   return (
     <Layout title="Report">
       <PageTitle
@@ -111,6 +113,10 @@ const ReportPage = () => {
               />
               <DetailsWrapper text="E-mail address" detail={user?.email} />
               <DetailsWrapper text="Phone number" detail={user?.phone_number} />
+              <DetailsWrapper
+                text="Test start date"
+                detail={myStartDate.toLocaleString()}
+              />
             </>
           ) : (
             <Text>No owner of this report</Text>
