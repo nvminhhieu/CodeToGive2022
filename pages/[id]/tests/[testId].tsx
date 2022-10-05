@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import { SvgIcon } from "@mui/material"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import PageTitle from "../../../components/common/PageTitle"
 import Layout from "../../../components/Layout"
 import QuestionCard from "../../../components/QuestionCard"
@@ -147,6 +147,63 @@ const WorkMotivation = () => {
     },
   ]
 
+  const ref = useRef()
+  const navigate = useCallback(
+    (event: any) => {
+      if (event.keyCode === 37) {
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex - 1, questions)
+        )
+      } else if (event.keyCode === 39) {
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex + 1, questions)
+        )
+      } else if (event.keyCode === 32) {
+        setIsOpenRecommended(!isOpenRecommended)
+      } else if (event.keyCode === 49 || event.keyCode === 97) {
+        setValue("description", "1")
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex + 1, questions)
+        )
+      } else if (event.keyCode === 50 || event.keyCode === 98) {
+        setValue("description", "2")
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex + 1, questions)
+        )
+      } else if (event.keyCode === 51 || event.keyCode === 99) {
+        setValue("description", "3")
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex + 1, questions)
+        )
+      } else if (event.keyCode === 52 || event.keyCode === 100) {
+        setValue("description", "4")
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex + 1, questions)
+        )
+      } else if (event.keyCode === 53 || event.keyCode === 101) {
+        setValue("description", "5")
+        setCurrentQuestionIndex(
+          handleIndexTransit(currentQuestionIndex + 1, questions)
+        )
+      }
+    },
+    [
+      currentQuestionIndex,
+      handleIndexTransit,
+      isOpenRecommended,
+      questions,
+      setValue,
+    ]
+  )
+
+  useEffect(() => {
+    document.addEventListener("keydown", navigate, false)
+
+    return () => {
+      document.removeEventListener("keydown", navigate, false)
+    }
+  }, [navigate])
+
   useEffect(() => {
     const timer = setTimeout(() => setMessage(""), 5000)
     return () => clearTimeout(timer)
@@ -169,7 +226,7 @@ const WorkMotivation = () => {
         showTooltip
       />
 
-      <CardContainer onSubmit={handleSubmit(onSubmit)}>
+      <CardContainer onSubmit={handleSubmit(onSubmit)} ref={ref}>
         <IconContainer
           type="submit"
           onClick={() => {

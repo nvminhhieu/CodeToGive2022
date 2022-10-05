@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import { ReactElement, useState } from "react"
+import { ReactElement, useCallback, useEffect, useState } from "react"
 import AnswerButton from "./AnswerButton/AnswerButton"
 import CheckIcon from "@mui/icons-material/Check"
 import CloseIcon from "@mui/icons-material/Close"
@@ -61,7 +61,6 @@ const QuestionCard = ({
     return undefined
   }
   const answeredValueDefault = findAnswerValue(answeredId)
-
   return (
     <Container>
       <InnerContainer>
