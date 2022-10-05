@@ -36,6 +36,9 @@ const ReportPage = () => {
   const [user, setUser] = useState<any>(null)
   const [assessments, setAssessments] = useState<ITestDisplay[]>([])
   const [testData, setTestData] = useState<any>({})
+  const [labels, setLabels] = useState()
+  const [questions, setQuestions] = useState()
+  const ids = []
   // TODO: ADD 3 MORE TestDATA State for each of the tests
   const router = useRouter()
   const id = router.query.id
@@ -84,7 +87,28 @@ const ReportPage = () => {
       } catch {}
     }
     fetchAssessmentData()
+
+    const fetchLabels = async () => {
+      try {
+        const req = await fetch(`${process.env.HOST}/api/v1/labels`)
+        const res = await req.json()
+        setLabels(res)
+      } catch {}
+    }
+    fetchLabels()
+
+    const fetchQuestions = async () => {
+      try {
+        const req = await fetch(`${process.env.HOST}/api/v1/questions`)
+        const res = await req.json()
+        setQuestions(res)
+      } catch {}
+    }
+    fetchQuestions()
   }, [id])
+  console.log(labels, testData.questions, questions)
+
+  console.log(testData.questions?.map((v) => ids.push(v.question_id)))
 
   return (
     <Layout title="Report">
