@@ -101,6 +101,7 @@ const WorkMotivation = () => {
     reset({})
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleIndexTransit = (nextValueIndex: number, array: any) => {
     if (nextValueIndex >= 0 && nextValueIndex < array.length)
       return nextValueIndex
@@ -122,6 +123,10 @@ const WorkMotivation = () => {
     setCurrentQuestionIndex(
       handleIndexTransit(currentQuestionIndex + 1, questions)
     )
+    //Submit here
+    if (currentQuestionIndex + 1 === questions.length) {
+      router.back()
+    }
   }
 
   const commands = [
@@ -275,7 +280,7 @@ const WorkMotivation = () => {
           }}
         >
           {currentQuestionIndex + 1 === questions.length ? (
-            <Link href="/assessments">
+            <Link href={`${UUID}`}>
               <SvgIcon sx={{ fontSize: "50px", color: "#0097F2" }}>
                 <DoneIcon />
               </SvgIcon>

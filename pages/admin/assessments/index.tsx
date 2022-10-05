@@ -13,7 +13,7 @@ import { MenuItem, Select } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 
 const Assessment = () => {
-  const [UUID, setUUID] = useState()
+  const [UUID, setUUID] = useState<any>()
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [isOpenCreateModal, setIsOpenCreateModal] = useState(false)
   const [assessmentData, setAssessmentData] = useState<ITest[] | any>([])
