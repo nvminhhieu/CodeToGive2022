@@ -11,12 +11,22 @@ import Bookmark from "./Bookmark/Bookmark"
 import { useState } from "react"
 import { useSession } from "next-auth/react"
 
+import InputLabel from "@mui/material/InputLabel"
+import MenuItem from "@mui/material/MenuItem"
+import FormControl from "@mui/material/FormControl"
+import Select, { SelectChangeEvent } from "@mui/material/Select"
+
 const Header = () => {
   const [isOpenBookmarked, setIsOpenBookmarked] = useState(false)
+  const [lang, setLang] = useState("en")
   const session = useSession()
   const router = useRouter()
   const isMatchRoute = (route: string): boolean =>
     router.pathname.match(route) !== null
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setLang(event.target.value as string)
+  }
 
   return (
     <Wrapper>
@@ -52,6 +62,27 @@ const Header = () => {
           </Nav>
         </LeftContainer>
         <RightContainer>
+          <FormControl
+            sx={{ width: 90, color: "#0068FF" }}
+            size="small"
+            fullWidth
+          >
+            <InputLabel sx={{ color: "#0068FF" }} id="label">
+              Language
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={lang}
+              onChange={handleChange}
+              label="Language"
+            >
+              <MenuItem value={"en"}>EN</MenuItem>
+              <MenuItem value={"hu"}>HU</MenuItem>
+              <MenuItem value={"vi"}>VI</MenuItem>
+            </Select>
+          </FormControl>
+
           <div
             onClick={() => {
               setIsOpenBookmarked(!isOpenBookmarked)
