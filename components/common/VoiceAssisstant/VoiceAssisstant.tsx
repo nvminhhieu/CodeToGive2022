@@ -63,15 +63,14 @@ const VoiceAssisstant = ({
   useEffect(() => {
     if (assisstant) {
       SpeechRecognition.startListening({
-        continuous: true,
+        continuous: false,
         language: "en-US",
       })
     } else {
       SpeechRecognition.stopListening()
     }
-  }, [])
-
-  console.log(listening)
+    console.log("listening", listening)
+  }, [assisstant, listening])
 
   useEffect(() => {
     const timer = setTimeout(() => setMessage(""), 5000)
