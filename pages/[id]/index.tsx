@@ -35,7 +35,7 @@ const AssessmentsPage = () => {
   }, [UUID, id, setUUID])
 
   const incomplete = assessments?.filter(
-    (assessment) => assessment.progress < 100
+    (assessment) => assessment?.progress < 100
   )
   useEffect(() => {
     const fetchAssessmentData = async () => {
