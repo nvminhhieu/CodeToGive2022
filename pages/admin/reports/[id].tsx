@@ -50,7 +50,10 @@ const ReportPage = () => {
 
   useEffect(() => {
     if (assessments.length > 0) {
-      fetchTestData(assessments[0]?.type)
+      const motivationTestType =
+        assessments?.find((e) => e.type === "MOTIVATION_TEST")?.type ||
+        "MOTIVATION_TEST"
+      fetchTestData(motivationTestType)
     }
   }, [assessments])
 

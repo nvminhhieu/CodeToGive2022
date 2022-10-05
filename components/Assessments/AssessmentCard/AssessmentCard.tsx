@@ -71,20 +71,20 @@ export const AssessmentCard = ({ assessment }: Props) => {
           )}
           <Icon
             style={{
-              background: HashedMapIcon[assessment.type]?.icon?.color,
-              opacity: assessment.completed ? "0.5" : 1,
+              background: HashedMapIcon[assessment?.type]?.icon?.color,
+              opacity: assessment?.completed ? "0.5" : 1,
             }}
           >
-            {handleIcon(HashedMapIcon[assessment.type]?.icon?.name)}
+            {handleIcon(HashedMapIcon[assessment?.type]?.icon?.name)}
           </Icon>
         </Flex>
       </Justify>
-      {!assessment.completed && (
+      {!assessment?.completed && (
         <>
           <Flex style={{ marginTop: "20px" }}>
             <LinearProgress
               variant="determinate"
-              value={assessment.progress}
+              value={assessment?.progress}
               color="greyishColor"
               sx={{
                 backgroundColor: "#EEEEEE",
@@ -94,9 +94,9 @@ export const AssessmentCard = ({ assessment }: Props) => {
               }}
             />
 
-            <Text>{assessment.progress}% ready</Text>
+            <Text>{assessment?.progress}% ready</Text>
           </Flex>
-          <NextLink href={`/${UUID}/tests/${assessment.test_id}`}>
+          <NextLink href={`/${UUID}/tests/${assessment?.test_id}`}>
             <div>
               <CustomButton
                 style={{
@@ -108,7 +108,7 @@ export const AssessmentCard = ({ assessment }: Props) => {
                 variant="contained"
                 color="primary"
               >
-                {assessment.progress > 0
+                {assessment?.progress > 0
                   ? "Continue answering"
                   : "Fill the questionnaire"}
               </CustomButton>

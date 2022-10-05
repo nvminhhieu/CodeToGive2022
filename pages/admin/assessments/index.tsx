@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import AssessmentCardAdmin from "../../../components/Assessments/AssessmentCardAdmin"
 import PageTitle from "../../../components/common/PageTitle"
 import Layout from "../../../components/Layout"
@@ -12,12 +12,12 @@ import { Controller, useForm } from "react-hook-form"
 import { MenuItem, Select } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 
-const MOCK_UUID = "e50a19fe-9130-4f41-afdc-a90fe66d317b"
-
 const Assessment = () => {
+  const [UUID, setUUID] = useState<any>()
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [isOpenCreateModal, setIsOpenCreateModal] = useState(false)
   const [assessmentData, setAssessmentData] = useState<ITest[] | any>([])
+  const isFirstRender = useRef(true)
   const {
     control: controlLink,
     handleSubmit: handleSubmitLink,
@@ -34,7 +34,7 @@ const Assessment = () => {
     setTimeout(async () => {
       try {
         const req = await fetch(
-          `${process.env.HOST}/api/v1/assessments/${MOCK_UUID}`,
+          `${process.env.HOST}/api/v1/assessments/${UUID}`,
           {
             method: "GET",
             headers: {
@@ -44,14 +44,39 @@ const Assessment = () => {
         )
         const res = await req.json()
         setAssessmentData(res.tests)
-      } catch {}
+      } catch {
+        console.log("errors")
+        setAssessmentData([])
+      }
     }, 1000) //SO after create, it can show the changes right after create. Cause take times to UI send, store in DB, then fetch it back to UI
   }
 
+  const createUUID = async () => {
+    try {
+      const req = await fetch(`${process.env.HOST}/api/v1/assessments/`, {
+        method: "POST",
+      })
+      const res = await req.json()
+      setUUID(res.uuid)
+    } catch {
+      setUUID("")
+    }
+  }
+
   useEffect(() => {
-    fetchDataAssessment()
-    setValueLink("link", `${process.env.HOST}/client/${MOCK_UUID}`) //NEED TO CHANGE THIS LATER, ALSO DEPENEDS ON GET ASSESSMENT UUID GENERATE API
+    if (!isFirstRender.current) {
+      createUUID()
+    } else {
+      isFirstRender.current = false
+    }
   }, [])
+
+  useEffect(() => {
+    if (UUID) {
+      fetchDataAssessment()
+      setValueLink("link", `${process.env.HOST}/client/${UUID}`) //NEED TO CHANGE THIS LATER, ALSO DEPENEDS ON GET ASSESSMENT UUID GENERATE API
+    }
+  }, [UUID])
 
   const handleOnClickModalClose = () => {
     setIsOpenModal(false)
@@ -66,7 +91,7 @@ const Assessment = () => {
     const fetchCreateTest = async (data: any) => {
       const constructedObject = {
         ...data,
-        assessment_uuid: MOCK_UUID, //REMOVE LATER, ONLY FOR TESTING
+        assessment_uuid: UUID, //REMOVE LATER, ONLY FOR TESTING
       }
       try {
         const req = await fetch(`${process.env.HOST}/api/v1/tests/`, {
