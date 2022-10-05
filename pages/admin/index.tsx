@@ -54,7 +54,7 @@ const Table = () => {
 
       <span />
 
-      {assessmentData.map((assessment: any, ind: any) => (
+      {assessmentData?.map((assessment: any, ind: any) => (
         <React.Fragment key={ind}>
           <p>
             {assessment?.owner
