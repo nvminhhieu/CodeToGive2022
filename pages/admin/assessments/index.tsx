@@ -119,7 +119,7 @@ const Assessment = () => {
         </FormGenContainer>
       </ModalWrapper>
 
-      {assessmentData.map((assessment: any, i: number) => (
+      {assessmentData?.map((assessment: any, i: number) => (
         <AssessmentCardAdmin key={i} assessment={assessment} />
       ))}
 
