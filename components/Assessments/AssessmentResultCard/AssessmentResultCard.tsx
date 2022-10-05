@@ -39,6 +39,7 @@ export const AssessmentResultCard = ({
         },
         body: JSON.stringify(data),
       })
+      handleOnClickModalClose()
       console.log(req)
     } catch (error) {
       console.log(error)
@@ -72,8 +73,8 @@ export const AssessmentResultCard = ({
             Learn more
           </CustomButton>
           <ModalWrapper
-            title="Get the report"
-            text="Please provide the following information before getting the assessment summary."
+            title="Submit report"
+            text="Please provide the following information to submit the results of your assessment."
             isDisabled={isCompleted}
             onClickCallBack={handleOnClickModalClose}
             isOpen={isOpenModal}
@@ -138,7 +139,7 @@ export const AssessmentResultCard = ({
                 }}
               >
                 <Button variant="contained" type="submit">
-                  Get the report
+                  Submit report
                 </Button>
               </div>
             </form>
