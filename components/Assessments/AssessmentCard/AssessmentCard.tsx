@@ -41,23 +41,23 @@ export const AssessmentCard = ({ assessment }: Props) => {
         <div>
           <Title
             style={{
-              color: assessment.completed
+              color: assessment?.completed
                 ? "rgba(0, 0, 0, 0.4)"
                 : "rgba(0, 0, 0, 0.87)",
             }}
           >
-            {assessment.title}
+            {assessment?.title}
           </Title>
           <Description
             style={{
-              color: assessment.completed ? "rgba(0, 0, 0, 0.4)" : "#6a6e77",
+              color: assessment?.completed ? "rgba(0, 0, 0, 0.4)" : "#6a6e77",
             }}
           >
-            {assessment.description}
+            {assessment?.description}
           </Description>
         </div>
         <Flex>
-          {assessment.completed && (
+          {assessment?.completed && (
             <Flex>
               <SuccessText>Completed</SuccessText>
               <DoneIcon

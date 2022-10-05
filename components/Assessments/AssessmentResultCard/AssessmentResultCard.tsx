@@ -5,6 +5,7 @@ import CustomTextField from "../../common/CustomTextField/CustomTextField"
 import ModalWrapper from "../../common/Modal"
 import { useForm } from "react-hook-form"
 import { useState } from "react"
+import { useUUIDContext } from "../../../context/UUIDContext"
 
 type AssessmentResultCardProps = {
   isCompleted: boolean
@@ -15,10 +16,37 @@ export const AssessmentResultCard = ({
 }: AssessmentResultCardProps) => {
   const { control, handleSubmit } = useForm()
   const [isOpenModal, setIsOpenModal] = useState(false)
+  const { UUID } = useUUIDContext()
+  const [data, setData] = useState({
+    uuid: UUID,
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+  })
 
   const handleOnClickModalClose = () => {
     setIsOpenModal(false)
   }
+
+  //Submit user data
+  const submitUserData = async () => {
+    try {
+      const req = await fetch(`${process.env.HOST}/api/v1/assessments/submit`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+      console.log(req)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  console.log(data)
+
   return (
     <Container>
       <div>
@@ -50,41 +78,70 @@ export const AssessmentResultCard = ({
             onClickCallBack={handleOnClickModalClose}
             isOpen={isOpenModal}
           >
-            <Label>Full name</Label>
-            <CustomTextField
-              control={control}
-              name="name"
-              label="Full name"
-              type="text"
-              variant="outlined"
-              sx={{ marginBottom: "24px" }}
-            />
-            <Label>E-mail address</Label>
-            <CustomTextField
-              control={control}
-              name="email"
-              label="E-mail address"
-              type="email"
-              variant="outlined"
-              sx={{ marginBottom: "24px" }}
-            />
-            <Label>Phone number (06 XX XXX XXXX)</Label>
-            <CustomTextField
-              control={control}
-              name="phone"
-              label="Phone number"
-              type="phone"
-              variant="outlined"
-              sx={{ marginBottom: "48px" }}
-            />
-            <div
-              style={{
-                width: "100%",
-                textAlign: "center",
-              }}
-            >
-              <Button variant="contained">Get the report</Button>
-            </div>
+            <form onSubmit={handleSubmit(submitUserData)}>
+              <Label>First name</Label>
+              <CustomTextField
+                control={control}
+                name="first_Name"
+                label="Full name"
+                type="text"
+                variant="outlined"
+                value={data.first_name}
+                sx={{ marginBottom: "24px" }}
+                onChange={(e: any) =>
+                  setData({ ...data, first_name: e.target.value })
+                }
+              />
+              <Label>Last name</Label>
+              <CustomTextField
+                control={control}
+                name="last_name"
+                label="Last name"
+                type="text"
+                variant="outlined"
+                value={data.last_name}
+                sx={{ marginBottom: "24px" }}
+                onChange={(e: any) =>
+                  setData({ ...data, last_name: e.target.value })
+                }
+              />
+              <Label>E-mail address</Label>
+              <CustomTextField
+                control={control}
+                name="email"
+                label="E-mail address"
+                type="email"
+                variant="outlined"
+                value={data.email}
+                sx={{ marginBottom: "24px" }}
+                onChange={(e: any) =>
+                  setData({ ...data, email: e.target.value })
+                }
+              />
+              <Label>Phone number (06 XX XXX XXXX)</Label>
+              <CustomTextField
+                control={control}
+                name="phone_number"
+                label="Phone number"
+                type="text"
+                variant="outlined"
+                value={data.phone_number}
+                sx={{ marginBottom: "48px" }}
+                onChange={(e: any) =>
+                  setData({ ...data, phone_number: e.target.value })
+                }
+              />
+              <div
+                style={{
+                  width: "100%",
+                  textAlign: "center",
+                }}
+              >
+                <Button variant="contained" type="submit">
+                  Get the report
+                </Button>
+              </div>
+            </form>
           </ModalWrapper>
           <Text>
             The results are available after finishing all questionnaires.
@@ -102,7 +159,7 @@ const Flex = styled.div`
   margin-top: 40px;
 `
 
-const Container = styled.div`
+const Container = styled.form`
   background: 0px 0px 7px rgba(0, 0, 0, 0.04),
     0px 15px 17px -1px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.04),
