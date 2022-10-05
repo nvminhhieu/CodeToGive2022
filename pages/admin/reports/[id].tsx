@@ -242,7 +242,7 @@ const ReportPage = () => {
               <Table questionsData={mergedArray} />
               <SubTitle style={{ marginTop: 20 }}>Summary</SubTitle>
               {scores
-                .sort(function (a, b) {
+                ?.sort(function (a, b) {
                   return b.total_score - a.total_score
                 })
                 .map((score, i) => (
@@ -338,7 +338,7 @@ const Table = ({ questionsData }: PropsTable) => {
                 ?.description
             }
           </p>
-          <p>{question.labels[0].label}</p>
+          <p>{question?.labels && question?.labels[0].label}</p>
         </React.Fragment>
       ))}
     </GridContainer>
