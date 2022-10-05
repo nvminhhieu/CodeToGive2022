@@ -75,6 +75,7 @@ export const AssessmentResultCard = ({
     setErrOpen(false)
   }
 
+  console.log(data)
   return (
     <>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
@@ -100,10 +101,7 @@ export const AssessmentResultCard = ({
       <Container>
         <div>
           <Title>Assessment report</Title>
-          <Description>
-            Check out your assessment summary and pick your favorite job to
-            apply to.
-          </Description>
+          <Description>Submit your assessment report.</Description>
           <Flex>
             <CustomButton
               variant="contained"
@@ -132,7 +130,7 @@ export const AssessmentResultCard = ({
                 <CustomTextField
                   control={control}
                   name="first_Name"
-                  label="Full name"
+                  label="First name"
                   type="text"
                   variant="outlined"
                   value={data.first_name}
