@@ -231,7 +231,7 @@ const WorkMotivation = () => {
         showTooltip
       />
 
-      <CardContainer onSubmit={handleSubmit(onSubmit)} ref={ref}>
+      <CardContainer onSubmit={handleSubmit(onSubmit)}>
         <IconContainer
           type="submit"
           onClick={() => {
