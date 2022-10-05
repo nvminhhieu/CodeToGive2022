@@ -26,7 +26,7 @@ export function BookmarkProvider({ children }: BookmarkProviderProps) {
 
   const addBookmarkedJobs = (inputJob: IJob) => {
     const isNotFoundExistedJobInState = !bookmarkedJobs.find(
-      (stateJob: IJob) => stateJob?.id === inputJob?.id
+      (stateJob: IJob) => stateJob?.job_id === inputJob?.job_id
     )
 
     if (isNotFoundExistedJobInState) {
@@ -38,7 +38,7 @@ export function BookmarkProvider({ children }: BookmarkProviderProps) {
     console.log("stateBookmarked", bookmarkedJobs)
     console.log("inputJobInRemove", inputJob)
     const removedResult = bookmarkedJobs.filter(
-      (stateJob: IJob) => stateJob?.id !== inputJob?.id
+      (stateJob: IJob) => stateJob?.job_id !== inputJob?.job_id
     )
     setBookmarkedJobs(removedResult)
   }

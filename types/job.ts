@@ -1,11 +1,6 @@
 export default interface IJob {
-  id: number
-  label: string
-  match_value: number
-  details: {
-    company_name: string
-    about: string
-    description: string
-  }
+  job_id: number
+  title: string
+  labels: any
   image?: string
 }

@@ -34,10 +34,7 @@ const Table = () => {
           (e: any) => e.tests.length > 1
         )
         // WORK AROUND TO DEMO THE ONLY CREATED TEST
-        console.log(
-          "onlyTestsHaveQuestionsMoreThan1",
-          onlyTestsHaveQuestionsMoreThan1
-        )
+
         setAssessmentData(onlyTestsHaveQuestionsMoreThan1)
       } catch {
         setAssessmentData([])

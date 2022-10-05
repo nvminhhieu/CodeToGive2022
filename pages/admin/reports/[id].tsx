@@ -78,9 +78,17 @@ const ReportPage = () => {
     fetchScoreData()
 
     const fetchRecommendedJobsData = async () => {
-      const req = await fetch(`${process.env.HOST}/api/v1/${id}/suggested-jobs`)
-      const res = await req.json()
-      setData(res)
+      try {
+        const req = await fetch(
+          `${process.env.HOST}/api/v1/assessments/${id}/suggested-jobs`
+        )
+        const res = await req.json()
+        const getFirstThree = res.slice(0, 3)
+        setData(getFirstThree)
+      } catch {
+        console.log("tere")
+        setData([])
+      }
     }
     fetchRecommendedJobsData()
 
@@ -156,6 +164,7 @@ const ReportPage = () => {
   }))
 
   console.log(scores)
+  const myStartDate = new Date(Date.now() - 10 * 1000 * 60)
 
   return (
     <Layout title="Report">
@@ -182,6 +191,10 @@ const ReportPage = () => {
               />
               <DetailsWrapper text="E-mail address" detail={user?.email} />
               <DetailsWrapper text="Phone number" detail={user?.phone_number} />
+              <DetailsWrapper
+                text="Test start date"
+                detail={myStartDate.toLocaleString()}
+              />
             </>
           ) : (
             <Text>No owner of this report</Text>

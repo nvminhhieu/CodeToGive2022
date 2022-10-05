@@ -17,7 +17,6 @@ const Assessment = () => {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [isOpenCreateModal, setIsOpenCreateModal] = useState(false)
   const [assessmentData, setAssessmentData] = useState<ITest[] | any>([])
-  const isFirstRender = useRef(true)
   const {
     control: controlLink,
     handleSubmit: handleSubmitLink,
@@ -64,14 +63,6 @@ const Assessment = () => {
   }
 
   useEffect(() => {
-    if (!isFirstRender.current) {
-      createUUID()
-    } else {
-      isFirstRender.current = false
-    }
-  }, [])
-
-  useEffect(() => {
     if (UUID) {
       fetchDataAssessment()
       setValueLink("link", `${process.env.HOST}/client/${UUID}`) //NEED TO CHANGE THIS LATER, ALSO DEPENEDS ON GET ASSESSMENT UUID GENERATE API
@@ -114,16 +105,28 @@ const Assessment = () => {
           title="Create Assessment"
           description="You can generate assessment, and create question here"
         />
-        <CustomButton
-          type="submit"
-          onClick={() => {
-            setIsOpenModal(true)
-          }}
-          sx={{ padding: "8px 22px" }}
-          variant="contained"
-        >
-          Share private link
-        </CustomButton>
+        <ButtonContainerTitle>
+          <CustomButton
+            type="submit"
+            onClick={() => {
+              createUUID()
+            }}
+            sx={{ padding: "8px 22px" }}
+            variant="outlined"
+          >
+            Generate ID
+          </CustomButton>
+          <CustomButton
+            type="submit"
+            onClick={() => {
+              setIsOpenModal(true)
+            }}
+            sx={{ padding: "8px 22px" }}
+            variant="contained"
+          >
+            Share private link
+          </CustomButton>
+        </ButtonContainerTitle>
       </Flex>
 
       <ModalWrapper
@@ -244,4 +247,9 @@ const CreateNewTestButton = styled.div`
   &:hover svg {
     color: #0097f2;
   }
+`
+
+const ButtonContainerTitle = styled.div`
+  display: flex;
+  gap: 20px;
 `
