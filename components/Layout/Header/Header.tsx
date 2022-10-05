@@ -27,7 +27,14 @@ const Header = () => {
             <LinkWrapper active={router.pathname === ROUTES.home}>
               <NextLink href={ROUTES.home}>Home</NextLink>
             </LinkWrapper>
-            {isMatchRoute(ROUTES.assessments_admin) ? (
+
+            {session.status === "authenticated" ? (
+              <LinkWrapper active={router.pathname === "/admin"}>
+                <NextLink href={"/admin"}>Admin</NextLink>
+              </LinkWrapper>
+            ) : null}
+            {isMatchRoute(ROUTES.assessments_admin) ||
+            session.status === "authenticated" ? (
               <LinkWrapper active={isMatchRoute(ROUTES.assessments_admin)}>
                 <NextLink href={ROUTES.assessments_admin}>
                   Assessments (Admin)

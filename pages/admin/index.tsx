@@ -111,7 +111,10 @@ const ButtonsContainer = styled.div`
 
 const AdminPage = (
   <Layout title="Admin">
-    <PageTitle title="Admin" description="This is admin Interface" />
+    <PageTitle
+      title="Admin Dashboard"
+      description="Collections of tools for Admin"
+    />
     <Container>
       <Card style={{ width: "30%", height: "170px" }}>
         <Title>Assessment</Title>
