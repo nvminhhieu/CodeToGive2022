@@ -136,7 +136,6 @@ const Assessment = () => {
       >
         <FormGenContainer>
           <CustomTextField
-            style={{ width: "30vw" }}
             control={controlLink}
             name="link"
             label="Private Assessment Link"

@@ -126,7 +126,6 @@ export const AssessmentResultCard = ({
               isOpen={isOpenModal}
             >
               <form onSubmit={handleSubmit(submitUserData)}>
-                <Label>First name</Label>
                 <CustomTextField
                   control={control}
                   name="first_Name"
@@ -139,7 +138,6 @@ export const AssessmentResultCard = ({
                     setData({ ...data, first_name: e.target.value })
                   }
                 />
-                <Label>Last name</Label>
                 <CustomTextField
                   control={control}
                   name="last_name"
@@ -152,7 +150,6 @@ export const AssessmentResultCard = ({
                     setData({ ...data, last_name: e.target.value })
                   }
                 />
-                <Label>E-mail address</Label>
                 <CustomTextField
                   control={control}
                   name="email"
@@ -165,7 +162,6 @@ export const AssessmentResultCard = ({
                     setData({ ...data, email: e.target.value })
                   }
                 />
-                <Label>Phone number (06 XX XXX XXXX)</Label>
                 <CustomTextField
                   control={control}
                   name="phone_number"
