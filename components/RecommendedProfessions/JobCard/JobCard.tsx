@@ -32,7 +32,7 @@ const JobCard = ({ jobData, bookmarked, onClickBookmarkCallback }: Props) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <ImageThumbnail value={jobData?.match_value} image={jobData?.image} />
+      <ImageThumbnail image={jobData?.image} />
       <AbsoluteInnerContainer>
         <SvgIcon sx={{ color: "white" }}>
           <InfoIcon />
@@ -40,8 +40,8 @@ const JobCard = ({ jobData, bookmarked, onClickBookmarkCallback }: Props) => {
       </AbsoluteInnerContainer>
       <ContentContainer>
         <Content>
-          <Title>{jobData?.label}</Title>
-          <Match>{jobData?.match_value}% match</Match>
+          <Title>{jobData?.title}</Title>
+          {/* <Match>{jobData?.match_value}% match</Match> */}
         </Content>
         <div
           style={{ cursor: "pointer" }}
@@ -82,14 +82,14 @@ const Container = styled(motion.div)`
   );
 `
 
-const ImageThumbnail = styled.div<{ value?: number; image?: string }>`
+const ImageThumbnail = styled.div<{ image?: string }>`
   background: url(${({ image }) => (image ? image : FALL_BACK_IMAGE)});
   background-position: center;
   background-size: cover;
   width: 100%;
   height: 100%;
   border-radius: 8px;
-  opacity: ${({ value }) => calculateFadeValue(value) * 1.3};
+  opacity: 1;
 `
 
 const Title = styled.p`

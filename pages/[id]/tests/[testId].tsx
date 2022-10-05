@@ -109,9 +109,18 @@ const WorkMotivation = () => {
   }
 
   const fetchRecommendedJobsData = async () => {
-    const req = await fetch(`${process.env.HOST}/api/v1/${UUID}/suggested-jobs`)
-    const res = await req.json()
-    setData(res)
+    try {
+      const req = await fetch(
+        `${process.env.HOST}/api/v1/assessments/${UUID}/suggested-jobs`
+      )
+      const res = await req.json()
+      const getFirstThree = res.slice(0, 3)
+      setData(getFirstThree)
+      console.log("getFirstThree", getFirstThree)
+    } catch {
+      console.log("tere")
+      setData([])
+    }
   }
 
   const fetchRecommendedJobsDataTest_REMOVE_LATER = async () => {
@@ -292,19 +301,18 @@ const WorkMotivation = () => {
         <IconContainer
           type="submit"
           onClick={() => {
-            //fetchRecommendedJobsData()
-            fetchRecommendedJobsDataTest_REMOVE_LATER()
+            fetchRecommendedJobsData()
+            //fetchRecommendedJobsDataTest_REMOVE_LATER()
             setCurrentQuestionIndex(
               handleIndexTransit(currentQuestionIndex + 1, questions)
             )
+            router.back()
           }}
         >
           {currentQuestionIndex + 1 === questions.length ? (
-            <Link href={`${UUID}`}>
-              <SvgIcon sx={{ fontSize: "50px", color: "#0097F2" }}>
-                <DoneIcon />
-              </SvgIcon>
-            </Link>
+            <SvgIcon sx={{ fontSize: "50px", color: "#0097F2" }}>
+              <DoneIcon />
+            </SvgIcon>
           ) : (
             <SvgIcon sx={{ fontSize: "50px", color: "#0097F2" }}>
               <NavigateNextIcon />

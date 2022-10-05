@@ -66,9 +66,17 @@ const ReportPage = () => {
     fetchUserData()
 
     const fetchRecommendedJobsData = async () => {
-      const req = await fetch(`${process.env.HOST}/api/v1/${id}/suggested-jobs`)
-      const res = await req.json()
-      setData(res)
+      try {
+        const req = await fetch(
+          `${process.env.HOST}/api/v1/assessments/${id}/suggested-jobs`
+        )
+        const res = await req.json()
+        const getFirstThree = res.slice(0, 3)
+        setData(getFirstThree)
+      } catch {
+        console.log("tere")
+        setData([])
+      }
     }
     fetchRecommendedJobsData()
 

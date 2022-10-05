@@ -119,9 +119,9 @@ const RecommendedProfessions = ({ onClickCallBack, data }: Props) => {
 
       <InnerContainer layout>
         <AnimatePresence mode="wait">
-          {data.map((e: any) => (
+          {data?.map((e: any) => (
             <JobCard
-              key={e.id}
+              key={e.job_id}
               jobData={e}
               onClickBookmarkCallback={handleBookmarkCallback}
             />
