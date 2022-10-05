@@ -34,6 +34,10 @@ const Table = () => {
           (e: any) => e.tests.length > 1
         )
         // WORK AROUND TO DEMO THE ONLY CREATED TEST
+        console.log(
+          "onlyTestsHaveQuestionsMoreThan1",
+          onlyTestsHaveQuestionsMoreThan1
+        )
         setAssessmentData(onlyTestsHaveQuestionsMoreThan1)
       } catch {
         setAssessmentData([])
@@ -52,8 +56,14 @@ const Table = () => {
 
       {assessmentData.map((assessment: any, ind: any) => (
         <React.Fragment key={ind}>
-          <p>{ind + 1}</p>
-          <p>{assessment?.uuid}</p>
+          <p>
+            {assessment?.owner
+              ? assessment?.owner?.last_name +
+                " " +
+                assessment?.owner?.first_name
+              : "Guest User"}
+          </p>
+          <p>Finished</p>
           <p>{assessment?.uuid}</p>
           <ButtonsContainer>
             <CustomButton
@@ -73,7 +83,7 @@ const Table = () => {
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: 200px 1fr 1fr 1fr;
+  grid-template-columns: 150px 1fr 1.2fr 1fr;
   align-items: center;
   span {
     font-weight: 700;
@@ -103,9 +113,19 @@ const AdminPage = (
   <Layout title="Admin">
     <PageTitle title="Admin" description="This is admin Interface" />
     <Container>
-      <Link href="admin/assessments">
-        <Card style={{ width: "30%" }}>asdasd</Card>
-      </Link>
+      <Card style={{ width: "30%", height: "170px" }}>
+        <Title>Assessment</Title>
+        <Link href="admin/assessments">
+          <div style={{ margin: "30px 0" }}>
+            <CustomButton
+              variant="contained"
+              sx={{ width: "100%", margin: "auto 0" }}
+            >
+              Create a custom assessment
+            </CustomButton>
+          </div>
+        </Link>
+      </Card>
       <Card style={{ width: "70%" }}>
         <Title>Recent reports</Title>
         <Table />

@@ -65,22 +65,29 @@ const AssessmentCardAdmin = ({ assessment }: Props) => {
       </Justify>
 
       <ButtonWrapper>
-        <CustomButton
-          style={{
-            boxShadow: "none",
-            padding: "8px 22px",
-          }}
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            router.push(`/admin/assessments/tests/${assessment.test_id}`)
-          }}
+        <a
+          target="_blank"
+          href={`assessments/tests/${assessment.test_id}`}
+          rel="noopener noreferrer"
+          style={{ display: "flex" }}
         >
-          <Flex style={{ gap: "10px" }}>
-            <span>Edit assessment</span>
-            <EditIcon sx={{ color: "white", fontSize: "20px" }} />
-          </Flex>
-        </CustomButton>
+          <CustomButton
+            style={{
+              boxShadow: "none",
+              padding: "8px 22px",
+            }}
+            variant="contained"
+            color="primary"
+            // onClick={() => {
+            //   router.push(`/admin/assessments/tests/${assessment.test_id}`)
+            // }}
+          >
+            <Flex style={{ gap: "10px" }}>
+              <span>Edit assessment</span>
+              <EditIcon sx={{ color: "white", fontSize: "20px" }} />
+            </Flex>
+          </CustomButton>
+        </a>
         <DeleteButton>
           <DeleteOutlineIcon />
         </DeleteButton>
