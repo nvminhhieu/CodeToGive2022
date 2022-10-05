@@ -33,7 +33,7 @@ const DetailsWrapper = ({ text, detail }: Props) => {
 
 const ReportPage = () => {
   const [data, setData] = useState<IJob[]>([])
-  const [user, setUser] = useState()
+  const [user, setUser] = useState<any>(null)
   const [assessments, setAssessments] = useState<ITestDisplay[]>([])
   const [testData, setTestData] = useState<any>({})
   // TODO: ADD 3 MORE TestDATA State for each of the tests
@@ -76,6 +76,7 @@ const ReportPage = () => {
 
         const testsArray = rearrangedArray(2, 0, res.tests)
 
+        setUser(res.owner)
         setAssessments(testsArray)
       } catch {}
     }
@@ -98,16 +99,19 @@ const ReportPage = () => {
           Personal data
         </Title>
         <Container>
-          <DetailsWrapper text="Full name" detail="Kovács Sándor" />
-          <DetailsWrapper
-            text="Birth place, date"
-            detail="Sopron, 1992. 04. 08."
-          />
-          <DetailsWrapper
-            text="E-mail address"
-            detail="sandor.kovacs42@gmail.com"
-          />
-          <DetailsWrapper text="Phone number" detail="06 20 234 5678" />
+          {user && typeof id === "string" ? (
+            <>
+              <DetailsWrapper text="UUID" detail={id} />
+              <DetailsWrapper
+                text="Full name"
+                detail={user?.first_name + " " + user?.last_name}
+              />
+              <DetailsWrapper text="E-mail address" detail={user?.email} />
+              <DetailsWrapper text="Phone number" detail={user?.phone_number} />
+            </>
+          ) : (
+            <Text>No owner of this report</Text>
+          )}
         </Container>
         <div
           style={{
