@@ -50,7 +50,10 @@ const ReportPage = () => {
 
   useEffect(() => {
     if (assessments.length > 0) {
-      fetchTestData(assessments[0].type)
+      const motivationTestType =
+        assessments?.find((e) => e.type === "MOTIVATION_TEST")?.type ||
+        "MOTIVATION_TEST"
+      fetchTestData(motivationTestType)
     }
   }, [assessments])
 
@@ -145,7 +148,7 @@ const ReportPage = () => {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <SubTitle>{assessment.title}</SubTitle>
+              <SubTitle>{assessment?.title}</SubTitle>
             </AccordionSummary>
             <AccordionDetails>
               <Table questionsData={testData?.questions} />

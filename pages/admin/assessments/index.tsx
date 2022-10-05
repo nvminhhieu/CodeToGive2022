@@ -13,7 +13,7 @@ import { MenuItem, Select } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 
 const Assessment = () => {
-  const [UUID, setUUID] = useState("5f0e2503-948e-4ebf-a4da-ac9400f774e6")
+  const [UUID, setUUID] = useState()
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [isOpenCreateModal, setIsOpenCreateModal] = useState(false)
   const [assessmentData, setAssessmentData] = useState<ITest[] | any>([])
@@ -64,14 +64,19 @@ const Assessment = () => {
   }
 
   useEffect(() => {
-    // if (!isFirstRender.current) {
-    //   createUUID()
-    // } else {
-    //   isFirstRender.current = false
-    // }
-    fetchDataAssessment()
-    setValueLink("link", `${process.env.HOST}/client/${UUID}`) //NEED TO CHANGE THIS LATER, ALSO DEPENEDS ON GET ASSESSMENT UUID GENERATE API
+    if (!isFirstRender.current) {
+      createUUID()
+    } else {
+      isFirstRender.current = false
+    }
   }, [])
+
+  useEffect(() => {
+    if (UUID) {
+      fetchDataAssessment()
+      setValueLink("link", `${process.env.HOST}/client/${UUID}`) //NEED TO CHANGE THIS LATER, ALSO DEPENEDS ON GET ASSESSMENT UUID GENERATE API
+    }
+  }, [UUID])
 
   const handleOnClickModalClose = () => {
     setIsOpenModal(false)

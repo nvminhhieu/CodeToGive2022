@@ -30,8 +30,11 @@ const Table = () => {
       try {
         const req = await fetch(`${process.env.HOST}/api/v1/assessments/`)
         const res = await req.json()
-        const lastestAssessmentTop3 = res.slice(-3)
-        setAssessmentData(lastestAssessmentTop3)
+        const onlyTestsHaveQuestionsMoreThan1 = res?.filter(
+          (e: any) => e.tests.length > 1
+        )
+        // WORK AROUND TO DEMO THE ONLY CREATED TEST
+        setAssessmentData(onlyTestsHaveQuestionsMoreThan1)
       } catch {
         setAssessmentData([])
       }
