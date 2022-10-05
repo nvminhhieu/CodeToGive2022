@@ -43,7 +43,7 @@ const PageTitle = ({
     <Container>
       {backURL ? (
         <Link href={backURL}>
-          <Anchor>Back to Assessment</Anchor>
+          <Anchor>Back to Assessments</Anchor>
         </Link>
       ) : null}
       <div

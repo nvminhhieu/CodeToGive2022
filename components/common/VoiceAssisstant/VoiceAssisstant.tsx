@@ -10,7 +10,9 @@ import { ROUTES } from "../../../routing/routes"
 import { useRouter } from "next/router"
 
 const appId = process.env.NEXT_PUBLIC_SPEECHLY_APP_ID
-const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId ?? "")
+const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(
+  "d1a2c48b-bacf-407b-9811-26b11be721d0"
+)
 SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition)
 export const speak = (text: string) => {
   const speech = new SpeechSynthesisUtterance(text)
@@ -69,16 +71,15 @@ const VoiceAssisstant = ({
     } else {
       SpeechRecognition.stopListening()
     }
-  }, [])
-
-  console.log(listening)
+  }, [assisstant, listening])
 
   useEffect(() => {
     const timer = setTimeout(() => setMessage(""), 5000)
     return () => clearTimeout(timer)
   }, [])
 
-  // console.log(transcript)
+  console.log("listening", listening)
+  console.log(transcript)
   // console.log(commands)
 
   if (!browserSupportsSpeechRecognition) {
