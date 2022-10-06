@@ -27,6 +27,7 @@ export interface ITest {
 }
 
 export type Question = {
+  labels?: any
   type:
     | string
     | "MOTIVATION_QUESTION"

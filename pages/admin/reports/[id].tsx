@@ -36,6 +36,9 @@ const ReportPage = () => {
   const [user, setUser] = useState<any>(null)
   const [assessments, setAssessments] = useState<ITestDisplay[]>([])
   const [testData, setTestData] = useState<any>({})
+  const [labels, setLabels] = useState()
+  const [scores, setScores] = useState()
+  const [questions, setQuestions] = useState()
   // TODO: ADD 3 MORE TestDATA State for each of the tests
   const router = useRouter()
   const id = router.query.id
@@ -65,6 +68,15 @@ const ReportPage = () => {
     }
     fetchUserData()
 
+    const fetchScoreData = async () => {
+      const req = await fetch(
+        `${process.env.HOST}/api/v1/assessments/${id}/report`
+      )
+      const res = await req.json()
+      setScores(res)
+    }
+    fetchScoreData()
+
     const fetchRecommendedJobsData = async () => {
       try {
         const req = await fetch(
@@ -92,8 +104,66 @@ const ReportPage = () => {
       } catch {}
     }
     fetchAssessmentData()
+
+    const fetchLabels = async () => {
+      try {
+        const req = await fetch(`${process.env.HOST}/api/v1/labels`)
+        const res = await req.json()
+        setLabels(res)
+      } catch {}
+    }
+    fetchLabels()
+
+    const fetchQuestions = async () => {
+      try {
+        const req = await fetch(`${process.env.HOST}/api/v1/questions`)
+        const res = await req.json()
+        setQuestions(res)
+      } catch {}
+    }
+    fetchQuestions()
   }, [id])
 
+  const ids = testData.questions?.map((v: any) => v.question_id)
+
+  let filteredQuestions
+  let filteredAnswers: any[]
+  if (ids && questions) {
+    filteredQuestions = questions.filter((v: any) =>
+      ids.includes(v.question_id)
+    )
+  }
+  const answeredIds = testData.questions?.map((v: any) => v.answered_id)
+
+  const allAnswers = []
+  if (filteredQuestions) {
+    const answers = filteredQuestions
+      .map((q: any) => q.answers)
+      .map((answer: any) => answer)
+
+    for (const i in answers) {
+      for (const ii in answers[i]) {
+        allAnswers.push({
+          answer_id: answers[i][ii].answer_id,
+          labels: answers[i][ii].labels,
+        })
+      }
+    }
+
+    if (allAnswers && answeredIds) {
+      filteredAnswers = allAnswers.filter((v) =>
+        answeredIds.includes(v.answer_id)
+      )
+    }
+  }
+
+  // merge test data questions, and filtered answers with labels based on answered id
+  const mergedArray = testData?.questions?.map((t1: any) => ({
+    ...t1,
+    ...filteredAnswers?.find((t2) => t2.answer_id === t1.answered_id),
+  }))
+
+  console.log(scores)
   const myStartDate = new Date(Date.now() - 10 * 1000 * 60)
 
   return (
@@ -169,10 +239,23 @@ const ReportPage = () => {
               <SubTitle>{assessment?.title}</SubTitle>
             </AccordionSummary>
             <AccordionDetails>
-              <Table questionsData={testData?.questions} />
+              <Table questionsData={mergedArray} />
+              <SubTitle style={{ marginTop: 20 }}>Summary</SubTitle>
+              {scores
+                ?.sort(function (a, b) {
+                  return b.total_score - a.total_score
+                })
+                .map((score, i) => (
+                  <DetailsWrapper
+                    key={i}
+                    text={score.label}
+                    detail={score.total_score}
+                  />
+                ))}
             </AccordionDetails>
           </Accordion>
         ))}
+
         <Title
           style={{
             marginTop: "60px",
@@ -242,6 +325,7 @@ const Table = ({ questionsData }: PropsTable) => {
       <span className="Question">Question</span>
       <span className="Type">Type</span>
       <span className="Answers"> Answers</span>
+      <span className="Category">Category</span>
 
       {questionsData?.map((question, ind) => (
         <React.Fragment key={ind}>
@@ -254,6 +338,7 @@ const Table = ({ questionsData }: PropsTable) => {
                 ?.description
             }
           </p>
+          <p>{question?.labels && question?.labels[0].label}</p>
         </React.Fragment>
       ))}
     </GridContainer>
@@ -262,7 +347,7 @@ const Table = ({ questionsData }: PropsTable) => {
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: auto 3fr 2fr 1fr;
+  grid-template-columns: auto 3fr 2fr 1fr 1fr;
   align-items: center;
   span {
     font-weight: 700;
