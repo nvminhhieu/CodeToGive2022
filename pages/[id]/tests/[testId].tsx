@@ -306,7 +306,9 @@ const WorkMotivation = () => {
             setCurrentQuestionIndex(
               handleIndexTransit(currentQuestionIndex + 1, questions)
             )
-            router.back()
+            if (currentQuestionIndex + 1 === questions.length) {
+              router.back()
+            }
           }}
         >
           {currentQuestionIndex + 1 === questions.length ? (
