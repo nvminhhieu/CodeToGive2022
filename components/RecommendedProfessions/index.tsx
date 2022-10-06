@@ -10,6 +10,7 @@ import IJob from "../../types/job"
 type Props = {
   onClickCallBack?: any
   data: IJob[]
+  showMatchValue?: boolean
 }
 
 const arrayMock = [
@@ -80,7 +81,11 @@ const arrayMock = [
   ],
 ]
 
-const RecommendedProfessions = ({ onClickCallBack, data }: Props) => {
+const RecommendedProfessions = ({
+  onClickCallBack,
+  data,
+  showMatchValue,
+}: Props) => {
   const { addBookmarkedJobs, removeBookmarkedJobs, bookmarkedJobs } =
     useBookmarkContext()
   //Test Animate Layout
@@ -124,6 +129,7 @@ const RecommendedProfessions = ({ onClickCallBack, data }: Props) => {
               key={e.job_id}
               jobData={e}
               onClickBookmarkCallback={handleBookmarkCallback}
+              showMatchValue={showMatchValue}
             />
           ))}
         </AnimatePresence>

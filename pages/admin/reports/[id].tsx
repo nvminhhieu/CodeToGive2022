@@ -36,9 +36,9 @@ const ReportPage = () => {
   const [user, setUser] = useState<any>(null)
   const [assessments, setAssessments] = useState<ITestDisplay[]>([])
   const [testData, setTestData] = useState<any>({})
-  const [labels, setLabels] = useState()
-  const [scores, setScores] = useState()
-  const [questions, setQuestions] = useState()
+  const [labels, setLabels] = useState<any>()
+  const [scores, setScores] = useState<any>()
+  const [questions, setQuestions] = useState<any>()
   // TODO: ADD 3 MORE TestDATA State for each of the tests
   const router = useRouter()
   const id = router.query.id
@@ -54,7 +54,7 @@ const ReportPage = () => {
   useEffect(() => {
     if (assessments.length > 0) {
       const motivationTestType =
-        assessments?.find((e) => e.type === "MOTIVATION_TEST")?.type ||
+        assessments?.find((e) => e?.type === "MOTIVATION_TEST")?.type ||
         "MOTIVATION_TEST"
       fetchTestData(motivationTestType)
     }
@@ -126,7 +126,7 @@ const ReportPage = () => {
 
   const ids = testData.questions?.map((v: any) => v.question_id)
 
-  let filteredQuestions
+  let filteredQuestions: any
   let filteredAnswers: any[]
   if (ids && questions) {
     filteredQuestions = questions.filter((v: any) =>
@@ -242,10 +242,10 @@ const ReportPage = () => {
               <Table questionsData={mergedArray} />
               <SubTitle style={{ marginTop: 20 }}>Summary</SubTitle>
               {scores
-                ?.sort(function (a, b) {
+                ?.sort(function (a: any, b: any) {
                   return b.total_score - a.total_score
                 })
-                .map((score, i) => (
+                .map((score: any, i: any) => (
                   <DetailsWrapper
                     key={i}
                     text={score.label}
@@ -264,7 +264,7 @@ const ReportPage = () => {
         >
           Recommended jobs
         </Title>
-        <RecommendedProfessions data={data} />
+        <RecommendedProfessions data={data} showMatchValue />
       </div>
     </Layout>
   )

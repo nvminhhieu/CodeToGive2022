@@ -97,6 +97,7 @@ const WorkMotivation = () => {
     }
 
     submitingAnswer(constructedAnswer(data))
+    fetchRecommendedJobsData()
     setSuggestedJobNoti(true)
     reset({})
   }
@@ -128,7 +129,6 @@ const WorkMotivation = () => {
   }
 
   const answerOnClickCallBack = () => {
-    fetchRecommendedJobsData()
     setCurrentQuestionIndex(
       handleIndexTransit(currentQuestionIndex + 1, questions)
     )
@@ -264,7 +264,6 @@ const WorkMotivation = () => {
         <IconContainer
           type="submit"
           onClick={() => {
-            fetchRecommendedJobsData()
             setCurrentQuestionIndex(
               handleIndexTransit(currentQuestionIndex - 1, questions)
             )
@@ -301,7 +300,6 @@ const WorkMotivation = () => {
         <IconContainer
           type="submit"
           onClick={() => {
-            fetchRecommendedJobsData()
             //fetchRecommendedJobsDataTest_REMOVE_LATER()
             setCurrentQuestionIndex(
               handleIndexTransit(currentQuestionIndex + 1, questions)

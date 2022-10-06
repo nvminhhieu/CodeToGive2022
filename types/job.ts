@@ -3,4 +3,5 @@ export default interface IJob {
   title: string
   labels: any
   image?: string
+  match_score?: number
 }

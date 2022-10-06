@@ -13,6 +13,7 @@ type Props = {
   image?: string
   bookmarked?: boolean
   onClickBookmarkCallback?: (job?: IJob) => void
+  showMatchValue?: boolean
 }
 
 const FALL_BACK_IMAGE =
@@ -23,7 +24,12 @@ const calculateFadeValue = (value?: number): number => {
   return value / 100
 }
 
-const JobCard = ({ jobData, bookmarked, onClickBookmarkCallback }: Props) => {
+const JobCard = ({
+  jobData,
+  bookmarked,
+  onClickBookmarkCallback,
+  showMatchValue,
+}: Props) => {
   const [isBookmarked, setIsBookmarked] = useState(bookmarked || false)
   return (
     <Container
@@ -41,7 +47,11 @@ const JobCard = ({ jobData, bookmarked, onClickBookmarkCallback }: Props) => {
       <ContentContainer>
         <Content>
           <Title>{jobData?.title}</Title>
-          {/* <Match>{jobData?.match_value}% match</Match> */}
+          {showMatchValue ? (
+            <Match>
+              {(((jobData?.match_score || 0) / 15) * 100).toFixed(0)}% match
+            </Match>
+          ) : null}
         </Content>
         <div
           style={{ cursor: "pointer" }}
@@ -50,11 +60,13 @@ const JobCard = ({ jobData, bookmarked, onClickBookmarkCallback }: Props) => {
             if (!bookmarked) setIsBookmarked(true)
           }}
         >
-          {isBookmarked ? (
-            <BookmarkIcon sx={{ color: "#e6d113" }} />
-          ) : (
-            <TurnedInNotIcon />
-          )}
+          {!showMatchValue ? (
+            isBookmarked ? (
+              <BookmarkIcon sx={{ color: "#e6d113" }} />
+            ) : (
+              <TurnedInNotIcon />
+            )
+          ) : null}
         </div>
       </ContentContainer>
     </Container>
