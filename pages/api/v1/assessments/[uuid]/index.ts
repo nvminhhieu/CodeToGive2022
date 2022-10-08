@@ -1,11 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { assessments as mock_display_tests } from "../../../../data/assessment_display"
-import { mockQuestions } from "../../../../data/work_motivation_questions"
-import { Assessment, ITestDisplay } from "../../../../types/assessment"
+import { assessments as mock_display_tests } from "../../../../../data/assessment_display"
+import { Assessment, ITestDisplay } from "../../../../../types/assessment"
 
 interface DetailedAssessment extends Assessment {
   tests: ITestDisplay[]
 }
+
+// Use to display the assessment, at /[uuid] page
 
 const listMockAssessment: DetailedAssessment[] = [
   {
