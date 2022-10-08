@@ -18,7 +18,6 @@ export interface ITestDisplay {
   progress: number
   completed: boolean
   description: string
-  url: string
   assessment_uuid: string
 }
 

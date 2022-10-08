@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { Assessment } from "../../../../types/assessment"
 
-const assessments: Assessment[] = [
+const assessmentsList: Assessment[] = [
   {
     uuid: "42069",
     owner: {
@@ -11,11 +11,18 @@ const assessments: Assessment[] = [
   },
 ]
 
-type Data = Assessment[]
+type Data = Assessment[] | { uuid: string }
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  res.status(200).json(assessments)
+  if (req.method === "POST") {
+    // Generate UUID, for admin
+    const generateUUID = "1234"
+    res.status(200).send({ uuid: generateUUID })
+    return
+  } else if (req.method === "GET") {
+    res.status(200).json(assessmentsList)
+  }
 }
