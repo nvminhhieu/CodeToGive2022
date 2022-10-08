@@ -1,14 +1,10 @@
 import { Alert, Slider } from "@mui/material"
 import { GetStaticProps } from "next"
-import { ReactElement, useState } from "react"
+import { ReactElement, useEffect, useState } from "react"
 import PageTitle from "../../components/common/PageTitle"
 import Layout from "../../components/Layout"
 import { useSession } from "next-auth/react"
 import { useForm } from "react-hook-form"
-
-type Props = {
-  data: any
-}
 
 const marks = [
   {
@@ -33,12 +29,24 @@ const marks = [
   },
 ]
 
-const Test = ({ data }: Props): ReactElement | null => {
+const Test = (): ReactElement | null => {
   const [alertIsOpen, setAlertIsOpen] = useState(true)
-  console.log(data)
+  const [assessments, setAssessments] = useState([])
   const session = useSession()
   console.log("session", session)
   console.log("env", process.env.HOST)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(`${process.env.HOST}/api/v1/assessments`)
+      const req = await res.json()
+
+      console.log("Data", req)
+    }
+
+    fetchData()
+  }, [])
+
   return (
     <Layout>
       <PageTitle
@@ -52,7 +60,6 @@ const Test = ({ data }: Props): ReactElement | null => {
         }
       />
       <div className="">This is another test page test 2</div>
-      <h1>{data?.message}</h1>
       {alertIsOpen ? (
         <Alert
           variant="filled"
@@ -71,14 +78,3 @@ const Test = ({ data }: Props): ReactElement | null => {
 }
 
 export default Test
-
-export const getStaticProps: GetStaticProps = async () => {
-  const request = await fetch(`${process.env.HOST}/api/v1/hello`)
-  const response = await request.json()
-
-  return {
-    props: {
-      data: response,
-    },
-  }
-}

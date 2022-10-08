@@ -1,3 +1,11 @@
+export interface Assessment {
+  uuid: string
+  owner?: {
+    last_name: string
+    first_name: string
+  }
+}
+
 export interface ITestDisplay {
   test_id: string | number
   title: string

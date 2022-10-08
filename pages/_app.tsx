@@ -10,7 +10,7 @@ import { UUIDProvider } from "../context/UUIDContext"
 
 function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
   return (
-    <SessionProvider session={pageProps.session} basePath="/client/api/auth">
+    <SessionProvider session={pageProps.session} basePath="/api/auth">
       <ThemeProvider theme={theme}>
         <UUIDProvider>
           <BookmarkProvider>
