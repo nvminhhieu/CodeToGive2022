@@ -96,11 +96,8 @@ const ReportPage = () => {
       try {
         const req = await fetch(`${process.env.HOST}/api/v1/assessments/${id}`)
         const res = await req.json()
-
-        const testsArray = rearrangedArray(2, 0, res.tests)
-
         setUser(res.owner)
-        setAssessments(testsArray)
+        setAssessments(res.tests)
       } catch {}
     }
     fetchAssessmentData()

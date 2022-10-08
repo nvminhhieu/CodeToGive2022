@@ -8,12 +8,14 @@ const mockTestsList: ITest[] = [
   {
     test_id: 21,
     title: "Work motivation test",
+    description: "This is test 21 description yo",
     type: "MOTIVATION_TEST",
     questions: mockQuestions,
   },
   {
     test_id: 1,
     title: "English Test",
+    description: "ay yo lmao",
     type: "MOTIVATION_TEST",
     questions: mockQuestions,
   },
@@ -27,7 +29,7 @@ export default function handler(
 ) {
   const { test_id } = req.query
 
-  const findedTest = mockTestsList.find((e) => e.test_id === test_id)
+  const findedTest = mockTestsList.find((e) => e.test_id == test_id)
 
   res.status(200).json(findedTest)
 }

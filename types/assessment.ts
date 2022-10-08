@@ -24,6 +24,7 @@ export interface ITestDisplay {
 export interface ITest {
   test_id: string | number
   title: string
+  description?: string
   type:
     | "MOTIVATION_TEST"
     | "ENGLISH_TEST"

@@ -3,7 +3,8 @@ import { ITest } from "../types/assessment"
 export const mockQuestions = [
   {
     type: "MOTIVATION_QUESTION",
-    description: "Question1",
+    description:
+      "I would like to have a job, where I continuously face new and unsolved problems",
     question_id: 12,
     answered_id: 125,
     answers: [
@@ -33,14 +34,11 @@ export const mockQuestions = [
         question_id: 12,
       },
     ],
-    image: {
-      src: "https://images.unsplash.com/photo-1556741533-6e6a62bd8b49?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVjZXB0aW9uaXN0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-      alt: "Alt text",
-    },
+    image: null,
   },
   {
     type: "MOTIVATION_QUESTION",
-    description: "Question2",
+    description: "I would like to have a job, where I can make a lot of money.",
     question_id: 13,
     answered_id: null,
     answers: [
@@ -70,11 +68,15 @@ export const mockQuestions = [
         question_id: 13,
       },
     ],
-    image: null,
+    image: {
+      src: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      alt: "Alt text",
+    },
   },
   {
     type: "MOTIVATION_QUESTION",
-    description: "Question3",
+    description:
+      "I would like to have a job, where I can make decisions based on my emotions.",
     question_id: 14,
     answered_id: null,
     answers: [
@@ -104,10 +106,250 @@ export const mockQuestions = [
         question_id: 14,
       },
     ],
-    image: {
-      src: "https://images.unsplash.com/photo-1657299143471-231353519c63?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      alt: "Alt text",
-    },
+    image: null,
+  },
+  {
+    type: "MOTIVATION_QUESTION",
+    description: "I would like to have a job, where I can bring new ideas.",
+    question_id: 14,
+    answered_id: null,
+    answers: [
+      {
+        description: "1",
+        answer_id: 133,
+        question_id: 14,
+      },
+      {
+        description: "2",
+        answer_id: 134,
+        question_id: 14,
+      },
+      {
+        description: "3",
+        answer_id: 135,
+        question_id: 14,
+      },
+      {
+        description: "4",
+        answer_id: 136,
+        question_id: 14,
+      },
+      {
+        description: "5",
+        answer_id: 137,
+        question_id: 14,
+      },
+    ],
+    image: null,
+  },
+  {
+    type: "MOTIVATION_QUESTION",
+    description:
+      "I would like to have a job, where I can do good for the common interest.",
+    question_id: 14,
+    answered_id: null,
+    answers: [
+      {
+        description: "1",
+        answer_id: 133,
+        question_id: 14,
+      },
+      {
+        description: "2",
+        answer_id: 134,
+        question_id: 14,
+      },
+      {
+        description: "3",
+        answer_id: 135,
+        question_id: 14,
+      },
+      {
+        description: "4",
+        answer_id: 136,
+        question_id: 14,
+      },
+      {
+        description: "5",
+        answer_id: 137,
+        question_id: 14,
+      },
+    ],
+    image: null,
+  },
+  {
+    type: "MOTIVATION_QUESTION",
+    description:
+      "I would like to have a job, where I can supervise other people's work.",
+    question_id: 14,
+    answered_id: null,
+    answers: [
+      {
+        description: "1",
+        answer_id: 133,
+        question_id: 14,
+      },
+      {
+        description: "2",
+        answer_id: 134,
+        question_id: 14,
+      },
+      {
+        description: "3",
+        answer_id: 135,
+        question_id: 14,
+      },
+      {
+        description: "4",
+        answer_id: 136,
+        question_id: 14,
+      },
+      {
+        description: "5",
+        answer_id: 137,
+        question_id: 14,
+      },
+    ],
+    image: null,
+  },
+  {
+    type: "MOTIVATION_QUESTION",
+    description:
+      "I would like to have a job, where I can always contribute with new ideas.",
+    question_id: 14,
+    answered_id: null,
+    answers: [
+      {
+        description: "1",
+        answer_id: 133,
+        question_id: 14,
+      },
+      {
+        description: "2",
+        answer_id: 134,
+        question_id: 14,
+      },
+      {
+        description: "3",
+        answer_id: 135,
+        question_id: 14,
+      },
+      {
+        description: "4",
+        answer_id: 136,
+        question_id: 14,
+      },
+      {
+        description: "5",
+        answer_id: 137,
+        question_id: 14,
+      },
+    ],
+    image: null,
+  },
+  {
+    type: "MOTIVATION_QUESTION",
+    description: "I would like to have a job, where I can play sometimes.",
+    question_id: 14,
+    answered_id: null,
+    answers: [
+      {
+        description: "1",
+        answer_id: 133,
+        question_id: 14,
+      },
+      {
+        description: "2",
+        answer_id: 134,
+        question_id: 14,
+      },
+      {
+        description: "3",
+        answer_id: 135,
+        question_id: 14,
+      },
+      {
+        description: "4",
+        answer_id: 136,
+        question_id: 14,
+      },
+      {
+        description: "5",
+        answer_id: 137,
+        question_id: 14,
+      },
+    ],
+    image: null,
+  },
+  {
+    type: "MOTIVATION_QUESTION",
+    description:
+      "I would like to have a job, where I can utilise my personal lifestyle.",
+    question_id: 14,
+    answered_id: null,
+    answers: [
+      {
+        description: "1",
+        answer_id: 133,
+        question_id: 14,
+      },
+      {
+        description: "2",
+        answer_id: 134,
+        question_id: 14,
+      },
+      {
+        description: "3",
+        answer_id: 135,
+        question_id: 14,
+      },
+      {
+        description: "4",
+        answer_id: 136,
+        question_id: 14,
+      },
+      {
+        description: "5",
+        answer_id: 137,
+        question_id: 14,
+      },
+    ],
+    image: null,
+  },
+  {
+    type: "MOTIVATION_QUESTION",
+    description:
+      "I would like to have a job, where I don't have to do repetitive tasks.",
+    question_id: 14,
+    answered_id: null,
+    answers: [
+      {
+        description: "1",
+        answer_id: 133,
+        question_id: 14,
+      },
+      {
+        description: "2",
+        answer_id: 134,
+        question_id: 14,
+      },
+      {
+        description: "3",
+        answer_id: 135,
+        question_id: 14,
+      },
+      {
+        description: "4",
+        answer_id: 136,
+        question_id: 14,
+      },
+      {
+        description: "5",
+        answer_id: 137,
+        question_id: 14,
+      },
+    ],
+    image: null,
   },
 ]
 

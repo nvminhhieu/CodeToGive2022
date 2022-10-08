@@ -65,7 +65,7 @@ const Assessment = () => {
   useEffect(() => {
     if (UUID) {
       fetchDataAssessment()
-      setValueLink("link", `${process.env.HOST}/client/${UUID}`) //NEED TO CHANGE THIS LATER, ALSO DEPENEDS ON GET ASSESSMENT UUID GENERATE API
+      setValueLink("link", `https://salva-vita.vercel.app/${UUID}`) //NEED TO CHANGE THIS LATER, ALSO DEPENEDS ON GET ASSESSMENT UUID GENERATE API
     }
   }, [UUID])
 
