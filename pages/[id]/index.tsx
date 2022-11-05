@@ -45,9 +45,7 @@ const AssessmentsPage = () => {
         )
         const res = await req.json()
 
-        const testsArray = rearrangedArray(2, 0, res.tests)
-
-        setAssessments(testsArray)
+        setAssessments(res.tests)
       } catch {
         setAssessments(mock_assessments_display)
       }

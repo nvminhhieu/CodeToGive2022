@@ -1,3 +1,11 @@
+export interface Assessment {
+  uuid: string
+  owner?: {
+    last_name: string
+    first_name: string
+  }
+}
+
 export interface ITestDisplay {
   test_id: string | number
   title: string
@@ -10,13 +18,13 @@ export interface ITestDisplay {
   progress: number
   completed: boolean
   description: string
-  url: string
   assessment_uuid: string
 }
 
 export interface ITest {
   test_id: string | number
   title: string
+  description?: string
   type:
     | "MOTIVATION_TEST"
     | "ENGLISH_TEST"
