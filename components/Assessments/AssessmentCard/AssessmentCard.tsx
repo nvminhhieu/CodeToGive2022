@@ -56,9 +56,9 @@ export const AssessmentCard = ({ assessment }: Props) => {
             {assessment?.description}
           </Description>
         </div>
-        <Flex>
+        <Flex className="right-row">
           {assessment?.completed && (
-            <Flex>
+            <Flex className="completed">
               <SuccessText>Completed</SuccessText>
               <DoneIcon
                 style={{
@@ -123,6 +123,21 @@ export const AssessmentCard = ({ assessment }: Props) => {
 const Flex = styled.div`
   display: flex;
   align-items: center;
+
+  &.completed {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &.right-row {
+    @media (max-width: 768px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+  }
 `
 
 const Justify = styled.div`

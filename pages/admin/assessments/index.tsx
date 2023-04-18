@@ -100,7 +100,7 @@ const Assessment = () => {
   }
   return (
     <Layout>
-      <Flex>
+      <Flex className="header-title">
         <PageTitle
           title="Create Assessment"
           description="You can generate assessment, and create question here"
@@ -214,6 +214,12 @@ const Flex = styled.div`
   align-items: center;
   width: 100%;
   justify-content: space-between;
+
+  &.header-title {
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
 `
 
 const FormCreateContainer = styled.form`

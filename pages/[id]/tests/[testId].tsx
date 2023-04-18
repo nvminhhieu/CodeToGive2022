@@ -367,6 +367,10 @@ const CardContainer = styled.form`
   justify-content: space-between;
   align-items: center;
   gap: 2vw;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `
 
 const Spacer = styled.div`

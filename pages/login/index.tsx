@@ -73,4 +73,8 @@ const LoginForm = styled.form`
     align-self: center;
     font-size: 54px;
   }
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `

@@ -168,6 +168,10 @@ const AnswerContainer = styled.div`
   padding: 24px;
   padding-top: 0;
   gap: 12px;
+
+  @media (max-width: 1100px) {
+    flex-wrap: wrap;
+  }
 `
 
 const AnswerTextSpectrum = styled.p`

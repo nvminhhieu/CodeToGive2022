@@ -201,6 +201,11 @@ const Flex = styled.div`
   align-items: center;
   position: relative;
   margin-top: 40px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 15px;
+  }
 `
 
 const Container = styled.form`

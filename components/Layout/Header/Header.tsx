@@ -135,6 +135,9 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   gap: 28px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 const LinkWrapper = styled.span<{ active: boolean }>`

@@ -105,11 +105,19 @@ const Title = styled.h2`
   font-size: 68px;
   font-weight: 600;
   color: #191e28;
+
+  @media (max-width: 768px) {
+    font-size: 48px;
+  }
 `
 
 const Description = styled.p`
   font-size: 24px;
   color: #6a6e77;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `
 
 const TooltipTitle = styled.h2`

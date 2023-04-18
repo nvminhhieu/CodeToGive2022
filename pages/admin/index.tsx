@@ -10,6 +10,10 @@ import { useRouter } from "next/router"
 const Container = styled.div`
   display: flex;
   gap: 24px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `
 
 const Card = styled.div`
@@ -17,6 +21,23 @@ const Card = styled.div`
     0px 15px 17px -1px rgba(0, 0, 0, 0.05);
   border-radius: 16px;
   padding: 24px;
+
+  &.left-card {
+    width: 30%;
+    height: 170px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  &.right-card {
+    width: 70%;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
 `
 
 const Title = styled.h2``
@@ -110,7 +131,7 @@ const AdminPage = (
       description="Collections of tools for Admin"
     />
     <Container>
-      <Card style={{ width: "30%", height: "170px" }}>
+      <Card className="left-card">
         <Title>Assessment</Title>
         <Link href="admin/assessments">
           <div style={{ margin: "30px 0" }}>
@@ -123,7 +144,7 @@ const AdminPage = (
           </div>
         </Link>
       </Card>
-      <Card style={{ width: "70%" }}>
+      <Card className="right-card">
         <Title>Recent reports</Title>
         <Table />
       </Card>
