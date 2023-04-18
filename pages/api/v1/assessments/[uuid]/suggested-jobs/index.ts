@@ -66,7 +66,7 @@ export default function handler(
 ) {
   const { uuid } = req.query
 
-  const randomizeSuggestedJob = shuffle(listMockSuggestedJobs)
+  const randomizeSuggestedJob = shuffle(listMockSuggesteds)
 
   res.status(200).json(randomizeSuggestedJob)
 }
