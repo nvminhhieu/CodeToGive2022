@@ -132,45 +132,6 @@ const RecommendedProfessions = ({
               showMatchValue={showMatchValue}
             />
           ))}
-
-          <JobCard
-            key={1}
-            jobData={{
-              job_id: 1,
-              title: "string",
-              labels: "any",
-              image: undefined,
-              match_score: 12,
-            }}
-            onClickBookmarkCallback={handleBookmarkCallback}
-            showMatchValue={showMatchValue}
-          />
-
-          <JobCard
-            key={1}
-            jobData={{
-              job_id: 1,
-              title: "string",
-              labels: "any",
-              image: undefined,
-              match_score: 12,
-            }}
-            onClickBookmarkCallback={handleBookmarkCallback}
-            showMatchValue={showMatchValue}
-          />
-
-          <JobCard
-            key={1}
-            jobData={{
-              job_id: 1,
-              title: "string",
-              labels: "any",
-              image: undefined,
-              match_score: 12,
-            }}
-            onClickBookmarkCallback={handleBookmarkCallback}
-            showMatchValue={showMatchValue}
-          />
         </AnimatePresence>
       </InnerContainer>
     </Container>
